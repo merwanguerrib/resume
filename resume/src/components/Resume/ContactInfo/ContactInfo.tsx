@@ -1,5 +1,5 @@
 import React from 'react';
-import { ContactInfoInterface } from '../interfaces';
+import { ContactInfoInterface } from '../../interfaces';
 
 interface Props {
   data: ContactInfoInterface

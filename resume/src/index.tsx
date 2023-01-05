@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
-import { Resume } from './components/Resume';
+import { Resume } from './components/Resume/Resume';
 import './index.css';
-import data from './resume-data'
+import data from './data/resume-data'
 import reportWebVitals from './reportWebVitals';
 import { ResumeInterface } from './interfaces';
 

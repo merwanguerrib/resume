@@ -1,7 +1,7 @@
 // a component with the SongInterface as props
 
 import React from 'react';
-import { SongInterface } from '../interfaces';
+import { SongInterface } from '../../../interfaces';
 
 interface Props {
   data: SongInterface;
@@ -17,7 +17,7 @@ export const Song: React.FC<Props> = (props) => {
         <iframe
           width="560"
           height="315"
-          src = {data.videoclip}
+          src={data.videoclip}
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen

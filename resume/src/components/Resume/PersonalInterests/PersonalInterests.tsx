@@ -1,5 +1,5 @@
 import React from 'react';
-import { PersonalInterestsListInterface } from '../interfaces';
+import { PersonalInterestsListInterface } from '../../../interfaces';
 
 interface PersonalInterestsProps {
   data: PersonalInterestsListInterface

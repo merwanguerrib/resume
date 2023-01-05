@@ -1,5 +1,5 @@
 import React from 'react';
-import { SkillListInterface } from '../interfaces';
+import { SkillListInterface } from '../../../interfaces';
 
 interface Props {
   data: SkillListInterface;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { MovieInterface } from '../interfaces';
+import { MovieInterface } from '../../interfaces';
 
 interface Props {
   data: MovieInterface;

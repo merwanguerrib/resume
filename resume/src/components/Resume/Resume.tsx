@@ -8,16 +8,16 @@ import {
   EntertainmentInterface,
   EducationListInterface,
   WorkExperienceListInterface,
-} from '../interfaces';
-import { Bio } from './Bio';
-import { ContactInfo } from './ContactInfo';
-import { Education } from './Education';
-import { Entertainment } from './Entertainment';
-import { Languages } from './Languages';
-import { PersonalInterests } from './PersonalInterests';
-import { References } from './References';
-import { Skills } from './Skills';
-import { WorkExperiences } from './WorkExperiences';
+} from '../../interfaces';
+import { Bio } from './Bio/Bio';
+import { ContactInfo } from './ContactInfo/ContactInfo';
+import { Education } from './Education/Education';
+import { Entertainment } from './Entertainment/Entertainment';
+import { Languages } from './Languages/Languages';
+import { PersonalInterests } from './PersonalInterests/PersonalInterests';
+import { References } from './References/References';
+import { Skills } from './Skills/Skills';
+import { WorkExperiences } from './WorkExperiences/WorkExperiences';
 
 interface Props {
   data: {

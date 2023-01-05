@@ -1,7 +1,7 @@
 // a Language component that display a language and its level in accordance with the LanguageInterface interface.
 
 import React from 'react';
-import { LanguageListInterface } from '../interfaces';
+import { LanguageListInterface } from '../../interfaces';
 
 interface Props {
   data: LanguageListInterface;

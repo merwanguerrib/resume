@@ -11,14 +11,14 @@ export interface ResumeInterface {
 }
 
 export interface ContactInfoInterface {
-    firstName: string;
-    lastName: string;
-    email: string;
-    address: {
-      street?: string;
-      city: string;
-      zip?: string;
-    };
+  firstName: string;
+  lastName: string;
+  email: string;
+  address: {
+    street?: string;
+    city: string;
+    zip?: string;
+  };
 }
 
 export interface BioInterface {
@@ -41,7 +41,7 @@ export interface EducationListInterface {
 
 export interface ProjectInterface {
   description: string;
-  technos: string;
+  technos: string[];
 }
 
 export interface WorkExperienceInterface {
@@ -50,8 +50,8 @@ export interface WorkExperienceInterface {
   description?: string;
   city: string;
   projects?: ProjectInterface[];
-  startDate: string;
-  endDate?: string;
+  startDate: Date
+  endDate?: Date;
 }
 
 export interface WorkExperienceListInterface {
@@ -73,8 +73,10 @@ export interface ReferenceInterface {
   };
   company: string;
   position: string;
-  relationship: string;
-  linkedin: string;
+  relationship?: string;
+  linkedin?: string;
+  review?: string;
+  email?: string;
 }
 
 export interface ReferenceListInterface {
@@ -92,7 +94,7 @@ export interface PersonalInterestsListInterface {
 
 export interface LanguageInterface {
   name: string;
-  level: number;
+  level?: string;
 }
 
 export interface LanguageListInterface {
@@ -101,9 +103,9 @@ export interface LanguageListInterface {
 
 export interface MovieInterface {
   title: string;
-  thumbnail?: string;
-  description?: string;
-  rating?: number;
+  posterURL?: string;
+  overview?: string;
+  popularity?: number;
   cast?: string[];
 }
 
@@ -123,8 +125,8 @@ export interface BookInterface {
 }
 
 export interface EntertainmentInterface {
-  favoriteMovies: MovieInterface[];
-  favoriteSongs: SongInterface[];
-  favoriteBooks: BookInterface[];
+  favoriteMovies?: MovieInterface[];
+  favoriteSongs?: SongInterface[];
+  favoriteBooks?: BookInterface[];
 }
 

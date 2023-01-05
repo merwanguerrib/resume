@@ -1,7 +1,8 @@
-import { BioInterface } from "../interfaces";
+import { BioInterface } from "../../../interfaces";
+// import {data} from "../../../data/bio-data"
 
 interface BioProps {
- data : BioInterface
+  data: BioInterface
 }
 
 export const Bio: React.FC<BioProps> = (props) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { WorkExperienceListInterface } from '../interfaces';
+import { WorkExperienceListInterface } from '../../../interfaces';
 
 interface WorkExperiencesProps {
   data: WorkExperienceListInterface;

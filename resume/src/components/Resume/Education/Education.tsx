@@ -1,5 +1,5 @@
 import React from 'react';
-import { EducationListInterface } from '../interfaces';
+import { EducationListInterface } from '../../interfaces';
 
 interface EducationProps {
   data: EducationListInterface;
