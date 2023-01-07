@@ -29,17 +29,25 @@ const root = ReactDOM.createRoot(
 function App() {
   return (
     <React.StrictMode>
-      <Resume>
-        <ContactInfo data={contactInfoData} />
-        <Bio data={bioData} />
-        <Education data={educationData} />
-        <WorkExperiences data={workExperienceData} />
-        <Skills data={skillsData} />
-        <PersonalInterests data={personalInterestsData} />
-        <References data={referencesData} />
-        <Languages data={languagesData} />
-        <Entertainment data={entertainmentData} />
-      </Resume>
+      <main className="main-container">
+        <div className="grid gap-5 lg:grid-cols-3">
+          <Resume>
+            <div className='space-y-5'>
+              <ContactInfo data={contactInfoData} />
+              <Skills data={skillsData} />
+              <Languages data={languagesData} />
+            </div>
+            <div className='space-y-5 lg:col-span-2'>
+              <Bio data={bioData} />
+              <Education data={educationData} />
+              <WorkExperiences data={workExperienceData} />
+            </div>
+            {/* <References data={referencesData} /> */}
+            {/* <PersonalInterests data={personalInterestsData} /> */}
+            {/* <Entertainment data={entertainmentData} /> */}
+          </Resume>
+        </div>
+      </main>
     </React.StrictMode>
   );
 }

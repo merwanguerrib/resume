@@ -14,6 +14,7 @@ export interface ContactInfoInterface {
   firstName: string;
   lastName: string;
   email: string;
+  title: string;
   address: {
     street?: string;
     city: string;
