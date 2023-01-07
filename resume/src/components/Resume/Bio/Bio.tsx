@@ -1,5 +1,4 @@
 import { BioInterface } from "../../../interfaces";
-// import {data} from "../../../data/bio-data"
 
 interface BioProps {
   data: BioInterface

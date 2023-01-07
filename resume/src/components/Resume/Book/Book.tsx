@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookInterface } from '../../interfaces';
+import { BookInterface } from '../../../interfaces';
 
 interface Props {
   data: BookInterface;
