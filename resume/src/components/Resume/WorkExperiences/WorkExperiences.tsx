@@ -80,11 +80,10 @@ export const WorkExperiences: React.FC<WorkExperiencesProps> = (props) => {
                     ></path>
                   </svg>
                   <span>
-                    `${experience.startDate.toDateString()} – $
+                    {experience.startDate.toLocaleDateString()} – 
                     {experience.endDate
-                      ? experience.endDate.toDateString()
+                      ? experience.endDate.toLocaleDateString()
                       : "Present"}
-                    `
                   </span>
                 </div>
               </div>
