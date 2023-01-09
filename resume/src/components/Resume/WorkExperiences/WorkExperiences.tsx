@@ -1,19 +1,15 @@
-import React from "react";
-import { WorkExperienceListInterface } from "../../../interfaces";
+import React, { useContext } from "react";
+import { ResumeContext } from "../../../context";
 
-interface WorkExperiencesProps {
-  data: WorkExperienceListInterface;
-}
-
-export const WorkExperiences: React.FC<WorkExperiencesProps> = (props) => {
-  const { data } = props;
+export const WorkExperiences: React.FC = () => {
+  const context = useContext(ResumeContext);
+  const data = context.workExperienceData;
   return (
     <div className="p-7 block-section">
-      <h2>Work Experience</h2>
+      <h2 className="block-title">Work Experience</h2>
       {data.list.map((experience, index) => (
         <div className="mb-5 item-section" key={index}>
-          <div className="company-logo" style={{ backgroundColor: "#1DA1F2" }}>
-            <i className="bx bxl-twitter text-3xl"></i>
+          <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-cover" style={{ backgroundImage: `url(${experience.logo})` }}>
           </div>
           <div className="w-full space-y-5">
             <div className="item-header">
@@ -80,7 +76,7 @@ export const WorkExperiences: React.FC<WorkExperiencesProps> = (props) => {
                     ></path>
                   </svg>
                   <span>
-                    {experience.startDate.toLocaleDateString()} – 
+                    {experience.startDate.toLocaleDateString()} –
                     {experience.endDate
                       ? experience.endDate.toLocaleDateString()
                       : "Present"}

@@ -1,23 +1,20 @@
-import React from 'react';
-import { SkillListInterface } from '../../../interfaces';
+import React, { useContext } from 'react';
+import { ResumeContext } from '../../../context';
 
-interface Props {
-  data: SkillListInterface;
-}
 
-export const Skills: React.FC<Props> = (props) => {
-  const { data } = props;
+export const Skills: React.FC = () => {
+  const context = useContext(ResumeContext)
+  const data = context.skillsData;
   return (
-    <div>
-      <h2>Skills</h2>
-      <ul>
-        {data.list.map((skill, index) => (
-          <li key={index}>
-            <p>Name: {skill.name}</p>
-            <p>Level: {skill.level}</p>
-          </li>
+    <div className="p-7 block-section flow-root">
+      <h2 className="block-title">Skills</h2>
+      <div className="-m-2 flex flex-wrap">
+        {data.list.map((skill) => (
+          <span className="skill-tag">{skill.name}</span>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
+
+

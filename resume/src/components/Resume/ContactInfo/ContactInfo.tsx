@@ -1,18 +1,15 @@
-import React from 'react';
-import { ContactInfoInterface } from '../../../interfaces';
+import React, { useContext } from 'react';
+import { ResumeContext } from '../../../context';
 
-interface Props {
-  data: ContactInfoInterface
-}
-
-export const ContactInfo: React.FC<Props> = (props) => {
-  const { data } = props;
+export const ContactInfo: React.FC = () => {
+  const context = useContext(ResumeContext)
+  const data = context.contactInfoData
   return (
     <div className="shadow rounded-xl overflow-hidden">
       <div className="h-32 bg-cover" style={{ backgroundImage: `url('https://res.cloudinary.com/mrwn211/image/upload/v1673129209/cover.jpg')` }}></div>
       <div className="pt-14 p-7 bg-white relative">
         <span className="status-badge bg-gray-400">Free</span>
-       <img src="https://res.cloudinary.com/mrwn211/image/upload/v1672054971/ProfilePictureMerwan.jpg" alt="Merwan Guerrib" className="user-photo" />
+        <img src="https://res.cloudinary.com/mrwn211/image/upload/v1672054971/ProfilePictureMerwan.jpg" alt="Merwan Guerrib" className="user-photo" />
         <div className="text-lg font-semibold mb-1.5">{data.firstName} {data.lastName}</div>
         <div className="text-sm text-gray-400 mb-7">{data.title}</div>
         <div className="flex group">

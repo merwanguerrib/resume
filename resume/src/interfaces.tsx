@@ -34,6 +34,7 @@ export interface EducationInterface {
   specialization: string;
   city: string;
   date: string;
+  logo?: string;
 }
 
 export interface EducationListInterface {
@@ -47,6 +48,7 @@ export interface ProjectInterface {
 
 export interface WorkExperienceInterface {
   company: string;
+  logo?: string;
   position: string;
   description?: string;
   city: string;
@@ -94,6 +96,7 @@ export interface PersonalInterestsListInterface {
 }
 
 export interface LanguageInterface {
+  emoji: string;
   name: string;
   level?: string;
 }
