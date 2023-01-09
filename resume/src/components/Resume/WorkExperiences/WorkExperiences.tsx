@@ -85,21 +85,18 @@ export const WorkExperiences: React.FC = () => {
               </div>
             </div>
             <p className="text-gray-600">{experience.description}</p>
+            {experience.projects && (
+              <ul className="list-disc list-outside">
+                {experience.projects.map(project => {
+                  return project.description.map(description => (
+                    <li key={description}>{description}</li>
+                  ));
+                })}
+              </ul>
+            )}
             <div className="border-b border-gray-200"></div>
           </div>
-          {/* {experience.projects && (
-              <>
-                <h4>Projects</h4>
-                <ul>
-                  {experience.projects.map((project, index) => (
-                    <li key={index}>
-                      <p>Description: {project.description}</p>
-                      <p>Technos: {project.technos}</p>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )} */}
+
         </div>
       ))}
     </div>

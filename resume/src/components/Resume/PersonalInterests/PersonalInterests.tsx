@@ -1,19 +1,15 @@
-import React from 'react';
-import { PersonalInterestsListInterface } from '../../../interfaces';
+import React, { useContext } from 'react';
+import { ResumeContext } from '../../../context';
 
-interface PersonalInterestsProps {
-  data: PersonalInterestsListInterface
-}
-
-export const PersonalInterests: React.FC<PersonalInterestsProps> = (props) => {
-  const { data } = props;
+export const PersonalInterests: React.FC = () => {
+  const context = useContext(ResumeContext);
+  const data = context.personalInterestsData;
   return (
-    <div>
-      <h2>Personal Interests</h2>
+    <div className="p-7 block-section flow-root">
+      <h2 className="block-title">Personal Interests</h2>
+      <div className="-m-2 flex flex-wrap"></div>
       {data.list.map((interest, index) => (
-        <div key={index}>
-          <p>{interest.emoji} {interest.name}</p>
-        </div>
+        <p>{`${interest.emoji} ${interest.name}`}</p>
       ))}
     </div>
   );

@@ -49,6 +49,7 @@ function App() {
                 <ContactInfo />
                 <Skills />
                 <Languages />
+                <PersonalInterests />
               </div>
               <div className="space-y-5 lg:col-span-2">
                 <Bio />
@@ -56,7 +57,6 @@ function App() {
                 <Education />
               </div>
               {/* <References data={referencesData} /> */}
-              {/* <PersonalInterests data={personalInterestsData} /> */}
               {/* <Entertainment data={entertainmentData} /> */}
             </Resume>
           </div>

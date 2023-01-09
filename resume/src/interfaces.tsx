@@ -42,7 +42,7 @@ export interface EducationListInterface {
 }
 
 export interface ProjectInterface {
-  description: string;
+  description: string[];
   technos: string[];
 }
 
