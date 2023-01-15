@@ -1,11 +1,15 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { ResumeContext } from '../../../context';
+
+
+
 
 export const Bio: React.FC = () => {
   const context = useContext(ResumeContext)
   const data = context.bioData;
   return (
-    <div className="p-7 pb-0 block-section">
+    <>
       <h2 className="block-title">About me</h2>
       <p className="text-gray-600 mb-5">{data.catchPhrase}</p>
       <p>{data.bio}</p>
@@ -41,17 +45,6 @@ export const Bio: React.FC = () => {
         </ul>
       )}
       <div className="border-t border-gray-200 my-5"></div>
-      <ul className="flex space-x-8 font-medium">
-        <li>
-          <a href="/personal_cv/index.html" className="menu-link-active menu-link-hover">Resume</a>
-        </li>
-        <li>
-          <a href="/personal_cv/products.html" className="menu-link menu-link-hover">Products</a>
-        </li>
-        <li>
-          <a href="/personal_cv/blog.html" className="menu-link menu-link-hover">Blog</a>
-        </li>
-      </ul>
-    </div>
+    </>
   );
 }

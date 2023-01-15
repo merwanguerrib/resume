@@ -1,16 +1,14 @@
-import React from 'react';
-import { EntertainmentInterface } from '../../../interfaces';
+import React, { useContext } from 'react';
 import { Movie } from '../Movie/Movie';
 import { Book } from '../Book/Book';
 import { Song } from '../Song/Song';
+import { ResumeContext } from '../../../context';
 
 
-interface Props {
-  data: EntertainmentInterface;
-}
 
-export const Entertainment: React.FC<Props> = (props) => {
-  const { data } = props;
+export const Entertainment: React.FC = () => {
+  const context = useContext(ResumeContext)
+  const data = context.entertainmentData;
   return (
     <>
       <h2>Favourite Movies</h2>
