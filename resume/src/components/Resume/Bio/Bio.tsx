@@ -1,9 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
 import { ResumeContext } from '../../../context';
-
-
-
 
 export const Bio: React.FC = () => {
   const context = useContext(ResumeContext)
@@ -14,10 +10,13 @@ export const Bio: React.FC = () => {
       <p className="text-gray-600 mb-5">{data.catchPhrase}</p>
       <p>{data.bio}</p>
       <div className="flex flex-col space-y-4">
-        <div className="mail-link social-link-hover">
-          <i className="bx bx-at text-xl"></i>
-          <span>merwanguerrib@gmail.com</span>
-        </div>
+        {data.qualities && (
+          <ul className="flex space-x-8">
+            {data.qualities.map((quality, index) => (
+              <li className="text-l mail-link " key={index}>{quality}</li>
+            ))}
+          </ul>
+        )}
         <ul className="flex space-x-5">
           <li>
             <a href="https://www.linkedin.com/in/merwanguerrib/" className="social-link-hover">
@@ -34,16 +33,13 @@ export const Bio: React.FC = () => {
               <i className="bx bxl-github text-2xl"></i>
             </a>
           </li>
+          <li>
+            <span className="social-link-hover">
+              <span>merwanguerrib@gmail.com</span>
+            </span>
+          </li>
         </ul>
       </div>
-      <div className="border-t border-gray-200 my-5"></div>
-      {data.qualities && (
-        <ul className="flex space-x-8">
-          {data.qualities.map((quality, index) => (
-            <li key={index}>{quality}</li>
-          ))}
-        </ul>
-      )}
       <div className="border-t border-gray-200 my-5"></div>
     </>
   );

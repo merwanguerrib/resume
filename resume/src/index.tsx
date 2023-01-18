@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 
@@ -25,8 +25,10 @@ import { languagesData } from "./data/languages-data";
 import { Entertainment } from "./components/Resume/Entertainment/Entertainment";
 import { entertainmentData } from "./data/entertainment-data";
 import { Blog } from "./components/Blog/Blog";
+import { articleData } from "./data/blog-data/article-data";
 
 import { ResumeContext } from "./context";
+import { Article } from "./components/Blog/Article";
 
 
 const root = ReactDOM.createRoot(
@@ -53,6 +55,7 @@ function App() {
             referencesData,
             languagesData,
             entertainmentData,
+            articleData
           }}
         >
           <main className="main-container">
@@ -88,6 +91,7 @@ function App() {
                         setIsBlogOpen(true);
                         setIsEntertainmentOpen(false);
                       }}>Blog</Link>
+                      
                     </li>
                   </ul>
                 </div>
