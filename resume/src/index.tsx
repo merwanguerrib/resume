@@ -96,32 +96,23 @@ function App() {
                   </ul>
                 </div>
                 <Routes>
-                  <Route path="/resume">
-                    {isResumeOpen && (
+                  < Route path="/resume"
+                    element={isResumeOpen && (
                       <Resume>
                         <WorkExperiences />
                         <Education />
                       </Resume>
                     )}
-                  </Route>
-                  <Route path="/entertainment">
-                    {isEntertainmentOpen && <Entertainment />}
-                  </Route>
-                  <Route path="/blog">
-                    {isBlogOpen && <Blog />}
-                  </Route>
+                  />
+                  < Route path="/entertainment"
+                    element={isEntertainmentOpen && <Entertainment />}
+                  />
+                  <Route path="/blog"
+                    element={isBlogOpen && <Blog />}
+                  />
                   <Route path="/blog/article/:slug" element={<Article />} />
                 </Routes>
-                {/* {isResumeOpen && (
-                  <Resume>
-                    <WorkExperiences />
-                    <Education />
-                  </Resume>
-                )}
-                {isBlogOpen && <Blog />}
-                {isEntertainmentOpen && <Entertainment />} */}
               </div>
-
             </div>
           </main>
         </ResumeContext.Provider>

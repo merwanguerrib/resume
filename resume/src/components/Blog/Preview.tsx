@@ -6,9 +6,9 @@ export const Preview: React.FC = () => {
   const context = useContext(ResumeContext);
   const data = context.articleData;
   return (
-    data.articles.map((article: any) => {
+    data.articles.map((article: any, index: any) => {
       return (
-        <Link to={`/blog/article/${article.slug}`} className="article-title-hover block">
+        <Link to={`/blog/article/${article.slug}`} className="article-title-hover block" key={index}>
           <article className="article-section">
             <div className="space-y-3 mb-5 p-7 pb-0">
               <h1 className="text-lg font-semibold">{article.h1}</h1>

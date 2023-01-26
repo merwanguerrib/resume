@@ -11,7 +11,7 @@ export const Languages: React.FC = () => {
       <h2 className="block-title">Languages</h2>
       <div className="-m-2 flex flex-wrap"></div>
       {data.list.map((language, index) => (
-        <p>{`${language.emoji} ${language.name} - ${language.level}`}</p>
+        <p key={index}>{`${language.emoji} ${language.name} - ${language.level}`}</p>
       ))}
     </div>
   );

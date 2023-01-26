@@ -9,8 +9,8 @@ export const Skills: React.FC = () => {
     <div className="p-7 block-section flow-root">
       <h2 className="block-title">Skills</h2>
       <div className="-m-2 flex flex-wrap">
-        {data.list.map((skill) => (
-          <span className="skill-tag">{skill.name}</span>
+        {data.list.map((skill, index) => (
+          <span key={index} className="skill-tag">{skill.name}</span>
         ))}
       </div>
     </div>

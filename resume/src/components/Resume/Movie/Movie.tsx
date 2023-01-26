@@ -17,8 +17,8 @@ export const Movie: React.FC<Props> = (props) => {
         <>
           <h3>Cast</h3>
           <ul>
-            {data.cast.map(actor => (
-              <li>{actor}</li>
+            {data.cast.map((actor, index) => (
+              <li key={index}>{actor}</li>
             ))}
           </ul>
         </>

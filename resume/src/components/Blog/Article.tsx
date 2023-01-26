@@ -21,7 +21,7 @@ export const Article: React.FC = () => {
         {article.parts.map((part: any, index: any) => {
           return (
             <>
-              <h2 className="text-lg font-semibold" key={index}>{part.h2}</h2>
+              <h2 className="text-lg font-semibold" >{part.h2}</h2>
               <p className="text-gray-600">{part.p}</p>
             </>
           )

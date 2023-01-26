@@ -9,7 +9,7 @@ export const PersonalInterests: React.FC = () => {
       <h2 className="block-title">Personal Interests</h2>
       <div className="-m-2 flex flex-wrap"></div>
       {data.list.map((interest, index) => (
-        <p>{`${interest.emoji} ${interest.name}`}</p>
+        <p key={index}>{`${interest.emoji} ${interest.name}`}</p>
       ))}
     </div>
   );
