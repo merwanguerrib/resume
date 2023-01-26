@@ -6,8 +6,7 @@ export const Blog: React.FC = () => {
   const location = useLocation();
   return (
     <>
-      {location.pathname.indexOf('/blog/article/') === -1 && <Preview />}
-      <Route path="/blog/article/:slug" element={<Article />} />
+      {location.pathname === '/blog' ? <Preview /> : location.pathname.indexOf('/blog/article/') === -1 ? <Preview /> : <Route path="/blog/article/:slug" element={<Article />} />}
     </>
   )
 }

@@ -1,6 +1,6 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
 
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
@@ -91,18 +91,35 @@ function App() {
                         setIsBlogOpen(true);
                         setIsEntertainmentOpen(false);
                       }}>Blog</Link>
-                      
+
                     </li>
                   </ul>
                 </div>
-                {isResumeOpen && (
+                <Routes>
+                  <Route path="/resume">
+                    {isResumeOpen && (
+                      <Resume>
+                        <WorkExperiences />
+                        <Education />
+                      </Resume>
+                    )}
+                  </Route>
+                  <Route path="/entertainment">
+                    {isEntertainmentOpen && <Entertainment />}
+                  </Route>
+                  <Route path="/blog">
+                    {isBlogOpen && <Blog />}
+                  </Route>
+                  <Route path="/blog/article/:slug" element={<Article />} />
+                </Routes>
+                {/* {isResumeOpen && (
                   <Resume>
                     <WorkExperiences />
                     <Education />
                   </Resume>
                 )}
                 {isBlogOpen && <Blog />}
-                {isEntertainmentOpen && <Entertainment />}
+                {isEntertainmentOpen && <Entertainment />} */}
               </div>
 
             </div>
