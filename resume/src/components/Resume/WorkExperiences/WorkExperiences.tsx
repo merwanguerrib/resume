@@ -1,16 +1,18 @@
-import React, { useContext } from "react";
-import { ResumeContext } from "../../../context";
+import React, { useContext } from 'react';
+import { ResumeContext } from '../../../context/context';
 
 export const WorkExperiences: React.FC = () => {
   const context = useContext(ResumeContext);
   const data = context.workExperienceData;
   return (
-    <div className="p-7 block-section">
+    <div className="WorkExperiences p-7 block-section">
       <h2 className="block-title">Work Experience</h2>
       {data.list.map((experience, index) => (
         <div className="mb-5 item-section" key={index}>
-          <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-cover" style={{ backgroundImage: `url(${experience.logo})` }}>
-          </div>
+          <div
+            className="flex-shrink-0 w-12 h-12 rounded-xl bg-cover"
+            style={{ backgroundImage: `url(${experience.logo})` }}
+          ></div>
           <div className="w-full space-y-5">
             <div className="item-header">
               <div className="space-y-1.5">
@@ -79,7 +81,7 @@ export const WorkExperiences: React.FC = () => {
                     {experience.startDate.toLocaleDateString()} –
                     {experience.endDate
                       ? experience.endDate.toLocaleDateString()
-                      : "Present"}
+                      : 'Present'}
                   </span>
                 </div>
               </div>
@@ -87,8 +89,8 @@ export const WorkExperiences: React.FC = () => {
             <p className="text-gray-600">{experience.description}</p>
             {experience.projects && (
               <ul className="list-disc list-outside">
-                {experience.projects.map(project => {
-                  return project.description.map(description => (
+                {experience.projects.map((project) => {
+                  return project.description.map((description) => (
                     <li key={description}>{description}</li>
                   ));
                 })}
@@ -96,7 +98,6 @@ export const WorkExperiences: React.FC = () => {
             )}
             <div className="border-b border-gray-200"></div>
           </div>
-
         </div>
       ))}
     </div>

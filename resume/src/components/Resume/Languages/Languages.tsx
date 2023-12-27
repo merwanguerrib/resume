@@ -1,7 +1,7 @@
 // a Language component that display a language and its level in accordance with the LanguageInterface interface.
 
 import React, { useContext } from 'react';
-import { ResumeContext } from "../../../context";
+import { ResumeContext } from '../../../context/context';
 
 export const Languages: React.FC = () => {
   const context = useContext(ResumeContext);
@@ -11,7 +11,9 @@ export const Languages: React.FC = () => {
       <h2 className="block-title">Languages</h2>
       <div className="-m-2 flex flex-wrap"></div>
       {data.list.map((language, index) => (
-        <p key={index}>{`${language.emoji} ${language.name} - ${language.level}`}</p>
+        <p
+          key={index}
+        >{`${language.emoji} ${language.name} - ${language.level}`}</p>
       ))}
     </div>
   );

@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { WorkExperiences } from './WorkExperiences/WorkExperiences';
+import { Education } from './Education/Education';
 
 export const Resume: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
-
   return (
-    <>
-      {children}
-    </>
+    <div className="Resume">
+      <WorkExperiences />
+      <Education />
+    </div>
   );
-}
+};

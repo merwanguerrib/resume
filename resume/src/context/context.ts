@@ -1,15 +1,14 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 import {
   BioInterface,
   ContactInfoInterface,
   EducationListInterface,
-  EntertainmentInterface,
   LanguageListInterface,
   PersonalInterestsListInterface,
   ReferenceListInterface,
   SkillListInterface,
   WorkExperienceListInterface,
-} from "./interfaces";
+} from '../interfaces';
 
 interface ResumeContextInterface {
   bioData: BioInterface;
@@ -20,8 +19,6 @@ interface ResumeContextInterface {
   personalInterestsData: PersonalInterestsListInterface;
   referencesData: ReferenceListInterface;
   languagesData: LanguageListInterface;
-  entertainmentData: EntertainmentInterface;
-  articleData: any;
 }
 // Create a context component
 export const ResumeContext = createContext<ResumeContextInterface>(

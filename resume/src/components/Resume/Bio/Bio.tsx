@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import { ResumeContext } from '../../../context';
+import React, { useContext } from 'react';
+import { ResumeContext } from '../../../context/context';
 
 export const Bio: React.FC = () => {
-  const context = useContext(ResumeContext)
+  const context = useContext(ResumeContext);
   const data = context.bioData;
   return (
     <>
@@ -13,14 +13,19 @@ export const Bio: React.FC = () => {
         {data.qualities && (
           <ul className="flex space-x-8">
             {data.qualities.map((quality, index) => (
-              <li className="text-l mail-link " key={index}>{quality}</li>
+              <li className="text-l mail-link " key={index}>
+                {quality}
+              </li>
             ))}
           </ul>
         )}
         <ul className="flex space-x-5">
           <li>
-            <a href="https://www.linkedin.com/in/merwanguerrib/" className="social-link-hover">
-              <i className='bx bxl-linkedin-square text-2xl' ></i>
+            <a
+              href="https://www.linkedin.com/in/merwanguerrib/"
+              className="social-link-hover"
+            >
+              <i className="bx bxl-linkedin-square text-2xl"></i>
             </a>
           </li>
           <li>
@@ -29,7 +34,10 @@ export const Bio: React.FC = () => {
             </a>
           </li>
           <li>
-            <a href="https://github.com/merwanguerrib" className="social-link-hover">
+            <a
+              href="https://github.com/merwanguerrib"
+              className="social-link-hover"
+            >
               <i className="bx bxl-github text-2xl"></i>
             </a>
           </li>
@@ -43,4 +51,4 @@ export const Bio: React.FC = () => {
       <div className="border-t border-gray-200 my-5"></div>
     </>
   );
-}
+};

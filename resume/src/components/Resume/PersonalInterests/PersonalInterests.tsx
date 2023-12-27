@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ResumeContext } from '../../../context';
+import { ResumeContext } from '../../../context/context';
 
 export const PersonalInterests: React.FC = () => {
   const context = useContext(ResumeContext);
@@ -13,4 +13,4 @@ export const PersonalInterests: React.FC = () => {
       ))}
     </div>
   );
-}
+};

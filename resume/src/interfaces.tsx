@@ -7,7 +7,6 @@ export interface ResumeInterface {
   personalInterests?: PersonalInterestsListInterface;
   references?: ReferenceListInterface;
   languages?: LanguageListInterface;
-  entertainment?: EntertainmentInterface;
 }
 
 export interface ContactInfoInterface {
@@ -105,32 +104,4 @@ export interface LanguageListInterface {
   list: LanguageInterface[];
 }
 
-export interface MovieInterface {
-  title: string;
-  posterURL?: string;
-  overview?: string;
-  popularity?: number;
-  cast?: string[];
-}
-
-export interface SongInterface {
-  title: string;
-  videoclip?: string;
-  album?: string;
-  rating: number;
-  artist: string;
-}
-
-export interface BookInterface {
-  title: string;
-  author: string;
-  rating: number;
-  preview?: string;
-}
-
-export interface EntertainmentInterface {
-  favoriteMovies?: MovieInterface[];
-  favoriteSongs?: SongInterface[];
-  favoriteBooks?: BookInterface[];
-}
 
