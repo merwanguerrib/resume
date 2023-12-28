@@ -1135,8 +1135,9 @@ video {
 }
 
 .download-btn-icon {
+
   --tw-bg-opacity: 1;
-  background-color: rgba(124, 58, 237, var(--tw-bg-opacity));
+  background-color: rgba(139, 92, 246, var(--tw-bg-opacity));
   border-top-right-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
   padding-top: 0.75rem;
