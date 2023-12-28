@@ -9,12 +9,13 @@ export const Preview: React.FC = () => {
   const { loading, error, data } = useQuery(GET_ARTICLES_QUERY);
   if (loading) return <Loader />;
   if (error) return <p>Error: {error.message}</p>;
-  
+
   return data.articles.data.map((article: ArticleInterface) => {
-    const { slug, title, description, publishedAt, image } = article.attributes;
+    const { slug, title, description, publishedAt, image, category } =
+      article.attributes;
     const imageUrl = `${process.env.REACT_APP_STRAPI_APP_URL}${image.data.attributes.url}`;
     const imageAlt = image.data.attributes.alternativeText;
-
+    const categoryName = category?.data.attributes.name;
     return (
       <div className="Preview">
         <Link
@@ -24,7 +25,14 @@ export const Preview: React.FC = () => {
         >
           <article className="article-section">
             <div className="space-y-3 mb-5 p-7 pb-0">
-              <h2 className="text-lg font-semibold">{title}</h2>
+              <div className="flex justify-between">
+                <h2 className="text-lg font-semibold">{title}</h2>
+                {category ? (
+                  <div className="space-y-2 sm:text-right">
+                    <div className="job-item-badge">{categoryName}</div>
+                  </div>
+                ) : null}
+              </div>
               <p className="text-gray-600">{description}</p>
               <p>
                 <time dateTime={publishedAt} className="text-sm text-gray-400">
