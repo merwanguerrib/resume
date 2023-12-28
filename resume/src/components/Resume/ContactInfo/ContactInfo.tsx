@@ -8,7 +8,7 @@ export const ContactInfo: React.FC = () => {
   const data = context.contactInfoData;
 
   return (
-    <div className="shadow rounded-xl overflow-hidden">
+    <div className="ContactInfo shadow rounded-xl overflow-hidden">
       <div
         className="h-32 bg-cover"
         style={{
@@ -28,7 +28,7 @@ export const ContactInfo: React.FC = () => {
         <div className="text-sm text-gray-400 mb-7">{data.title}</div>
         <div className="flex flex-col space-y-2">
           <a
-            href="https://drive.google.com/file/d/1woWGpXj7xbE3uxW0TJuxpNPww7dr3Ete/view?usp=sharing"
+            href="https://drive.google.com/file/d/1o2J2muY8X_8THfziatZQ-sgBQFQBUU9Y/view"
             target="_blank"
             rel="noopener noreferrer"
             download

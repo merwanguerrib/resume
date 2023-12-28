@@ -5,7 +5,7 @@ export const Bio: React.FC = () => {
   const context = useContext(ResumeContext);
   const data = context.bioData;
   return (
-    <>
+    <div className="Bio">
       <h2 className="block-title">About me</h2>
       <p className="text-gray-600 mb-5">{data.catchPhrase}</p>
       <p>{data.bio}</p>
@@ -49,6 +49,6 @@ export const Bio: React.FC = () => {
         </ul>
       </div>
       <div className="border-t border-gray-200 my-5"></div>
-    </>
+    </div>
   );
 };
