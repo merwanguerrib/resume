@@ -1,7 +1,6 @@
-// src/context/ResumeProvider.tsx (or your chosen location)
 import React from 'react';
-import { ResumeContext } from './context'; // Adjust this import path as needed
-// Import your data here (adjust the paths as necessary)
+import { ResumeContext } from './context'; 
+
 import {
   bioData,
   contactInfoData,
@@ -11,7 +10,7 @@ import {
   personalInterestsData,
   referencesData,
   languagesData,
-  } from '../data'; // Adjust this import path as needed
+  } from '../data'; 
 
 const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,

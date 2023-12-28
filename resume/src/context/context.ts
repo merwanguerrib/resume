@@ -20,7 +20,6 @@ interface ResumeContextInterface {
   referencesData: ReferenceListInterface;
   languagesData: LanguageListInterface;
 }
-// Create a context component
 export const ResumeContext = createContext<ResumeContextInterface>(
   {} as ResumeContextInterface
 );
