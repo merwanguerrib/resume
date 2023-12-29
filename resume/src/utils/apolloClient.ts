@@ -58,3 +58,34 @@ export const GET_ARTICLES_QUERY = gql`
     }
   }
 `;
+export const GET_ARTICLE_BY_SLUG_QUERY = gql`
+  query GetArticleBySlug($slug: String!) {
+    articles(filters: { slug: { eq: $slug } }) {
+      data {
+        id
+        attributes {
+          slug
+          title
+          description
+          content
+          publishedAt
+          category {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
+          image {
+            data {
+              attributes {
+                url
+                alternativeText
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
