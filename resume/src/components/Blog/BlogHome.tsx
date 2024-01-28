@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_ARTICLES_QUERY } from '../../utils/apolloClient';
 import { ArticleInterface } from './Article';
@@ -11,6 +11,23 @@ export const BlogHome: React.FC = () => {
   const { loading, error, data } = useQuery(GET_ARTICLES_QUERY);
   const [showDropDown, setShowDropDown] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setShowDropDown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   if (loading) return <Loader />;
   if (error) return <p>Error: {error.message}</p>;
@@ -47,9 +64,10 @@ export const BlogHome: React.FC = () => {
         article.attributes.category?.data.attributes.name as string
       )
   );
+
   return (
     <div className=" BlogHome flex flex-col items-end relative ">
-      <div className="relative">
+      <div className="relative" ref={dropdownRef}>
         <FilterButton handleClick={handleFilter} />
         {showDropDown && (
           <DropDown
