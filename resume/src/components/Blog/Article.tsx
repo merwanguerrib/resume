@@ -42,7 +42,7 @@ export const Article: React.FC = () => {
 
   const article = data.articles.data[0]?.attributes;
   const { title, publishedAt, image, category, content } =
-    data.articles.data[0]?.attributes;
+    data.articles.data[0]?.attributes ?? {};
   const imageUrl = `${process.env.REACT_APP_STRAPI_APP_URL}${image.data.attributes.url}`;
   const imageAlt = image.data.attributes.alternativeText;
   const categoryName = category?.data.attributes.name;
@@ -73,7 +73,7 @@ export const Article: React.FC = () => {
             </time>
           </p>
         </div>
-        <Markdown className="markdown-body" children={content} />
+        <Markdown className="markdown-body">{content}</Markdown>
       </div>
     </article>
   );
