@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import notFoundImage from '../../assets/404.png';
@@ -13,7 +14,7 @@ const NotFoundPage: React.FC = () => {
         to="/resume"
         className="text-lg bg-[#8b5cf6] text-white font-bold py-2 px-4 mb-2 rounded"
       >
-        Go to Resume
+        Go to Home
       </Link>
       <img
         src={notFoundImage}
