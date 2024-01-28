@@ -41,7 +41,7 @@ export const Article: React.FC = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   const article = data.articles.data[0]?.attributes;
-  const { title, description, publishedAt, image, category, content } =
+  const { title, publishedAt, image, category, content } =
     data.articles.data[0]?.attributes;
   const imageUrl = `${process.env.REACT_APP_STRAPI_APP_URL}${image.data.attributes.url}`;
   const imageAlt = image.data.attributes.alternativeText;

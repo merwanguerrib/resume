@@ -3,7 +3,7 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Article } from '../components/Blog/Article';
 import { Resume } from '../components/Resume/Resume';
-import { Preview } from '../components/Blog/Preview';
+import { BlogHome } from '../components/Blog/BlogHome';
 import { ApolloProvider } from '@apollo/client';
 import { client } from '../utils/apolloClient';
 import NotFoundPage from '../components/Layout/NotFound';
@@ -16,7 +16,7 @@ const AppRoutes = () => {
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/" element={<Navigate to="/resume" />} />
         <Route path="/resume" element={<Resume />} />
-        <Route path="/blog" element={<Preview />} />
+        <Route path="/blog" element={<BlogHome />} />
         <Route path="/blog/article/:slug" element={<Article />} />
         {/* Add other routes here */}
       </Routes>
