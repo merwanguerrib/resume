@@ -11,6 +11,7 @@ import { Bio } from './components/Resume/Bio/Bio';
 
 import { Navigation } from './components/Layout/Navigation';
 import SideBar from './components/Layout/SideBar';
+import { SchemaMarkup } from './Schema';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -19,13 +20,14 @@ const root = ReactDOM.createRoot(
 function App() {
   return (
     <React.StrictMode>
+      <SchemaMarkup />
       <BrowserRouter>
         <ResumeProvider>
           <main className="main-container">
-            <div className="grid gap-5 lg:grid-cols-3">
+            <div className="grid gap-5 lg:grid-cols-3 ">
               <SideBar />
               <div className="space-y-5 lg:col-span-2">
-                <div className="p-7 pb-0 block-section">
+                <div className="BIO_NAV p-7 pb-0 block-section md:block hidden">
                   <Bio />
                   <Navigation />
                 </div>
