@@ -5,7 +5,7 @@ export const Education: React.FC = () => {
   const context = useContext(ResumeContext);
   const data = context.educationData;
   return (
-    <div className="Education p-7 block-section">
+    <div className="Education p-7 block-section mt-2">
       <h2 className="block-title">Education</h2>
       {data.list.map((education, index) => (
         <div key={index} className="mb-5 item-section">
