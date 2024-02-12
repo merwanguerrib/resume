@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "bios",
+  "info": {
+    "singularName": "bio",
+    "pluralName": "bios",
+    "displayName": "Bio"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "catchPhrase": {
+      "type": "text"
+    },
+    "bio": {
+      "type": "text"
+    },
+    "qualities": {
+      "type": "enumeration",
+      "enum": [
+        "Team player",
+        " Quick learner",
+        " Problem solver",
+        " Innovative dreamer"
+      ]
+    }
+  }
+}
