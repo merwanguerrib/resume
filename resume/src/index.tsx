@@ -27,7 +27,7 @@ function App() {
             <div className="grid gap-5 lg:grid-cols-3 ">
               <SideBar />
               <div className="space-y-5 lg:col-span-2">
-                <div className="BIO_NAV p-7 pb-0 block-section md:block hidden">
+                <div className="BIO_NAV p-7 pb-0 block-section lg:block hidden">
                   <Bio />
                   <Navigation />
                 </div>

@@ -10,7 +10,7 @@ const SideBar = () => {
   return (
     <div className="Sidebar space-y-5 ">
       <ContactInfo />
-      <div className="BIO_NAV p-7 pb-0 block-section md:hidden block">
+      <div className="BIO_NAV_SIDEBAR p-7 pb-0 block-section lg:hidden sm:block">
         <Bio />
         <Navigation />
       </div>
