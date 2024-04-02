@@ -23,8 +23,8 @@ export const personalInterestsData: PersonalInterestsListInterface = {
       emoji: "📚",
     },
     {
-      name: "Podcasts",
-      emoji: "🎙️",
+      name: "Tennis",
+      emoji: "🎾",
     },
   ],
 };
