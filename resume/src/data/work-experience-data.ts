@@ -4,8 +4,8 @@ export const workExperienceData: WorkExperienceListInterface = {
   list: [
     {
       company: 'PayFit',
-      logo: 'https://media.licdn.com/dms/image/C560BAQG8enVUlIaAwA/company-logo_100_100/0/1630584148492/payfit_logo?e=1711584000&v=beta&t=3xzflb6gbaf77m9pdUs5roD5UwDuhbFlGBJuBmdCEDQ',
-      position: 'Business Engineer',
+      logo: 'https://res.cloudinary.com/mrwn211/image/upload/v1712069470/resume/payfit_logo.jpg',
+      position: 'Software Engineer',
       description: 'Fullstack developer',
       city: 'Remote',
       projects: [
@@ -23,7 +23,7 @@ export const workExperienceData: WorkExperienceListInterface = {
     },
     {
       company: 'Capgemini',
-      logo: 'https://media.licdn.com/dms/image/D4D0BAQH7wERIbu2fvQ/company-logo_100_100/0/1702673452642/capgemini_logo?e=1711584000&v=beta&t=95k2rhuEpomut8vm5aS0XGPQ7D23mONua8LYgwPJZvE',
+      logo: 'https://res.cloudinary.com/mrwn211/image/upload/v1712069468/resume/capgemini_logo.jpg',
       position: 'Software Engineer',
       description: 'Front-end developer',
       city: 'Aix en Provence',
@@ -42,7 +42,7 @@ export const workExperienceData: WorkExperienceListInterface = {
     },
     {
       company: 'Capgemini',
-      logo: 'https://media.licdn.com/dms/image/D4D0BAQH7wERIbu2fvQ/company-logo_100_100/0/1702673452642/capgemini_logo?e=1711584000&v=beta&t=95k2rhuEpomut8vm5aS0XGPQ7D23mONua8LYgwPJZvE',
+      logo: 'https://res.cloudinary.com/mrwn211/image/upload/v1712069468/resume/capgemini_logo.jpg',
       position: 'Application Consultant',
       description: 'Fullstack developer',
       city: 'Issy les Moulineaux',
@@ -61,7 +61,7 @@ export const workExperienceData: WorkExperienceListInterface = {
     },
     {
       company: 'Galileo Global Education',
-      logo: 'https://media.licdn.com/dms/image/C4E0BAQGUWuFl-wnjUQ/company-logo_100_100/0/1643815692632/galileo_global_education_logo?e=1711584000&v=beta&t=1Sg7RpQnpI7wSgMl7LdS9E_cKhegz3NGA9GFeEA2EYI',
+      logo: 'https://res.cloudinary.com/mrwn211/image/upload/v1712069469/resume/galileo_global_education_logo.jpg',
       position: 'Digital Marketer',
       description: '',
       city: 'Paris',

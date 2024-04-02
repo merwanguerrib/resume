@@ -7,7 +7,7 @@ export const educationData: EducationListInterface = {
       specialization: 'Fullstack Javascrit (MERN)',
       city: 'Paris',
       date: '2019',
-      logo: 'https://media.licdn.com/dms/image/C4D0BAQG2NHDv2YWLyA/company-logo_100_100/0/1669206757915/ironhack_logo?e=1711584000&v=beta&t=oeiAx428_w8SD07r1p_D4O0PEy8wqzGaJ0djcvtiUIo',
+      logo: 'https://res.cloudinary.com/mrwn211/image/upload/v1712069469/resume/ironhack_logo.jpg',
     },
     {
       school: 'ESG',
@@ -15,7 +15,7 @@ export const educationData: EducationListInterface = {
       specialization: 'Digital Marketing',
       city: 'Paris',
       date: '2016',
-      logo: 'https://media.licdn.com/dms/image/C4D0BAQGUVcXuY-6GBw/company-logo_100_100/0/1634816535105/mba_esg_logo?e=1711584000&v=beta&t=mdAC1A3ZzVISij1YzyAB2UrthU10eiD1ZnmmoxOz-DA',
+      logo: 'https://res.cloudinary.com/mrwn211/image/upload/v1712069470/resume/mba_esg_logo.jpg',
     },
   ],
 };
