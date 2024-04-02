@@ -1,12 +1,13 @@
 {
   "dependencies": {
     "@strapi/plugin-graphql": "^4.0.0",
+    "@strapi/plugin-i18n": "4.11.7",
+    "@strapi/plugin-users-permissions": "4.11.7",
+    "@strapi/strapi": "4.11.7",
+    "better-sqlite3": "8.0.1",
     "lodash.set": "^4.3.2",
     "mime-types": "^2.1.27",
-    "@strapi/strapi": "4.11.7",
-    "@strapi/plugin-users-permissions": "4.11.7",
-    "@strapi/plugin-i18n": "4.11.7",
-    "better-sqlite3": "8.0.1"
+    "strapi-plugin-netlify-deployments": "^2.0.2"
   },
   "name": "blog",
   "private": true,
