@@ -9,7 +9,7 @@ import reportWebVitals from './reportWebVitals';
 
 import { Bio } from './components/Resume/Bio/Bio';
 
-import { Navigation } from './components/Layout/Navigation';
+// import { Navigation } from './components/Layout/Navigation';
 import SideBar from './components/Layout/SideBar';
 import { SchemaMarkup } from './Schema';
 import DynamicFavicon from './components/Layout/DynamicFavicon';
