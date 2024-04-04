@@ -29,7 +29,7 @@ function App() {
               <div className="space-y-5 lg:col-span-2">
                 <div className="BIO_NAV p-7 pb-0 block-section lg:block hidden">
                   <Bio />
-                  <Navigation />
+                  {/* <Navigation /> */}
                 </div>
                 <AppRoutes />
               </div>
