@@ -12,6 +12,7 @@ import { Bio } from './components/Resume/Bio/Bio';
 import { Navigation } from './components/Layout/Navigation';
 import SideBar from './components/Layout/SideBar';
 import { SchemaMarkup } from './Schema';
+import DynamicFavicon from './components/Layout/DynamicFavicon';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -20,6 +21,7 @@ const root = ReactDOM.createRoot(
 function App() {
   return (
     <React.StrictMode>
+      <DynamicFavicon />
       <SchemaMarkup />
       <BrowserRouter>
         <ResumeProvider>
