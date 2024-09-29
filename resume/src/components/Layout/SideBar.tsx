@@ -4,7 +4,7 @@ import { Skills } from '../Resume/Skills/Skills';
 import { Languages } from '../Resume/Languages/Languages';
 import { PersonalInterests } from '../Resume/PersonalInterests/PersonalInterests';
 import { Bio } from '../Resume/Bio/Bio';
-import { Navigation } from './Navigation';
+// import { Navigation } from './Navigation';
 
 const SideBar = () => {
   return (
