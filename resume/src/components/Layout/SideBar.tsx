@@ -12,7 +12,7 @@ const SideBar = () => {
       <ContactInfo />
       <div className="BIO_NAV_SIDEBAR p-7 pb-0 block-section lg:hidden sm:block">
         <Bio />
-        <Navigation />
+        {/* <Navigation /> */}
       </div>
       <Skills />
       <Languages />
