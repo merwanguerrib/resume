@@ -5,15 +5,15 @@ export const SchemaMarkup = () => (
   <Helmet>
     <script type="application/ld+json">
       {`
-       {
-        "@context": "http://schema.org",
+{
+        "@context": "https://schema.org",
         "@type": "Person",
         "name": "Merwan Guerrib",
         "jobTitle": "Fullstack Developer",
         "email": "merwanguerrib@gmail.com",
         "address": {
           "@type": "PostalAddress",
-          "addressLocality": "Marseille",
+          "addressLocality": "Marseille"
         },
         "sameAs": [
           "https://www.linkedin.com/in/merwanguerrib",
