@@ -16,7 +16,7 @@ export const ContactInfo: React.FC = () => {
         }}
       ></div>
       <div className="pt-14 p-7 bg-white relative">
-        <span className="status-badge bg-gray-400">Free</span>
+        <span className="status-badge bg-green-300">Available</span>
         <img
           src="https://res.cloudinary.com/mrwn211/image/upload/v1689842298/merwan-guerrib.jpg"
           alt="Merwan Guerrib"
