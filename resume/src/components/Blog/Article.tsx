@@ -4,42 +4,14 @@ import { useStoryblokApi } from "@storyblok/react";
 import Loader from '../Layout/Loader';
 import NotFoundPage from '../Layout/NotFound';
 import Markdown from 'react-markdown';
-
-export interface StoryblokArticle {
-  content: {
-    Title: string;
-    Content: string;
-    Description: string;
-    Category: string[];
-    image: {
-      id: null;
-      alt: string | null;
-      name: string;
-      focus: null;
-      title: string | null;
-      source: null;
-      filename: string;
-      copyright: null;
-      fieldtype: string;
-      meta_data: Record<string, unknown>;
-    };
-    component: 'article';
-    _uid: string;
-    _editable?: string;
-  };
-  name: string;
-  full_slug: string;
-  slug: string;
-  published_at?: string;
-  uuid: string;
-}
+import { ArticleStory } from '../../storyblok/types';
 
 export const Article: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const storyblokApi = useStoryblokApi();
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<Error | null>(null);
-  const [article, setArticle] = React.useState<StoryblokArticle | null>(null);
+  const [article, setArticle] = React.useState<ArticleStory | null>(null);
 
   console.log('Article - received slug from params:', slug);
 

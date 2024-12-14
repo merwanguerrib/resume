@@ -1,8 +1,8 @@
 import React from 'react';
-import { StoryblokArticle } from './Article';
+import { ArticleStory } from '../../storyblok/types';
 import { Link } from 'react-router-dom';
 
-const ArticleCard: React.FC<{ article: StoryblokArticle }> = ({ article }) => {
+const ArticleCard: React.FC<{ article: ArticleStory }> = ({ article }) => {
   const { Title, Description, image, Category } = article.content;
   const imageUrl = image?.filename;
   const imageAlt = image?.alt || Title;

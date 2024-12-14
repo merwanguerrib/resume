@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useStoryblokApi } from "@storyblok/react";
-import { StoryblokArticle } from './Article';
+import { ArticleStory } from '../../storyblok/types';
 import Loader from '../Layout/Loader';
 import FilterButton from '../Layout/FilterButton';
 import DropDown from '../Layout/DropDown';
@@ -10,7 +10,7 @@ export const BlogHome: React.FC = () => {
   const storyblokApi = useStoryblokApi();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
-  const [articles, setArticles] = useState<StoryblokArticle[]>([]);
+  const [articles, setArticles] = useState<ArticleStory[]>([]);
   const [showDropDown, setShowDropDown] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
@@ -80,7 +80,7 @@ export const BlogHome: React.FC = () => {
 
   const filteredArticles = articles.filter((article) => {
     if (selectedCategories.length === 0) return true;
-    return article.content.Category?.some((category) =>
+    return article.content.Category?.some((category: string) =>
       selectedCategories.includes(category)
     );
   });
