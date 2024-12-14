@@ -29,7 +29,6 @@ export const Bio = () => {
   if (error) return <div>Error: {error}</div>;
   if (!bioData) return <div>No bio data available</div>;
 
-
   return (
     <div className="Bio">
       <h2 className="block-title">About me</h2>
@@ -47,11 +46,18 @@ export const Bio = () => {
           {bioData.socialLinks?.map((link: SocialLink) => (
             <li key={link._uid}>
               {link.platform.toLowerCase() === 'email' ? (
-                <span className="social-link-hover">
-                  <span>{link.url}</span>
-                </span>
+                <a href={`mailto:${link.url}`} className="social-link-hover">
+                  <i
+                    className={`bx ${link.Icon} bx-flip-horizontal text-2xl`}
+                  ></i>
+                </a>
               ) : (
-                <a href={link.url} className="social-link-hover" target="_blank" rel="noopener noreferrer">
+                <a
+                  href={link.url}
+                  className="social-link-hover"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <i className={`bx ${link.Icon} text-2xl`}></i>
                 </a>
               )}
