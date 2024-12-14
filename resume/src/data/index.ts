@@ -5,4 +5,3 @@ export * from './skills-data';
 export * from './personal-interests-data';
 export * from './references-data';
 export * from './languages-data';
-export * from './bio-data';

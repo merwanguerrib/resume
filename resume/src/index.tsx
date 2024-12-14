@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from './routes/AppRoutes';
 import ResumeProvider from './context/ResumeProvider';
-import { initStoryblok } from './utils/storyblokConfig';
+import { initStoryblok } from './storyblok/config';
 
 import './index.css';
 import reportWebVitals from './reportWebVitals';

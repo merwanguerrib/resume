@@ -1,6 +1,5 @@
 import { createContext } from 'react';
 import {
-  BioInterface,
   ContactInfoInterface,
   EducationListInterface,
   LanguageListInterface,
@@ -10,8 +9,7 @@ import {
   WorkExperienceListInterface,
 } from '../interfaces';
 
-interface ResumeContextInterface {
-  bioData: BioInterface;
+export interface ResumeContextInterface {
   contactInfoData: ContactInfoInterface;
   educationData: EducationListInterface;
   workExperienceData: WorkExperienceListInterface;

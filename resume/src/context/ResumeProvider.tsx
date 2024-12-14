@@ -2,7 +2,6 @@ import React from 'react';
 import { ResumeContext } from './context'; 
 
 import {
-  bioData,
   contactInfoData,
   educationData,
   workExperienceData,
@@ -16,7 +15,6 @@ const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const contextValue = {
-    bioData,
     contactInfoData,
     educationData,
     workExperienceData,
