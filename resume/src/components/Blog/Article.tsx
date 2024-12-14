@@ -13,20 +13,15 @@ export const Article: React.FC = () => {
   const [error, setError] = React.useState<Error | null>(null);
   const [article, setArticle] = React.useState<ArticleStory | null>(null);
 
-  console.log('Article - received slug from params:', slug);
-
   React.useEffect(() => {
     const getArticle = async () => {
       try {
-        console.log('Article - fetching story with path:', `blog/${slug}`);
         const { data } = await storyblokApi.get(`cdn/stories/blog/${slug}`, {
           version: 'draft'
         });
-        console.log('Article - received data:', data);
         setArticle(data.story);
         setLoading(false);
       } catch (err) {
-        console.error('Article - error fetching story:', err);
         setError(err instanceof Error ? err : new Error('Failed to fetch article'));
         setLoading(false);
       }

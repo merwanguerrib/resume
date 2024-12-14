@@ -19,7 +19,6 @@ export const BlogHome: React.FC = () => {
   useEffect(() => {
     const getArticles = async () => {
       try {
-        console.log('BlogHome - fetching articles');
         const { data } = await storyblokApi.get('cdn/stories', {
           version: 'draft',
           filter_query: {
@@ -28,11 +27,9 @@ export const BlogHome: React.FC = () => {
             }
           }
         });
-        console.log('BlogHome - received articles:', data.stories);
         setArticles(data.stories);
         setLoading(false);
       } catch (err) {
-        console.error('BlogHome - error fetching articles:', err);
         setError(err instanceof Error ? err : new Error('Failed to fetch articles'));
         setLoading(false);
       }

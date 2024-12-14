@@ -12,7 +12,6 @@ export const Bio = () => {
     const fetchBioData = async () => {
       try {
         const data = await getBioData();
-        console.log('Fetched Bio Data:', data);
         setBioData(data);
         setError(null);
       } catch (error) {
@@ -30,7 +29,6 @@ export const Bio = () => {
   if (error) return <div>Error: {error}</div>;
   if (!bioData) return <div>No bio data available</div>;
 
-  console.log('Social Links:', bioData.socialLinks);
 
   return (
     <div className="Bio">

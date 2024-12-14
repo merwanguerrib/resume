@@ -11,14 +11,6 @@ const ArticleCard: React.FC<{ article: ArticleStory }> = ({ article }) => {
   // Extract just the slug part from the full_slug
   const slug = article.full_slug.replace('blog/', '');
 
-  console.log('ArticleCard - article data:', {
-    full_slug: article.full_slug,
-    extracted_slug: slug,
-    name: article.name,
-    uuid: article.uuid,
-    title: Title
-  });
-
   return (
     <div className="ArticleCard mt-2 mb-2">
       <article className="article-section">
