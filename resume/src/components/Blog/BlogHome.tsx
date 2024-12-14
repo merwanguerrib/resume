@@ -1,18 +1,42 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useQuery } from '@apollo/client';
-import { GET_ARTICLES_QUERY } from '../../utils/apolloClient';
-import { ArticleInterface } from './Article';
+import { useStoryblokApi } from "@storyblok/react";
+import { ArticleStory } from '../../storyblok/types';
 import Loader from '../Layout/Loader';
 import FilterButton from '../Layout/FilterButton';
 import DropDown from '../Layout/DropDown';
 import ArticleCard from './ArticleCard';
 
 export const BlogHome: React.FC = () => {
-  const { loading, error, data } = useQuery(GET_ARTICLES_QUERY);
+  const storyblokApi = useStoryblokApi();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+  const [articles, setArticles] = useState<ArticleStory[]>([]);
   const [showDropDown, setShowDropDown] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const getArticles = async () => {
+      try {
+        const { data } = await storyblokApi.get('cdn/stories', {
+          version: 'draft',
+          filter_query: {
+            component: {
+              in: 'article'
+            }
+          }
+        });
+        setArticles(data.stories);
+        setLoading(false);
+      } catch (err) {
+        setError(err instanceof Error ? err : new Error('Failed to fetch articles'));
+        setLoading(false);
+      }
+    };
+
+    getArticles();
+  }, [storyblokApi]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -32,15 +56,11 @@ export const BlogHome: React.FC = () => {
   if (loading) return <Loader />;
   if (error) return <p>Error: {error.message}</p>;
 
-  const dropdownItems = data.articles.data.reduce(
-    (acc: string[], article: ArticleInterface) => {
-      const categoryName = article.attributes.category?.data.attributes.name;
-      if (categoryName && !acc.includes(categoryName)) {
-        acc.push(categoryName);
-      }
-      return acc;
-    },
-    []
+  // Get unique categories from all articles
+  const dropdownItems = Array.from(
+    new Set(
+      articles.flatMap(article => article.content.Category || [])
+    )
   );
 
   const handleFilter = () => {
@@ -51,34 +71,39 @@ export const BlogHome: React.FC = () => {
     if (isChecked) {
       setSelectedCategories([...selectedCategories, category]);
     } else {
-      setSelectedCategories(
-        selectedCategories.filter((cat) => cat !== category)
-      );
+      setSelectedCategories(selectedCategories.filter((c) => c !== category));
     }
   };
 
-  const filteredArticles = data.articles.data.filter(
-    (article: ArticleInterface) =>
-      selectedCategories.length === 0 ||
-      selectedCategories.includes(
-        article.attributes.category?.data.attributes.name as string
-      )
-  );
+  const filteredArticles = articles.filter((article) => {
+    if (selectedCategories.length === 0) return true;
+    return article.content.Category?.some((category: string) =>
+      selectedCategories.includes(category)
+    );
+  });
 
   return (
-    <div className=" BlogHome flex flex-col items-end relative ">
-      <div className="relative" ref={dropdownRef}>
-        <FilterButton handleClick={handleFilter} />
-        {showDropDown && (
-          <DropDown
-            items={dropdownItems}
-            onCategoryChange={handleCategorySelection}
-          />
-        )}
+    <div className="blog-section">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">Blog</h1>
+        <div className="relative" ref={dropdownRef}>
+          <FilterButton onClick={handleFilter} />
+          {showDropDown && (
+            <DropDown
+              items={dropdownItems}
+              selectedItems={selectedCategories}
+              onItemClick={handleCategorySelection}
+            />
+          )}
+        </div>
       </div>
-      {filteredArticles.map((article: ArticleInterface) => (
-        <ArticleCard key={article.id} article={article} />
-      ))}
+      <div className="space-y-4">
+        {filteredArticles.map((article) => (
+          <ArticleCard key={article.uuid} article={article} />
+        ))}
+      </div>
     </div>
   );
 };
+
+export default BlogHome;

@@ -1,13 +1,15 @@
 import React from 'react';
-import { ArticleInterface } from './Article';
+import { ArticleStory } from '../../storyblok/types';
 import { Link } from 'react-router-dom';
 
-const ArticleCard: React.FC<{ article: ArticleInterface }> = ({ article }) => {
-  const { slug, title, description, publishedAt, image, category } =
-    article.attributes;
-  const imageUrl = `${process.env.REACT_APP_STRAPI_APP_URL}${image.data.attributes.url}`;
-  const imageAlt = image.data.attributes.alternativeText;
-  const categoryName = category?.data.attributes.name;
+const ArticleCard: React.FC<{ article: ArticleStory }> = ({ article }) => {
+  const { Title, Description, image, Category } = article.content;
+  const imageUrl = image?.filename;
+  const imageAlt = image?.alt || Title;
+  const categoryName = Category?.[0];
+
+  // Extract just the slug part from the full_slug
+  const slug = article.full_slug.replace('blog/', '');
 
   return (
     <div className="ArticleCard mt-2 mb-2">
@@ -17,30 +19,34 @@ const ArticleCard: React.FC<{ article: ArticleInterface }> = ({ article }) => {
             <Link
               to={`/blog/article/${slug}`}
               className="article-title-hover block"
-              key={article.id}
+              key={article.uuid}
             >
-              <h2 className="text-lg font-semibold">{title}</h2>
+              <h2 className="text-lg font-semibold">{Title}</h2>
             </Link>
-            {category ? (
+            {categoryName && (
               <div className="space-y-2 sm:text-right">
                 <div className="job-item-badge">{categoryName}</div>
               </div>
-            ) : null}
+            )}
           </div>
-          <p className="text-gray-600">{description}</p>
-          <p>
-            <time dateTime={publishedAt} className="text-sm text-gray-400">
-              {new Date(publishedAt).toLocaleDateString('fr-FR', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-              })}
-            </time>
-          </p>
+          <p className="text-gray-600">{Description}</p>
+          {article.published_at && (
+            <p>
+              <time dateTime={article.published_at} className="text-sm text-gray-400">
+                {new Date(article.published_at).toLocaleDateString('fr-FR', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                })}
+              </time>
+            </p>
+          )}
         </div>
-        <div className="article-img">
-          <img src={imageUrl} alt={imageAlt} />
-        </div>
+        {imageUrl && (
+          <div className="article-img">
+            <img src={imageUrl} alt={imageAlt} />
+          </div>
+        )}
       </article>
     </div>
   );
