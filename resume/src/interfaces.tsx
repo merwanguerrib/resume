@@ -1,6 +1,5 @@
 export interface ResumeInterface {
   contactInfo?: ContactInfoInterface;
-  bio?: BioInterface;
   education?: EducationListInterface;
   workExperiences?: WorkExperienceListInterface;
   skills?: SkillListInterface;
@@ -19,12 +18,6 @@ export interface ContactInfoInterface {
     city: string;
     zip?: string;
   };
-}
-
-export interface BioInterface {
-  catchPhrase?: string;
-  bio?: string;
-  qualities?: string[];
 }
 
 export interface EducationInterface {
