@@ -2,10 +2,10 @@ import React from 'react';
 
 const Loader: React.FC = () => {
   return (
-    <div role="status" className="Loader flex items-center justify-center ">
+    <div role="status" className="flex items-center justify-center">
       <svg
         aria-hidden="true"
-        className="w-8 h-8 text-gray-100 animate-spin dark:text-gray-600 fill-[#8b5cf6]"
+        className="h-8 w-8 animate-spin text-panel fill-primary"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -19,7 +19,9 @@ const Loader: React.FC = () => {
           fill="currentFill"
         />
       </svg>
-      <span className='pl-1 text-[#8b5cf6]'>Loading...</span>
+      <span className="pl-2 text-sm font-medium text-primary">
+        Loading...
+      </span>
     </div>
   );
 };

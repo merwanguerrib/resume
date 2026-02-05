@@ -10,39 +10,41 @@ const ArticleCard: React.FC<{ article: ArticleInterface }> = ({ article }) => {
   const categoryName = category?.data.attributes.name;
 
   return (
-    <div className="ArticleCard mt-2 mb-2">
-      <article className="article-section">
-        <div className="space-y-3 mb-5 p-7 pb-0">
-          <div className="flex justify-between">
-            <Link
-              to={`/blog/article/${slug}`}
-              className="article-title-hover block"
-              key={article.id}
-            >
-              <h2 className="text-lg font-semibold">{title}</h2>
-            </Link>
-            {category ? (
-              <div className="space-y-2 sm:text-right">
-                <div className="job-item-badge">{categoryName}</div>
-              </div>
-            ) : null}
-          </div>
-          <p className="text-gray-600">{description}</p>
-          <p>
-            <time dateTime={publishedAt} className="text-sm text-gray-400">
-              {new Date(publishedAt).toLocaleDateString('fr-FR', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-              })}
-            </time>
-          </p>
+    <article className="mt-2 overflow-hidden rounded-3xl border border-line/80 bg-surface/90 shadow-soft transition duration-300 hover:-translate-y-0.5 hover:shadow-glow">
+      <div className="space-y-3 p-6 sm:p-7">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <Link
+            to={`/blog/article/${slug}`}
+            className="block text-lg font-semibold text-ink transition duration-300 hover:text-primary"
+            key={article.id}
+          >
+            {title}
+          </Link>
+          {category ? (
+            <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+              {categoryName}
+            </span>
+          ) : null}
         </div>
-        <div className="article-img">
-          <img src={imageUrl} alt={imageAlt} />
-        </div>
-      </article>
-    </div>
+        <p className="text-sm text-muted">{description}</p>
+        <p>
+          <time dateTime={publishedAt} className="text-xs uppercase text-muted">
+            {new Date(publishedAt).toLocaleDateString('fr-FR', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            })}
+          </time>
+        </p>
+      </div>
+      <div className="h-56 w-full overflow-hidden">
+        <img
+          src={imageUrl}
+          alt={imageAlt}
+          className="h-full w-full object-cover"
+        />
+      </div>
+    </article>
   );
 };
 

@@ -7,15 +7,19 @@ export const Languages: React.FC = () => {
   const context = useContext(ResumeContext);
   const data = context.languagesData;
   return (
-    <div className="Languages p-7 block-section flow-root">
-      <h2 className="block-title">Languages</h2>
-      <div className="-m-2 flex flex-wrap">
+    <section className="rounded-3xl border border-line/80 bg-surface/90 p-6 shadow-soft backdrop-blur transition duration-300 motion-safe:animate-fade-up motion-safe:hover:-translate-y-0.5 motion-safe:hover:shadow-glow sm:p-8">
+      <h2 className="mb-6 text-lg font-semibold text-ink">Languages</h2>
+      <div className="flex flex-wrap gap-3">
         {data.list.map((language, index) => (
-          <p
+          <span
             key={index}
-          >{`${language.emoji} ${language.name} - ${language.level}`}</p>
+            className="inline-flex items-center gap-2 rounded-full border border-line/80 bg-panel/50 px-3 py-1 text-xs font-medium text-ink"
+          >
+            <span>{language.emoji}</span>
+            <span>{`${language.name} · ${language.level}`}</span>
+          </span>
         ))}
       </div>
-    </div>
+    </section>
   );
 };

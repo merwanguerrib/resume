@@ -8,69 +8,75 @@ export const ContactInfo: React.FC = () => {
   const data = context.contactInfoData;
 
   return (
-    <div className="ContactInfo shadow rounded-xl overflow-hidden">
-      <div
-        className="h-32 bg-cover"
-        style={{
-          backgroundImage: `url('https://res.cloudinary.com/mrwn211/image/upload/v1689841866/Blue_Modern_Lets_Do_This_LinkedIn_Banner.png')`,
-        }}
-      ></div>
-      <div className="pt-14 p-7 bg-white relative">
-        <span className="status-badge bg-green-300">Available</span>
+    <section className="overflow-hidden rounded-3xl border border-line/80 bg-surface/90 shadow-glow backdrop-blur">
+      <div className="relative h-32 bg-cover bg-center">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url('https://res.cloudinary.com/mrwn211/image/upload/v1689841866/Blue_Modern_Lets_Do_This_LinkedIn_Banner.png')`,
+          }}
+        ></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/40 via-primary/10 to-transparent"></div>
+      </div>
+      <div className="relative space-y-5 p-6 pt-14 sm:p-7">
+        <span className="inline-flex items-center gap-2 rounded-full bg-success/15 px-3 py-1 text-xs font-semibold text-success">
+          <span className="h-2 w-2 rounded-full bg-success"></span>
+          Available
+        </span>
         <img
           src="https://res.cloudinary.com/mrwn211/image/upload/v1689842298/merwan-guerrib.jpg"
           alt="Merwan Guerrib"
-          className="user-photo"
+          className="absolute left-6 top-0 h-16 w-16 -translate-y-1/2 rounded-2xl border-2 border-surface object-cover shadow-soft ring-1 ring-primary/20 motion-safe:animate-float sm:left-7"
         />
-        <div className="text-lg font-semibold mb-1.5">
-          {data.firstName} {data.lastName}
+        <div>
+          <div className="text-lg font-semibold text-ink">
+            {data.firstName} {data.lastName}
+          </div>
+          <div className="text-sm text-muted">{data.title}</div>
         </div>
-        <div className="text-sm text-gray-400 mb-7">{data.title}</div>
-        <div className="flex flex-col space-y-2">
+        <div className="flex flex-col gap-3">
           <a
             href="https://drive.google.com/file/d/1o2J2muY8X_8THfziatZQ-sgBQFQBUU9Y/view"
             target="_blank"
             rel="noopener noreferrer"
             download
+            className="group inline-flex items-center justify-between gap-3 rounded-2xl border border-primary/20 bg-primary/10 px-4 py-3 text-sm font-semibold text-primary transition duration-300 hover:bg-primary/20"
           >
-            <div className="flex">
-              <button className="download-btn">Download CV</button>
-              <button className="download-btn-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.8"
-                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                  ></path>
-                </svg>
-              </button>
-            </div>
+            Download CV
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-surface text-primary transition duration-300 group-hover:translate-x-0.5">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.8"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                ></path>
+              </svg>
+            </span>
           </a>
-          <div className="flex">
+          <div className="flex flex-col gap-3 sm:flex-row">
             {rootElement ? (
               <>
                 <PopupButton
                   url="https://calendly.com/merwanguerrib/let-s-connect"
                   rootElement={rootElement}
                   text="Let's connect !"
-                  className="download-btn"
+                  className="inline-flex flex-1 items-center justify-between gap-3 rounded-2xl border border-line/80 bg-surface px-4 py-3 text-sm font-semibold text-ink transition duration-300 hover:border-primary/30"
                 />
-
-                <button className="download-btn-icon">
+                <button className="inline-flex h-12 items-center justify-center rounded-2xl border border-line/80 bg-surface px-4 text-primary transition duration-300 hover:border-primary/40">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    className="w-6 h-6"
+                    className="h-5 w-5"
                   >
                     <path
                       strokeLinecap="round"
@@ -84,21 +90,6 @@ export const ContactInfo: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
-
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  fill="none"
-  viewBox="0 0 24 24"
-  strokeWidth={1.5}
-  stroke="currentColor"
-  className="w-6 h-6"
->
-  <path
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
-  />
-</svg>;

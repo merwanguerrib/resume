@@ -25,15 +25,17 @@ function App() {
       <SchemaMarkup />
       <BrowserRouter>
         <ResumeProvider>
-          <main className="main-container">
-            <div className="grid gap-5 lg:grid-cols-3 ">
-              <SideBar />
-              <div className="space-y-5 lg:col-span-2">
-                <div className="BIO_NAV p-7 pb-0 block-section lg:block hidden">
-                  <Bio />
-                  {/* <Navigation /> */}
+          <main className="min-h-screen bg-hero">
+            <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-4 py-10 sm:px-6 lg:px-8">
+              <div className="grid gap-6 lg:grid-cols-3">
+                <SideBar />
+                <div className="space-y-6 lg:col-span-2">
+                  <div className="hidden rounded-3xl border border-line/80 bg-surface/90 p-6 shadow-soft backdrop-blur transition duration-300 motion-safe:animate-fade-up motion-safe:hover:-translate-y-0.5 motion-safe:hover:shadow-glow lg:block">
+                    <Bio />
+                    {/* <Navigation /> */}
+                  </div>
+                  <AppRoutes />
                 </div>
-                <AppRoutes />
               </div>
             </div>
           </main>

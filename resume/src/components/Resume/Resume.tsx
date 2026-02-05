@@ -6,7 +6,7 @@ export const Resume: React.FC<
   React.PropsWithChildren<Record<string, never>>
 > = () => {
   return (
-    <div className="Resume">
+    <div className="space-y-6">
       <WorkExperiences />
       <Education />
     </div>

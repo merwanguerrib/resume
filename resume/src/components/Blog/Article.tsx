@@ -49,22 +49,26 @@ export const Article: React.FC = () => {
   if (!article) return <NotFoundPage />;
 
   return (
-    <article className="Article single-article-section">
-      <div className="single-article-img rounded-t-xl">
-        <img src={imageUrl} alt={imageAlt} />
+    <article className="overflow-hidden rounded-3xl border border-line/80 bg-surface/90 shadow-soft">
+      <div className="h-64 w-full overflow-hidden">
+        <img
+          src={imageUrl}
+          alt={imageAlt}
+          className="h-full w-full object-cover"
+        />
       </div>
-      <div className="space-y-7 mb-5 p-7 pb-0">
+      <div className="space-y-6 p-6 sm:p-7">
         <div className="space-y-2">
-          <div className="flex justify-between">
-            <h1 className="text-lg font-semibold">{title}</h1>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h1 className="text-lg font-semibold text-ink">{title}</h1>
             {category ? (
-              <div className="space-y-2 sm:text-right">
-                <div className="job-item-badge">{categoryName}</div>
-              </div>
+              <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                {categoryName}
+              </span>
             ) : null}
           </div>
           <p>
-            <time dateTime={publishedAt} className="text-sm text-gray-400">
+            <time dateTime={publishedAt} className="text-xs uppercase text-muted">
               {new Date(publishedAt).toLocaleDateString('fr-FR', {
                 year: 'numeric',
                 month: 'short',
@@ -73,7 +77,9 @@ export const Article: React.FC = () => {
             </time>
           </p>
         </div>
-        <Markdown className="markdown-body">{content}</Markdown>
+        <Markdown className="text-sm leading-relaxed text-ink">
+          {content}
+        </Markdown>
       </div>
     </article>
   );

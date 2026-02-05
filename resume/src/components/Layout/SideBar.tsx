@@ -8,9 +8,9 @@ import { Bio } from '../Resume/Bio/Bio';
 
 const SideBar = () => {
   return (
-    <div className="Sidebar space-y-5 ">
+    <div className="space-y-6">
       <ContactInfo />
-      <div className="BIO_NAV_SIDEBAR p-7 pb-0 block-section lg:hidden sm:block">
+      <div className="rounded-3xl border border-line/80 bg-surface/90 p-6 shadow-soft backdrop-blur transition duration-300 motion-safe:animate-fade-up motion-safe:hover:-translate-y-0.5 motion-safe:hover:shadow-glow lg:hidden">
         <Bio />
         {/* <Navigation /> */}
       </div>

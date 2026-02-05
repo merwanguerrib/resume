@@ -9,13 +9,15 @@ export const Navigation = () => {
   const isBlogActive = location.pathname.startsWith('/blog');
 
   return (
-    <ul className="Navigation flex space-x-8 font-medium">
+    <ul className="flex items-center space-x-8 text-sm font-semibold text-muted">
       <li>
         <Link
           to="/resume"
-          className={`menu-link ${
-            isResumeActive ? 'menu-link-active' : ''
-          } menu-link-hover`}
+          className={`transition duration-300 hover:text-primary ${
+            isResumeActive
+              ? 'text-primary'
+              : 'text-muted'
+          }`}
         >
           Resume
         </Link>
@@ -23,9 +25,11 @@ export const Navigation = () => {
       <li>
         <Link
           to="/blog"
-          className={`menu-link ${
-            isBlogActive ? 'menu-link-active' : ''
-          } menu-link-hover`}
+          className={`transition duration-300 hover:text-primary ${
+            isBlogActive
+              ? 'text-primary'
+              : 'text-muted'
+          }`}
         >
           Blog
         </Link>
