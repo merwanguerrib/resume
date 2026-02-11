@@ -1,0 +1,16 @@
+---
+import ContactInfo from '../Resume/ContactInfo.astro';
+import Skills from '../Resume/Skills.astro';
+import Languages from '../Resume/Languages.astro';
+import PersonalInterests from '../Resume/PersonalInterests.astro';
+import Bio from '../Resume/Bio.astro';
+---
+<div class="space-y-6">
+  <ContactInfo />
+  <div class="rounded-3xl border border-line/80 bg-surface/90 p-6 shadow-soft backdrop-blur transition duration-300 motion-safe:animate-fade-up motion-safe:hover:-translate-y-0.5 motion-safe:hover:shadow-glow lg:hidden">
+    <Bio />
+  </div>
+  <Skills />
+  <Languages />
+  <PersonalInterests />
+</div>

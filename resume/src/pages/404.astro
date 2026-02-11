@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Page Not Found">
+  <main class="min-h-screen bg-hero">
+    <div class="mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center gap-8 px-6 py-16 text-center">
+      <img
+        src="/assets/404.png"
+        alt="Lost in space"
+        class="h-40 w-auto"
+        loading="lazy"
+      />
+      <div class="space-y-3">
+        <h1 class="text-3xl font-semibold text-ink">Page not found</h1>
+        <p class="text-base text-muted">
+          The page you are looking for does not exist. Head back home to explore the resume.
+        </p>
+      </div>
+      <a
+        href="/"
+        class="inline-flex items-center justify-center rounded-full border border-primary/20 bg-primary/10 px-5 py-3 text-sm font-semibold text-primary transition duration-300 hover:bg-primary/20"
+      >
+        Back to home
+      </a>
+    </div>
+  </main>
+</BaseLayout>

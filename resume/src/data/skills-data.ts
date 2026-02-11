@@ -19,6 +19,10 @@ export const skillsData: SkillListInterface = {
       level: 60,
     },
     {
+      name: 'MUI',
+      level: 55,
+    },
+    {
       name: 'TypeScript',
       level: 50,
     },
@@ -31,15 +35,27 @@ export const skillsData: SkillListInterface = {
       level: 40,
     },
     {
-      name: 'PostgreSQL',
-      level: 30,
-    },
-    {
       name: 'Docker',
       level: 20,
     },
     {
       name: 'AWS',
+      level: 20,
+    },
+    {
+      name: 'Claude Code',
+      level: 20,
+    },
+    {
+      name: 'Lovable',
+      level: 20,
+    },
+    {
+      name: 'Codex',
+      level: 20,
+    },
+    {
+      name: 'ShadCn',
       level: 20,
     },
   ],
