@@ -1,0 +1,94 @@
+---
+import '../styles/global.css';
+
+const {
+  title = 'Merwan Guerrib - Fullstack Developer',
+  description =
+    'Fullstack developer crafting modern web experiences with a product-first mindset.',
+} = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Merwan Guerrib',
+  jobTitle: 'Fullstack Developer',
+  email: 'merwanguerrib@gmail.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Marseille',
+  },
+  sameAs: [
+    'https://www.linkedin.com/in/merwanguerrib',
+    'https://github.com/merwanguerrib/merwanguerrib',
+    'https://twitter.com/mrwn211',
+  ],
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1c1433" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
+  </head>
+  <body>
+    <slot />
+    <script is:inline>
+      const emojis = [
+        '😀',
+        '😎',
+        '👨‍💻',
+        '👨🏼‍🍳',
+        '💻',
+        '📖',
+        '🍔',
+        '🍕',
+        '🌮',
+        '👟',
+        '🏀',
+        '🎾',
+        '🎉',
+        '🚀',
+      ];
+
+      window.addEventListener('load', () => {
+        const updateFavicon = () => {
+          const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+          const canvas = document.createElement('canvas');
+          canvas.width = 64;
+          canvas.height = 64;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) return;
+
+          ctx.font = '48px serif';
+          ctx.fillText(emoji, 0, 48);
+
+          const link =
+            document.querySelector("link[rel*='icon']") ||
+            document.createElement('link');
+          link.type = 'image/x-icon';
+          link.rel = 'shortcut icon';
+          link.href = canvas.toDataURL();
+          document.getElementsByTagName('head')[0].appendChild(link);
+        };
+
+        updateFavicon();
+        setInterval(updateFavicon, 60000);
+      });
+    </script>
+  </body>
+</html>

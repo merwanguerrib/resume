@@ -1,0 +1,72 @@
+---
+import { skillsData } from '../../data/skills-data';
+import {
+  siAnthropic,
+  siDocker,
+  siGraphql,
+  siJavascript,
+  siMongodb,
+  siMui,
+  siNodedotjs,
+  siOpenaigym,
+  siPostgresql,
+  siReact,
+  siShadcnui,
+  siTailwindcss,
+  siTypescript,
+} from 'simple-icons';
+
+const { list } = skillsData;
+
+const iconMap = {
+  Tailwind: siTailwindcss,
+  JavaScript: siJavascript,
+  GraphQL: siGraphql,
+  React: siReact,
+  TypeScript: siTypescript,
+  'Node.js': siNodedotjs,
+  MongoDB: siMongodb,
+  PostgreSQL: siPostgresql,
+  Docker: siDocker,
+  MUI: siMui,
+  'Claude Code': siAnthropic,
+  Codex: siOpenaigym,
+  ShadCn: siShadcnui,
+};
+
+const fallbackIcons = {
+  Lovable: 'bx bxs-heart',
+};
+---
+<section class="rounded-3xl border border-line/80 bg-surface/90 p-6 shadow-soft backdrop-blur transition duration-300 motion-safe:animate-fade-up motion-safe:hover:-translate-y-0.5 motion-safe:hover:shadow-glow sm:p-8">
+  <h2 class="mb-6 text-lg font-semibold text-ink">Skills</h2>
+  <div class="grid gap-3 sm:grid-cols-2">
+    {list.map((skill) => (
+      <div class="flex items-center gap-3 text-sm font-medium text-ink">
+        <span class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-line/80 bg-surface/80 text-primary">
+          {iconMap[skill.name] ? (
+            <span
+              class="skill-icon h-4 w-4 text-primary"
+              set:html={iconMap[skill.name].svg}
+            ></span>
+          ) : fallbackIcons[skill.name] ? (
+            <i class={`${fallbackIcons[skill.name]} text-lg text-primary`}></i>
+          ) : (
+            <span class="text-xs font-semibold text-primary">
+              {skill.name.charAt(0)}
+            </span>
+          )}
+        </span>
+        <span>{skill.name}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .skill-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+</style>

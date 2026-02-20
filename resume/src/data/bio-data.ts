@@ -1,8 +1,8 @@
 import { BioInterface } from "../interfaces";
 
 export const bioData: BioInterface = {
-  catchPhrase: "JavaScript Developer with strong digital marketing foundations",
-  bio: "A highly motivated fullstack developer with 3 years of experience in building web applications and a digital marketing background as foundations. Able to work independently but prefers to be part of a team that delivers high-quality, scalable solutions.",
+  catchPhrase: "Fullstack developer with 6 years of experience building web products",
+  bio: "Fullstack developer with 6 years of experience delivering scalable web applications end-to-end. I pair strong engineering fundamentals with a product mindset, and I enjoy collaborating with teams that ship high-quality, reliable experiences.",
   qualities: [
     "Team player",
     "Quick learner",
