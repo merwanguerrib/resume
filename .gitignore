@@ -1,2 +1,10 @@
 # Local Netlify folder
 .netlify
+
+# Git worktrees
+.worktrees
+
+
+# Claude
+
+.claude/skills/*
