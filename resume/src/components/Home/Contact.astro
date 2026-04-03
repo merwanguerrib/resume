@@ -1,0 +1,161 @@
+---
+import type { Lang } from '../../data/site-strings';
+import { t } from '../../data/site-strings';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+const strings = t(lang);
+const { contact } = strings;
+---
+
+<section id="contact" class="py-section px-4 bg-white">
+  <div class="mx-auto max-w-6xl">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+
+      <!-- Left: copy -->
+      <div class="flex flex-col gap-6">
+        <div class="reveal">
+          <span class="eyebrow mb-5">{contact.eyebrow}</span>
+          <h2 class="font-display text-display-lg font-black text-dark mt-5 whitespace-pre-line leading-[0.95]">
+            {contact.title}
+          </h2>
+        </div>
+        <p class="reveal text-muted text-lg leading-relaxed" data-delay="100">
+          {contact.subtitle}
+        </p>
+
+      </div>
+
+      <!-- Right: form -->
+      <div class="reveal card-shell" data-delay="150">
+        <div class="card-core p-6 md:p-8">
+          <form
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            class="flex flex-col gap-5"
+            id="contact-form"
+          >
+            <!-- Honeypot -->
+            <div class="hidden" aria-hidden="true">
+              <input name="bot-field" tabindex="-1" autocomplete="off" />
+            </div>
+            <input type="hidden" name="form-name" value="contact" />
+
+            <!-- Name -->
+            <div class="flex flex-col gap-1.5">
+              <label for="name" class="text-xs font-medium text-ink uppercase tracking-wide">
+                {contact.fields.name}
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                placeholder="John Doe"
+                class="w-full rounded-xl border border-black/8 bg-canvas px-4 py-3 text-sm text-ink placeholder:text-muted/50 outline-none focus:border-dark/30 focus:ring-2 focus:ring-dark/8 transition-all duration-200"
+              />
+            </div>
+
+            <!-- Email -->
+            <div class="flex flex-col gap-1.5">
+              <label for="email" class="text-xs font-medium text-ink uppercase tracking-wide">
+                {contact.fields.email}
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                placeholder="you@company.com"
+                class="w-full rounded-xl border border-black/8 bg-canvas px-4 py-3 text-sm text-ink placeholder:text-muted/50 outline-none focus:border-dark/30 focus:ring-2 focus:ring-dark/8 transition-all duration-200"
+              />
+            </div>
+
+            <!-- Project description -->
+            <div class="flex flex-col gap-1.5">
+              <label for="project" class="text-xs font-medium text-ink uppercase tracking-wide">
+                {contact.fields.project}
+              </label>
+              <textarea
+                id="project"
+                name="project"
+                required
+                rows="4"
+                placeholder={lang === 'en' ? 'Tell me about your project...' : 'Parlez-moi de votre projet...'}
+                class="w-full rounded-xl border border-black/8 bg-canvas px-4 py-3 text-sm text-ink placeholder:text-muted/50 outline-none focus:border-dark/30 focus:ring-2 focus:ring-dark/8 transition-all duration-200 resize-none"
+              ></textarea>
+            </div>
+
+            <!-- Budget -->
+            <div class="flex flex-col gap-1.5">
+              <label for="budget" class="text-xs font-medium text-ink uppercase tracking-wide">
+                {contact.fields.budget}
+              </label>
+              <select
+                id="budget"
+                name="budget"
+                class="w-full rounded-xl border border-black/8 bg-canvas px-4 py-3 text-sm text-ink outline-none focus:border-dark/30 focus:ring-2 focus:ring-dark/8 transition-all duration-200 appearance-none cursor-pointer"
+              >
+                {contact.fields.budgetOptions.map((option, i) => (
+                  <option value={i === 0 ? '' : option} disabled={i === 0} selected={i === 0}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <!-- Submit -->
+            <button
+              type="submit"
+              class="group btn-primary w-full justify-center mt-2 py-4"
+            >
+              {contact.fields.submit}
+              <span class="btn-icon">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+
+          </form>
+
+          <!-- Success message (hidden by default) -->
+          <div id="contact-success" class="hidden text-center py-8 flex flex-col items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xl">✓</div>
+            <p class="font-display font-bold text-dark">{contact.success}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  const form = document.getElementById('contact-form');
+  const success = document.getElementById('contact-success');
+
+  if (form && success) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      try {
+        await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(data).toString(),
+        });
+        form.classList.add('hidden');
+        success.classList.remove('hidden');
+      } catch {
+        // Fallback: let native form submit
+        form.submit();
+      }
+    });
+  }
+</script>

@@ -1,94 +1,103 @@
 ---
 import '../styles/global.css';
+import type { Lang } from '../data/site-strings';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: Lang;
+}
 
 const {
-  title = 'Merwan Guerrib - Fullstack Developer',
-  description =
-    'Fullstack developer crafting modern web experiences with a product-first mindset.',
+  title = 'Merwan Guerrib — Just dev it.',
+  description = 'Premium web & app development. Built fast, built right. Fullstack developer based in Marseille.',
+  lang = 'en',
 } = Astro.props;
 
 const schema = {
   '@context': 'https://schema.org',
-  '@type': 'Person',
+  '@type': 'ProfessionalService',
   name: 'Merwan Guerrib',
-  jobTitle: 'Fullstack Developer',
-  email: 'merwanguerrib@gmail.com',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Marseille',
+  description: 'Premium web & app development services',
+  url: 'https://merwanguerrib.com',
+  founder: {
+    '@type': 'Person',
+    name: 'Merwan Guerrib',
+    jobTitle: 'Fullstack Developer',
+    email: 'merwanguerrib@gmail.com',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Marseille',
+      addressCountry: 'FR',
+    },
   },
   sameAs: [
     'https://www.linkedin.com/in/merwanguerrib',
-    'https://github.com/merwanguerrib/merwanguerrib',
-    'https://twitter.com/mrwn211',
+    'https://github.com/merwanguerrib',
   ],
 };
 ---
+
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#1c1433" />
+    <meta name="theme-color" content="#F9F8F5" />
     <meta name="description" content={description} />
     <title>{title}</title>
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=DM+Sans:wght@400;500&family=Geist+Mono:wght@400&display=swap"
     />
     <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=DM+Sans:wght@400;500&family=Geist+Mono:wght@400&display=swap"
+      media="print"
+      onload="this.media='all'"
     />
-    <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=DM+Sans:wght@400;500&family=Geist+Mono:wght@400&display=swap"
+      />
+    </noscript>
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
-  <body>
+  <body class="bg-canvas">
+    <div class="grain-overlay" aria-hidden="true"></div>
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-dark focus:px-4 focus:py-2 focus:text-sm focus:text-white"
+    >
+      Skip to content
+    </a>
     <slot />
     <script is:inline>
-      const emojis = [
-        '😀',
-        '😎',
-        '👨‍💻',
-        '👨🏼‍🍳',
-        '💻',
-        '📖',
-        '🍔',
-        '🍕',
-        '🌮',
-        '👟',
-        '🏀',
-        '🎾',
-        '🎉',
-        '🚀',
-      ];
-
-      window.addEventListener('load', () => {
-        const updateFavicon = () => {
-          const emoji = emojis[Math.floor(Math.random() * emojis.length)];
-          const canvas = document.createElement('canvas');
-          canvas.width = 64;
-          canvas.height = 64;
-          const ctx = canvas.getContext('2d');
-          if (!ctx) return;
-
-          ctx.font = '48px serif';
-          ctx.fillText(emoji, 0, 48);
-
-          const link =
-            document.querySelector("link[rel*='icon']") ||
-            document.createElement('link');
-          link.type = 'image/x-icon';
-          link.rel = 'shortcut icon';
-          link.href = canvas.toDataURL();
-          document.getElementsByTagName('head')[0].appendChild(link);
-        };
-
-        updateFavicon();
-        setInterval(updateFavicon, 60000);
-      });
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const delay = entry.target.dataset.delay || 0;
+              setTimeout(() => {
+                entry.target.classList.add('visible');
+              }, Number(delay));
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      document
+        .querySelectorAll('.reveal')
+        .forEach((el) => observer.observe(el));
     </script>
   </body>
 </html>

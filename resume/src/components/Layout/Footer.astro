@@ -1,0 +1,55 @@
+---
+import type { Lang } from '../../data/site-strings';
+import { t } from '../../data/site-strings';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+const strings = t(lang);
+const { footer } = strings;
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-black/6 bg-surface py-12 px-4">
+  <div class="mx-auto max-w-6xl">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+
+      <!-- Brand -->
+      <div class="flex flex-col gap-2">
+        <span class="font-display font-black text-xl text-dark">{footer.tagline}</span>
+        <span class="text-xs text-muted">
+          © {year} Merwan Guerrib — {footer.rights}
+        </span>
+      </div>
+
+      <!-- Links -->
+      <div class="flex flex-wrap items-center gap-6">
+        <a
+          href="https://www.linkedin.com/in/merwanguerrib"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm text-muted hover:text-ink transition-colors duration-200 font-medium"
+        >
+          {footer.links.linkedin}
+        </a>
+        <a
+          href="https://github.com/merwanguerrib"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm text-muted hover:text-ink transition-colors duration-200 font-medium"
+        >
+          {footer.links.github}
+        </a>
+        <a
+          href="#"
+          class="text-sm text-muted hover:text-ink transition-colors duration-200 font-medium"
+        >
+          {footer.privacy}
+        </a>
+      </div>
+
+    </div>
+  </div>
+</footer>

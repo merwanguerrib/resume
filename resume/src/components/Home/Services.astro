@@ -1,0 +1,236 @@
+---
+import type { Lang } from '../../data/site-strings';
+import { t } from '../../data/site-strings';
+import { servicesData } from '../../data/services-data';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+const strings = t(lang);
+
+// Icons as inline SVG paths (Phosphor light style)
+const icons: Record<string, string> = {
+  browser: `<svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="26" height="20" rx="3"/><line x1="3" y1="12" x2="29" y2="12"/><circle cx="8" cy="9" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="9" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="9" r="1" fill="currentColor" stroke="none"/></svg>`,
+  'device-mobile': `<svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="14" height="28" rx="3"/><line x1="14" y1="26" x2="18" y2="26"/></svg>`,
+  palette: `<svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4C9.4 4 4 9.4 4 16c0 5.5 4.5 8 8 8h1.5c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.4-.3-.4-.5-.9-.5-1.4 0-1.1.9-2 2-2H20c3.3 0 8-2.7 8-8 0-6.6-5.4-8-12-8z"/><circle cx="11" cy="14" r="1.5" fill="currentColor" stroke="none"/><circle cx="16" cy="10" r="1.5" fill="currentColor" stroke="none"/><circle cx="21" cy="14" r="1.5" fill="currentColor" stroke="none"/></svg>`,
+  robot: `<svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="12" width="24" height="16" rx="3"/><path d="M16 12V8"/><circle cx="16" cy="6" r="2"/><circle cx="11" cy="20" r="2"/><circle cx="21" cy="20" r="2"/><line x1="8" y1="24" x2="24" y2="24"/></svg>`,
+  megaphone: `<svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h4l12-7v18L9 16H5a2 2 0 01-2-2v-2a2 2 0 012-2z"/><path d="M9 16v7"/></svg>`,
+  clipboard: `<svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="6" width="16" height="22" rx="2"/><path d="M12 6V4h8v2"/><line x1="12" y1="14" x2="20" y2="14"/><line x1="12" y1="19" x2="17" y2="19"/></svg>`,
+  chart: `<svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="28" x2="28" y2="28"/><rect x="6" y="18" width="5" height="10"/><rect x="13" y="11" width="5" height="17"/><rect x="20" y="5" width="5" height="23"/></svg>`,
+  search: `<svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="14" r="9"/><line x1="21" y1="21" x2="28" y2="28"/></svg>`,
+};
+---
+
+<section id="services" class="py-section px-4 overflow-hidden bg-white">
+  <div class="mx-auto max-w-6xl">
+
+    <!-- Header -->
+    <div class="mb-20 reveal">
+      <span class="eyebrow mb-5">{strings.services.eyebrow}</span>
+      <h2 class="font-display text-display-lg font-black text-dark mt-5 whitespace-pre-line">
+        {strings.services.title}
+      </h2>
+    </div>
+
+    <!-- Bento grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-auto">
+
+      <!-- Large card (col-span-2) — Web Development -->
+      <div
+        class="reveal lg:col-span-2 card-shell group cursor-default service-card"
+        data-delay="0"
+      >
+        <div class="card-core p-8 h-full flex flex-col gap-6 transition-all duration-500 group-hover:shadow-card-hover">
+          <div class="flex items-start justify-between gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-elevated flex items-center justify-center text-ink/70">
+              <Fragment set:html={icons[servicesData[0].icon]} />
+            </div>
+            <div class="flex gap-1.5 flex-wrap justify-end">
+              {servicesData[0].tags.map((tag) => (
+                <span class="font-mono text-[10px] bg-elevated rounded-md px-2 py-1 text-muted border border-black/6">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 class="font-display text-xl font-bold text-dark mb-2">{servicesData[0].title[lang]}</h3>
+            <p class="text-muted leading-relaxed">{servicesData[0].description[lang]}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Medium card — App Development -->
+      <div class="reveal card-shell group cursor-default service-card" data-delay="100">
+        <div class="card-core p-7 h-full flex flex-col gap-5 transition-shadow duration-500 group-hover:shadow-card-hover">
+          <div class="w-12 h-12 rounded-2xl bg-elevated flex items-center justify-center text-ink/70">
+            <Fragment set:html={icons[servicesData[1].icon]} />
+          </div>
+          <div>
+            <h3 class="font-display text-lg font-bold text-dark mb-2">{servicesData[1].title[lang]}</h3>
+            <p class="text-muted text-sm leading-relaxed">{servicesData[1].description[lang]}</p>
+          </div>
+          <div class="flex gap-1.5 flex-wrap mt-auto">
+            {servicesData[1].tags.map((tag) => (
+              <span class="font-mono text-[10px] bg-elevated rounded-md px-2 py-1 text-muted border border-black/6">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Small card — UI/UX Design -->
+      <div class="reveal card-shell group cursor-default service-card" data-delay="150">
+        <div class="card-core p-7 h-full flex flex-col gap-4 transition-shadow duration-500 group-hover:shadow-card-hover">
+          <div class="w-12 h-12 rounded-2xl bg-elevated flex items-center justify-center text-ink/70">
+            <Fragment set:html={icons[servicesData[2].icon]} />
+          </div>
+          <div>
+            <h3 class="font-display text-lg font-bold text-dark mb-2">{servicesData[2].title[lang]}</h3>
+            <p class="text-muted text-sm leading-relaxed">{servicesData[2].description[lang]}</p>
+          </div>
+          <div class="flex gap-1.5 flex-wrap mt-auto">
+            {servicesData[2].tags.map((tag) => (
+              <span class="font-mono text-[10px] bg-elevated rounded-md px-2 py-1 text-muted border border-black/6">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Medium card (col-span-2) — AI Integration -->
+      <div class="reveal lg:col-span-2 card-shell group cursor-default" data-delay="200">
+        <div class="card-core p-7 h-full flex flex-col md:flex-row gap-6 items-start transition-shadow duration-500 group-hover:shadow-card-hover">
+          <div class="shrink-0 w-12 h-12 rounded-2xl bg-dark flex items-center justify-center text-white">
+            <Fragment set:html={icons[servicesData[3].icon]} />
+          </div>
+          <div class="flex-1">
+            <h3 class="font-display text-lg font-bold text-dark mb-2">{servicesData[3].title[lang]}</h3>
+            <p class="text-muted text-sm leading-relaxed mb-4">{servicesData[3].description[lang]}</p>
+            <div class="flex gap-1.5 flex-wrap">
+              {servicesData[3].tags.map((tag) => (
+                <span class="font-mono text-[10px] bg-dark/5 rounded-md px-2 py-1 text-ink border border-black/8">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+          <!-- Visual accent -->
+          <div class="hidden md:flex shrink-0 items-center justify-center w-24 h-24 rounded-3xl bg-elevated text-3xl">
+            ⚡
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Secondary services — bento checkerboard (2+1 / 1+2 on 3 cols) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+
+      <!-- Product Marketing — wide (col-span-2) -->
+      <div class="reveal card-shell group cursor-default service-card lg:col-span-2" data-delay="0">
+        <div class="card-core p-7 h-full flex flex-col gap-5 transition-shadow duration-500 group-hover:shadow-card-hover">
+          <div class="flex items-start justify-between gap-4">
+            <div class="w-10 h-10 rounded-xl bg-elevated flex items-center justify-center text-ink/70">
+              <Fragment set:html={icons[servicesData[4].icon]} />
+            </div>
+            <div class="flex gap-1.5 flex-wrap justify-end mt-1">
+              {servicesData[4].tags.map((tag) => (
+                <span class="font-mono text-[10px] bg-elevated rounded-md px-2 py-1 text-muted border border-black/6">{tag}</span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 class="font-display text-lg font-bold text-dark mb-2">{servicesData[4].title[lang]}</h3>
+            <p class="text-muted text-sm leading-relaxed">{servicesData[4].description[lang]}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Marketing — narrow -->
+      <div class="reveal card-shell group cursor-default service-card" data-delay="80">
+        <div class="card-core p-6 h-full flex flex-col gap-4 transition-shadow duration-500 group-hover:shadow-card-hover">
+          <div class="w-10 h-10 rounded-xl bg-elevated flex items-center justify-center text-ink/70">
+            <Fragment set:html={icons[servicesData[6].icon]} />
+          </div>
+          <div>
+            <h3 class="font-display text-base font-bold text-dark mb-1.5">{servicesData[6].title[lang]}</h3>
+            <p class="text-muted text-xs leading-relaxed">{servicesData[6].description[lang]}</p>
+          </div>
+          <div class="flex gap-1.5 flex-wrap mt-auto">
+            {servicesData[6].tags.map((tag) => (
+              <span class="font-mono text-[10px] bg-elevated rounded-md px-2 py-1 text-muted border border-black/6">{tag}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Management — narrow -->
+      <div class="reveal card-shell group cursor-default service-card" data-delay="160">
+        <div class="card-core p-6 h-full flex flex-col gap-4 transition-shadow duration-500 group-hover:shadow-card-hover">
+          <div class="w-10 h-10 rounded-xl bg-elevated flex items-center justify-center text-ink/70">
+            <Fragment set:html={icons[servicesData[5].icon]} />
+          </div>
+          <div>
+            <h3 class="font-display text-base font-bold text-dark mb-1.5">{servicesData[5].title[lang]}</h3>
+            <p class="text-muted text-xs leading-relaxed">{servicesData[5].description[lang]}</p>
+          </div>
+          <div class="flex gap-1.5 flex-wrap mt-auto">
+            {servicesData[5].tags.map((tag) => (
+              <span class="font-mono text-[10px] bg-elevated rounded-md px-2 py-1 text-muted border border-black/6">{tag}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- SEO — wide (col-span-2) -->
+      <div class="reveal card-shell group cursor-default service-card lg:col-span-2" data-delay="240">
+        <div class="card-core p-7 h-full flex flex-col md:flex-row gap-6 items-start transition-shadow duration-500 group-hover:shadow-card-hover">
+          <div class="w-10 h-10 rounded-xl bg-elevated flex items-center justify-center text-ink/70 shrink-0">
+            <Fragment set:html={icons[servicesData[7].icon]} />
+          </div>
+          <div class="flex-1">
+            <h3 class="font-display text-lg font-bold text-dark mb-2">{servicesData[7].title[lang]}</h3>
+            <p class="text-muted text-sm leading-relaxed mb-4">{servicesData[7].description[lang]}</p>
+            <div class="flex gap-1.5 flex-wrap">
+              {servicesData[7].tags.map((tag) => (
+                <span class="font-mono text-[10px] bg-elevated rounded-md px-2 py-1 text-muted border border-black/6">{tag}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .service-card {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+  }
+  .service-card .card-core {
+    transition: box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .service-card:hover .card-core {
+    box-shadow: 0 2px 4px rgba(12,12,10,0.06), 0 16px 40px rgba(12,12,10,0.10);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('#services .card-shell').forEach((card) => {
+    card.addEventListener('mousemove', (e: MouseEvent) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+      card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+    });
+  });
+</script>
