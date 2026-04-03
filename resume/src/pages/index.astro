@@ -1,21 +1,25 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SideBar from '../components/Layout/SideBar.astro';
-import Bio from '../components/Resume/Bio.astro';
-import Resume from '../components/Resume/Resume.astro';
+import Nav from '../components/Layout/Nav.astro';
+import Hero from '../components/Home/Hero.astro';
+import ScrollShowcase from '../components/Home/ScrollShowcase.astro';
+import Services from '../components/Home/Services.astro';
+import Work from '../components/Home/Work.astro';
+import Process from '../components/Home/Process.astro';
+import About from '../components/Home/About.astro';
+import Contact from '../components/Home/Contact.astro';
+import Footer from '../components/Layout/Footer.astro';
 ---
-<BaseLayout>
-  <main class="min-h-screen bg-hero">
-    <div class="mx-auto flex min-h-screen max-w-6xl flex-col px-4 py-10 sm:px-6 lg:px-8">
-      <div class="grid gap-6 lg:grid-cols-3">
-        <SideBar />
-        <div class="space-y-6 lg:col-span-2">
-          <div class="hidden rounded-3xl border border-line/80 bg-surface/90 p-6 shadow-soft backdrop-blur transition duration-300 motion-safe:animate-fade-up motion-safe:hover:-translate-y-0.5 motion-safe:hover:shadow-glow lg:block">
-            <Bio />
-          </div>
-          <Resume />
-        </div>
-      </div>
-    </div>
+<BaseLayout lang="en">
+  <Nav lang="en" />
+  <main id="main-content">
+    <Hero lang="en" />
+    <ScrollShowcase lang="en" />
+    <Services lang="en" />
+    <Work lang="en" />
+    <Process lang="en" />
+    <About lang="en" />
+    <Contact lang="en" />
   </main>
+  <Footer lang="en" />
 </BaseLayout>

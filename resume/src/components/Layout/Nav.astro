@@ -1,0 +1,61 @@
+---
+import type { Lang } from '../../data/site-strings';
+import { t } from '../../data/site-strings';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+const strings = t(lang);
+const altLang = lang === 'en' ? 'FR' : 'EN';
+const altHref = lang === 'en' ? '/fr/' : '/';
+---
+
+<header class="fixed top-0 left-0 right-0 z-40 flex justify-center pt-5 px-4">
+  <nav
+    class="flex items-center gap-1 rounded-full bg-surface/90 backdrop-blur-md border border-black/8 shadow-pill px-2 py-2 w-full max-w-2xl overflow-hidden"
+    aria-label="Main navigation"
+  >
+    <!-- Logo -->
+    <a
+      href={lang === 'en' ? '/' : '/fr/'}
+      class="flex items-center gap-2 rounded-full px-4 py-2 font-display font-bold text-ink hover:bg-elevated transition-colors duration-200 mr-auto text-sm"
+    >
+      <span class="text-dark font-black">MG</span>
+      <span class="hidden sm:inline text-muted font-medium">merwanguerrib</span>
+    </a>
+
+    <!-- Nav links -->
+    <a href="#services" class="hidden md:block px-4 py-2 text-sm font-medium text-muted hover:text-ink rounded-full hover:bg-elevated transition-all duration-200 whitespace-nowrap">
+      {strings.nav.services}
+    </a>
+    <a href="#work" class="hidden md:block px-4 py-2 text-sm font-medium text-muted hover:text-ink rounded-full hover:bg-elevated transition-all duration-200 whitespace-nowrap">
+      {strings.nav.work}
+    </a>
+    <a href="#about" class="hidden md:block px-4 py-2 text-sm font-medium text-muted hover:text-ink rounded-full hover:bg-elevated transition-all duration-200 whitespace-nowrap">
+      {strings.nav.about}
+    </a>
+
+    <!-- Lang toggle -->
+    <a
+      href={altHref}
+      class="px-3 py-2 text-xs font-mono font-medium text-muted hover:text-ink rounded-full hover:bg-elevated transition-all duration-200 border border-transparent hover:border-black/8"
+    >
+      {altLang}
+    </a>
+
+    <!-- CTA -->
+    <a
+      href="#contact"
+      class="group btn-primary text-sm px-5 py-2.5 whitespace-nowrap shrink-0"
+    >
+      {strings.nav.contact}
+      <span class="btn-icon w-6 h-6">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </a>
+  </nav>
+</header>

@@ -1,0 +1,86 @@
+---
+import type { Lang } from '../../data/site-strings';
+import { t } from '../../data/site-strings';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+const strings = t(lang);
+const { steps } = strings.process;
+---
+
+<section id="process" class="py-section px-4 bg-white">
+  <div class="mx-auto max-w-6xl">
+
+    <!-- Header -->
+    <div class="mb-20 reveal">
+      <span class="eyebrow mb-5">{strings.process.eyebrow}</span>
+      <h2 class="font-display text-display-lg font-black text-dark mt-5 whitespace-pre-line">
+        {strings.process.title}
+      </h2>
+    </div>
+
+    <!-- Steps grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {steps.map((step, i) => (
+        <div class="reveal card-shell group process-card" data-delay={String(i * 120)}>
+          <div class="card-core p-6 h-full flex flex-col gap-4 transition-shadow duration-500 group-hover:shadow-card-hover">
+
+            <!-- Step number -->
+            <div class="process-number font-mono text-[11px] font-medium text-muted/60 uppercase tracking-widest">
+              {step.number}
+            </div>
+
+            <h3 class="font-display text-lg font-bold text-dark">{step.title}</h3>
+            <p class="text-muted text-sm leading-relaxed flex-1">{step.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .process-card {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0) scale(0.985);
+    transition:
+      opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, opacity;
+  }
+  .process-card.visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  .process-card:hover {
+    transform: translateY(-6px);
+  }
+  .process-card .card-core {
+    transition: box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .process-card:hover .card-core {
+    box-shadow: 0 2px 4px rgba(12,12,10,0.05), 0 16px 40px rgba(12,12,10,0.10);
+  }
+  .process-number {
+    transition: color 0.3s ease;
+  }
+  .process-card:hover .process-number {
+    color: #0C0C0A;
+  }
+</style>
+
+<script>
+  // Spotlight effect on process cards
+  document.querySelectorAll<HTMLElement>('#process .card-shell').forEach((card) => {
+    card.addEventListener('mousemove', (e: MouseEvent) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+      card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+    });
+  });
+</script>

@@ -1,0 +1,117 @@
+---
+import type { Lang } from '../../data/site-strings';
+import { t } from '../../data/site-strings';
+import { projectsData } from '../../data/projects-data';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+const strings = t(lang);
+---
+
+<section id="work" class="py-section px-4 bg-elevated">
+  <div class="mx-auto max-w-6xl">
+
+    <!-- Header -->
+    <div class="mb-20 reveal">
+      <span class="eyebrow mb-5">{strings.work.eyebrow}</span>
+      <h2 class="font-display text-display-lg font-black text-dark mt-5 whitespace-pre-line">
+        {strings.work.title}
+      </h2>
+    </div>
+
+    <!-- Projects list -->
+    <div class="flex flex-col gap-4">
+      {projectsData.map((project, i) => (
+        <div
+          class="reveal card-shell group work-card"
+          data-delay={String(i * 100)}
+        >
+          <div class="card-core p-6 md:p-8">
+            <div class="flex flex-col md:flex-row gap-6 md:gap-12 items-start">
+
+              <!-- Left: content -->
+              <div class="flex-1 min-w-0">
+
+                <!-- Category + year -->
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="font-mono text-[10px] uppercase tracking-widest text-muted">
+                    {project.category[lang]}
+                  </span>
+                  <span class="w-1 h-1 rounded-full bg-muted/40"></span>
+                  <span class="font-mono text-[10px] text-muted">{project.year}</span>
+                </div>
+
+                <!-- Client name -->
+                <div class="flex items-center gap-3 mb-3">
+                  {project.logo && (
+                    <img
+                      src={project.logo}
+                      alt={project.client}
+                      class="h-6 w-auto object-contain rounded"
+                    />
+                  )}
+                  <span class="font-display font-black text-xs uppercase tracking-widest text-muted">
+                    {project.client}
+                  </span>
+                </div>
+
+                <h3 class="font-display text-xl md:text-2xl font-bold text-dark mb-3 leading-snug">
+                  {project.title[lang]}
+                </h3>
+                <p class="text-muted leading-relaxed text-sm md:text-base mb-4">
+                  {project.description[lang]}
+                </p>
+                <p class="text-ink/70 text-sm leading-relaxed italic">
+                  {project.result[lang]}
+                </p>
+
+                <!-- Stack -->
+                <div class="flex flex-wrap gap-1.5 mt-5">
+                  {project.stack.map((tech) => (
+                    <span class="font-mono text-[10px] bg-elevated rounded-md px-2 py-1 text-muted border border-black/6">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Right: metric -->
+              <div class="shrink-0 flex flex-col items-start md:items-end gap-1 md:min-w-[120px]">
+                <div class="card-shell">
+                  <div class="card-core px-5 py-4 text-center">
+                    <div class="font-display font-black text-2xl md:text-3xl text-dark leading-none">
+                      {project.metric}
+                    </div>
+                    <div class="text-xs text-muted mt-1 font-medium">
+                      {project.metricLabel[lang]}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .work-card {
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .work-card:hover {
+    transform: translateY(-3px);
+  }
+  .work-card .card-core {
+    transition: box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .work-card:hover .card-core {
+    box-shadow: 0 4px 8px rgba(12,12,10,0.06), 0 20px 48px rgba(12,12,10,0.09);
+  }
+</style>

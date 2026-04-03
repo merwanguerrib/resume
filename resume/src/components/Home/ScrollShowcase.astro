@@ -1,0 +1,380 @@
+---
+import type { Lang } from '../../data/site-strings';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+const sectionId = `scroll-transition-${lang}`;
+const frameCount = 144;
+const framePrefix = '/assets/hero-scroll/frames/frame_';
+---
+
+<section id={sectionId} class="scroll-transition" aria-label="Scroll transition animation">
+  <div class="scroll-transition-track" data-scroll-wrapper>
+    <div class="scroll-transition-sticky">
+      <div class="scroll-transition-stage">
+        <canvas class="scroll-transition-canvas" role="img" aria-label="Scroll-controlled transition animation"></canvas>
+        <div class="scroll-transition-glass" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .scroll-transition {
+    position: relative;
+    z-index: 2;
+    isolation: isolate;
+    margin-top: -4rem;
+    background: linear-gradient(
+      180deg,
+      #f9f8f5 0%,
+      #ffffff 14%,
+      #ffffff 86%,
+      #f9f8f5 100%
+    );
+    padding: 0 0 5rem;
+  }
+
+  .scroll-transition::before,
+  .scroll-transition::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .scroll-transition::before {
+    top: 0;
+    height: 9rem;
+    background: linear-gradient(180deg, #f9f8f5 0%, rgba(249, 248, 245, 0) 72%);
+  }
+
+  .scroll-transition::after {
+    bottom: 0;
+    height: 8.5rem;
+    background: linear-gradient(0deg, #f9f8f5 0%, rgba(249, 248, 245, 0) 72%);
+  }
+
+  .scroll-transition-track {
+    position: relative;
+    height: 165vh;
+  }
+
+  .scroll-transition-sticky {
+    position: sticky;
+    top: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    width: min(100% - 2rem, 1200px);
+    margin: 0 auto;
+    padding-top: 8vh;
+    background: transparent;
+  }
+
+  .scroll-transition-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: clamp(0.75rem, 1.8vw, 1.5rem);
+    background: #fff;
+    box-shadow: 0 16px 50px -42px rgba(12, 12, 10, 0.45);
+  }
+
+  .scroll-transition-stage::before,
+  .scroll-transition-stage::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: clamp(1.5rem, 4vw, 2.8rem);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .scroll-transition-stage::before {
+    top: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.84) 0%, rgba(255, 255, 255, 0) 100%);
+  }
+
+  .scroll-transition-stage::after {
+    bottom: 0;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0) 100%);
+  }
+
+  .scroll-transition-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+  }
+
+  .scroll-transition-glass {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(12, 12, 10, 0.015) 100%);
+  }
+
+  @media (max-width: 1023px) {
+    .scroll-transition {
+      margin-top: -2.75rem;
+      padding-bottom: 4rem;
+    }
+
+    .scroll-transition-track {
+      height: 145vh;
+    }
+
+    .scroll-transition-sticky {
+      width: min(100% - 1.25rem, 1000px);
+      padding-top: 7vh;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .scroll-transition {
+      margin-top: -1.5rem;
+      padding-bottom: 3rem;
+    }
+
+    .scroll-transition::before {
+      height: 4.25rem;
+    }
+
+    .scroll-transition::after {
+      height: 4rem;
+    }
+
+    .scroll-transition-track {
+      height: 122vh;
+    }
+
+    .scroll-transition-sticky {
+      width: calc(100% - 0.75rem);
+      padding-top: 5.5vh;
+      gap: 0.6rem;
+    }
+  }
+</style>
+
+<script define:vars={{ sectionId, frameCount, framePrefix }}>
+  (function () {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+
+    const wrapper = section.querySelector('[data-scroll-wrapper]');
+    const canvas = section.querySelector('.scroll-transition-canvas');
+
+    if (!(wrapper instanceof HTMLElement) || !(canvas instanceof HTMLCanvasElement)) return;
+    const ctx = canvas.getContext('2d', { alpha: false });
+    if (!ctx) return;
+
+    const totalFrames = Number(frameCount);
+    if (!Number.isFinite(totalFrames) || totalFrames < 2) return;
+
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReducedData = window.matchMedia('(prefers-reduced-data: reduce)').matches;
+    const lowPowerMode = isMobile || prefersReducedMotion || prefersReducedData;
+    const sampledFrameCount = lowPowerMode ? Math.min(totalFrames, 48) : totalFrames;
+
+    const frameUrls = Array.from({ length: sampledFrameCount }, (_, index) => {
+      const progress = sampledFrameCount === 1 ? 0 : index / (sampledFrameCount - 1);
+      const mappedFrame = Math.round(progress * (totalFrames - 1)) + 1;
+      const frameNumber = String(mappedFrame).padStart(4, '0');
+      return `${framePrefix}${frameNumber}.jpg`;
+    });
+
+    const frames = new Array(sampledFrameCount);
+    let activeFrame = 0;
+    let targetProgress = 0;
+    let currentProgress = 0;
+    let animationFrame = 0;
+    let started = false;
+    let destroyed = false;
+    let observer;
+
+    const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+    const pixelRatio = () => {
+      const ratio = window.devicePixelRatio || 1;
+      return lowPowerMode ? Math.min(ratio, 1.4) : Math.min(ratio, 2);
+    };
+
+    const drawFrame = (index) => {
+      const image = frames[index];
+      if (!image) return;
+
+      const sourceTopCrop = index === 0 ? Math.max(2, Math.round(image.height * 0.012)) : 0;
+      const sourceWidth = image.width;
+      const sourceHeight = Math.max(1, image.height - sourceTopCrop);
+      const canvasWidth = canvas.width;
+      const canvasHeight = canvas.height;
+      const fit = Math.min(canvasWidth / sourceWidth, canvasHeight / sourceHeight);
+      const drawWidth = sourceWidth * fit;
+      const drawHeight = sourceHeight * fit;
+      const dx = (canvasWidth - drawWidth) * 0.5;
+      const dy = (canvasHeight - drawHeight) * 0.5;
+
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+      ctx.drawImage(
+        image,
+        0,
+        sourceTopCrop,
+        sourceWidth,
+        sourceHeight,
+        dx,
+        dy,
+        drawWidth,
+        drawHeight
+      );
+    };
+
+    const resizeCanvas = () => {
+      const rect = canvas.getBoundingClientRect();
+      const ratio = pixelRatio();
+      canvas.width = Math.max(1, Math.round(rect.width * ratio));
+      canvas.height = Math.max(1, Math.round(rect.height * ratio));
+      drawFrame(activeFrame);
+    };
+
+    const sectionProgress = () => {
+      const rect = wrapper.getBoundingClientRect();
+      const scrollable = Math.max(rect.height - window.innerHeight, 1);
+      return clamp((-rect.top) / scrollable, 0, 1);
+    };
+
+    const onScroll = () => {
+      targetProgress = sectionProgress();
+    };
+
+    const animate = () => {
+      if (destroyed) return;
+      currentProgress += (targetProgress - currentProgress) * 0.14;
+      const nextFrame = clamp(
+        Math.round(currentProgress * (sampledFrameCount - 1)),
+        0,
+        sampledFrameCount - 1
+      );
+
+      if (nextFrame !== activeFrame) {
+        activeFrame = nextFrame;
+        drawFrame(activeFrame);
+      }
+
+      animationFrame = requestAnimationFrame(animate);
+    };
+
+    const loadFrame = (src, index) =>
+      new Promise((resolve) => {
+        const image = new Image();
+        image.decoding = 'async';
+        image.onload = () => {
+          frames[index] = image;
+          if (index === 0) {
+            drawFrame(0);
+          }
+          resolve(true);
+        };
+        image.onerror = () => resolve(false);
+        image.src = src;
+      });
+
+    const preloadFrames = async () => {
+      const concurrency = lowPowerMode ? 3 : 8;
+      const results = new Array(sampledFrameCount).fill(false);
+      let cursor = 0;
+
+      const worker = async () => {
+        while (!destroyed && cursor < sampledFrameCount) {
+          const index = cursor++;
+          results[index] = await loadFrame(frameUrls[index], index);
+        }
+      };
+
+      await Promise.all(
+        Array.from({ length: Math.min(concurrency, sampledFrameCount) }, () => worker())
+      );
+      return results;
+    };
+
+    const onVisibilityChange = () => {
+      if (document.hidden && animationFrame) {
+        cancelAnimationFrame(animationFrame);
+        animationFrame = 0;
+        return;
+      }
+
+      if (!document.hidden && started && !destroyed && !animationFrame) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    const cleanup = () => {
+      if (destroyed) return;
+      destroyed = true;
+
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+        animationFrame = 0;
+      }
+
+      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('scroll', onScroll);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+
+      if (observer) {
+        observer.disconnect();
+      }
+    };
+
+    const start = () => {
+      if (started || destroyed) return;
+      started = true;
+
+      resizeCanvas();
+      onScroll();
+      drawFrame(0);
+
+      window.addEventListener('resize', resizeCanvas, { passive: true });
+      window.addEventListener('scroll', onScroll, { passive: true });
+      document.addEventListener('visibilitychange', onVisibilityChange);
+
+      preloadFrames().then((results) => {
+        if (destroyed || !results.some(Boolean)) return;
+        onScroll();
+        drawFrame(activeFrame);
+      });
+
+      animationFrame = requestAnimationFrame(animate);
+    };
+
+    if ('IntersectionObserver' in window) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            observer?.disconnect();
+            start();
+          }
+        },
+        { rootMargin: '320px 0px', threshold: 0.01 }
+      );
+      observer.observe(section);
+    } else {
+      start();
+    }
+
+    window.addEventListener('pagehide', cleanup, { once: true });
+    document.addEventListener('astro:before-swap', cleanup, { once: true });
+  })();
+</script>

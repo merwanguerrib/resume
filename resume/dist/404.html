@@ -1,47 +1,25 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#1c1433"><meta name="description" content="Fullstack developer crafting modern web experiences with a product-first mindset."><title>Page Not Found</title><link rel="icon" href="/favicon.ico"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Merwan Guerrib","jobTitle":"Fullstack Developer","email":"merwanguerrib@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Marseille"},"sameAs":["https://www.linkedin.com/in/merwanguerrib","https://github.com/merwanguerrib/merwanguerrib","https://twitter.com/mrwn211"]}</script><link rel="stylesheet" href="/_astro/index.SAWn34Io.css"></head> <body>  <main class="min-h-screen bg-hero"> <div class="mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center gap-8 px-6 py-16 text-center"> <img src="/assets/404.png" alt="Lost in space" class="h-40 w-auto" loading="lazy"> <div class="space-y-3"> <h1 class="text-3xl font-semibold text-ink">Page not found</h1> <p class="text-base text-muted">
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#F9F8F5"><meta name="description" content="Premium web &#38; app development. Built fast, built right. Fullstack developer based in Marseille."><title>Page Not Found</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=DM+Sans:wght@400;500&family=Geist+Mono:wght@400&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=DM+Sans:wght@400;500&family=Geist+Mono:wght@400&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=DM+Sans:wght@400;500&family=Geist+Mono:wght@400&display=swap"></noscript><meta property="og:title" content="Page Not Found"><meta property="og:description" content="Premium web &#38; app development. Built fast, built right. Fullstack developer based in Marseille."><meta property="og:type" content="website"><script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Merwan Guerrib","description":"Premium web & app development services","url":"https://merwanguerrib.com","founder":{"@type":"Person","name":"Merwan Guerrib","jobTitle":"Fullstack Developer","email":"merwanguerrib@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Marseille","addressCountry":"FR"}},"sameAs":["https://www.linkedin.com/in/merwanguerrib","https://github.com/merwanguerrib"]}</script><link rel="stylesheet" href="/_astro/index.DF3iFLrH.css"></head> <body class="bg-canvas"> <div class="grain-overlay" aria-hidden="true"></div> <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-dark focus:px-4 focus:py-2 focus:text-sm focus:text-white">
+Skip to content
+</a>  <main class="min-h-screen bg-hero"> <div class="mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center gap-8 px-6 py-16 text-center"> <img src="/assets/404.png" alt="Lost in space" class="h-40 w-auto" loading="lazy"> <div class="space-y-3"> <h1 class="text-3xl font-semibold text-ink">Page not found</h1> <p class="text-base text-muted">
 The page you are looking for does not exist. Head back home to explore the resume.
 </p> </div> <a href="/" class="inline-flex items-center justify-center rounded-full border border-primary/20 bg-primary/10 px-5 py-3 text-sm font-semibold text-primary transition duration-300 hover:bg-primary/20">
 Back to home
 </a> </div> </main>  <script>
-      const emojis = [
-        '😀',
-        '😎',
-        '👨‍💻',
-        '👨🏼‍🍳',
-        '💻',
-        '📖',
-        '🍔',
-        '🍕',
-        '🌮',
-        '👟',
-        '🏀',
-        '🎾',
-        '🎉',
-        '🚀',
-      ];
-
-      window.addEventListener('load', () => {
-        const updateFavicon = () => {
-          const emoji = emojis[Math.floor(Math.random() * emojis.length)];
-          const canvas = document.createElement('canvas');
-          canvas.width = 64;
-          canvas.height = 64;
-          const ctx = canvas.getContext('2d');
-          if (!ctx) return;
-
-          ctx.font = '48px serif';
-          ctx.fillText(emoji, 0, 48);
-
-          const link =
-            document.querySelector("link[rel*='icon']") ||
-            document.createElement('link');
-          link.type = 'image/x-icon';
-          link.rel = 'shortcut icon';
-          link.href = canvas.toDataURL();
-          document.getElementsByTagName('head')[0].appendChild(link);
-        };
-
-        updateFavicon();
-        setInterval(updateFavicon, 60000);
-      });
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const delay = entry.target.dataset.delay || 0;
+              setTimeout(() => {
+                entry.target.classList.add('visible');
+              }, Number(delay));
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      document
+        .querySelectorAll('.reveal')
+        .forEach((el) => observer.observe(el));
     </script> </body> </html>
