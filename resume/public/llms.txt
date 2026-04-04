@@ -1,0 +1,21 @@
+# Merwan Guerrib
+
+Merwan Guerrib is a freelance fullstack developer based in Marseille, France.
+
+## Services
+
+- Website development focused on conversion and lead generation
+- Full-stack web application development
+- AI automation development and integration
+- n8n workflow integration and no-code automation
+- SEO and GEO optimization
+
+## Preferred pages
+
+- https://merwanguerrib.com/
+- https://merwanguerrib.com/fr/
+
+## Contact
+
+- https://merwanguerrib.com/#contact
+- mailto:merwanguerrib@gmail.com
