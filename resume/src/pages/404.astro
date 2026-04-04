@@ -1,27 +1,92 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { t, type Lang } from '../data/site-strings';
+
+const pathname = Astro.url?.pathname ?? '/';
+const lang: Lang = pathname.startsWith('/fr') ? 'fr' : 'en';
+const homeHref = lang === 'fr' ? '/fr/' : '/';
+const strings = t(lang);
+const copy = strings.notFound;
 ---
-<BaseLayout title="Page Not Found">
-  <main class="min-h-screen bg-hero">
-    <div class="mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center gap-8 px-6 py-16 text-center">
-      <img
-        src="/assets/404.png"
-        alt="Lost in space"
-        class="h-40 w-auto"
-        loading="lazy"
-      />
-      <div class="space-y-3">
-        <h1 class="text-3xl font-semibold text-ink">Page not found</h1>
-        <p class="text-base text-muted">
-          The page you are looking for does not exist. Head back home to explore the resume.
-        </p>
-      </div>
-      <a
-        href="/"
-        class="inline-flex items-center justify-center rounded-full border border-primary/20 bg-primary/10 px-5 py-3 text-sm font-semibold text-primary transition duration-300 hover:bg-primary/20"
-      >
-        Back to home
-      </a>
+
+<BaseLayout
+  lang={lang}
+  title={copy.title}
+  description={copy.description}
+>
+  <main class="relative min-h-[100dvh] overflow-hidden bg-canvas px-4 py-10 md:py-16">
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute -top-40 -left-24 h-80 w-80 rounded-full bg-elevated/80 blur-3xl"></div>
+      <div class="absolute -right-24 bottom-8 h-72 w-72 rounded-full bg-dark/5 blur-3xl"></div>
+    </div>
+
+    <div class="relative mx-auto grid w-full max-w-7xl gap-6 md:grid-cols-[minmax(0,1.35fr)_minmax(18rem,1fr)] md:gap-8">
+      <section class="card-shell animate-fade-up">
+        <div class="card-core flex h-full flex-col justify-between p-8 md:p-12">
+          <div class="space-y-8">
+            <span class="eyebrow">{copy.badge}</span>
+
+            <div class="space-y-4">
+              <h1 class="text-display-md font-semibold text-ink">{copy.heading}</h1>
+              <p class="max-w-[62ch] text-base leading-relaxed text-muted">{copy.body}</p>
+            </div>
+
+            <div class="rounded-2xl border border-black/10 bg-elevated/50 px-4 py-3">
+              <p class="text-xs uppercase tracking-[0.14em] text-muted">{copy.pathLabel}</p>
+              <p class="mt-1 break-all text-sm text-ink">{pathname}</p>
+            </div>
+          </div>
+
+          <div class="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+            <a href={homeHref} class="btn-primary">
+              {copy.primaryCta}
+              <span class="btn-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M2.75 7H11.25M2.75 7L6 3.75M2.75 7L6 10.25" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+            </a>
+            <a href={`${homeHref}#lead-magnet`} class="btn-ghost">
+              {copy.secondaryCta}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <aside class="flex flex-col gap-6">
+        <section class="card-shell animate-fade-up-1">
+          <div class="card-core p-7 md:p-8">
+            <h2 class="text-xl font-semibold tracking-tight text-ink">{copy.quickLinksTitle}</h2>
+            <ul class="mt-5 space-y-2">
+              {copy.quickLinks.map((link) => (
+                <li>
+                  <a
+                    href={`${homeHref}#${link.section}`}
+                    class="group flex items-center justify-between rounded-xl border border-black/8 bg-white px-4 py-3 text-sm font-medium text-ink transition duration-300 hover:-translate-y-[1px] hover:border-black/15 hover:shadow-card"
+                  >
+                    <span>{link.label}</span>
+                    <span aria-hidden="true" class="text-muted transition duration-300 group-hover:text-ink">
+                      <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                        <path d="M2.75 10.25L10.25 2.75M10.25 2.75H5.1M10.25 2.75V7.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section class="card-shell animate-fade-up-2">
+          <div class="card-core p-7 md:p-8">
+            <h2 class="text-xl font-semibold tracking-tight text-ink">{copy.helpCardTitle}</h2>
+            <p class="mt-3 text-sm leading-relaxed text-muted">{copy.helpCardBody}</p>
+            <a href={`${homeHref}#contact`} class="btn-primary mt-6 inline-flex">
+              {copy.helpCardCta}
+            </a>
+          </div>
+        </section>
+      </aside>
     </div>
   </main>
 </BaseLayout>

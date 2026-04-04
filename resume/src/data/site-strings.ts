@@ -37,6 +37,44 @@ export const t = (lang: Lang) => ({
     about: lang === 'en' ? 'About' : 'À propos',
     contact: lang === 'en' ? 'Get free audit' : 'Audit gratuit',
   },
+  notFound: {
+    title: lang === 'en' ? '404 | Page not found' : '404 | Page introuvable',
+    description:
+      lang === 'en'
+        ? 'This page no longer exists or has moved. Head back home or request your free growth audit.'
+        : 'Cette page n\'existe plus ou a été déplacée. Revenez à l\'accueil ou lancez votre audit gratuit.',
+    badge: lang === 'en' ? 'Error 404' : 'Erreur 404',
+    heading: lang === 'en' ? 'This page cannot be found.' : 'Cette page est introuvable.',
+    body:
+      lang === 'en'
+        ? 'The link may be outdated, the URL might contain a typo, or the page was moved during the conversion-focused redesign.'
+        : 'Le lien a peut-être expiré, l\'URL contient une erreur, ou la page a été déplacée pendant la refonte orientée conversion.',
+    pathLabel: lang === 'en' ? 'Requested URL' : 'URL demandée',
+    primaryCta: lang === 'en' ? 'Back to home' : 'Retour à l\'accueil',
+    secondaryCta: lang === 'en' ? 'Get a free audit' : 'Recevoir un audit gratuit',
+    quickLinksTitle: lang === 'en' ? 'Quick access' : 'Accès rapide',
+    quickLinks:
+      lang === 'en'
+        ? [
+            { label: 'Services', section: 'services' },
+            { label: 'Case studies', section: 'work' },
+            { label: 'Contact', section: 'contact' },
+          ]
+        : [
+            { label: 'Services', section: 'services' },
+            { label: 'Cas clients', section: 'work' },
+            { label: 'Contact', section: 'contact' },
+          ],
+    helpCardTitle:
+      lang === 'en'
+        ? 'Turn this dead end into growth.'
+        : 'Transformons cette erreur en opportunité.',
+    helpCardBody:
+      lang === 'en'
+        ? 'Share your context and I will send a focused action plan to improve acquisition, conversion, and automation.'
+        : 'Partagez votre contexte, je vous envoie un plan d\'action concret pour améliorer acquisition, conversion et automatisation.',
+    helpCardCta: lang === 'en' ? 'Request my audit' : 'Demander mon audit',
+  },
   hero: {
     available: lang === 'en' ? 'Available for new projects' : 'Disponible pour de nouveaux projets',
     tagline: 'Just dev it.',

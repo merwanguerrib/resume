@@ -17,11 +17,18 @@ interface Props {
 
 const {
   title = 'Merwan Guerrib — Just dev it.',
-  description = 'Premium web & app development. Built fast, built right. Fullstack developer based in Marseille.',
+  description,
   keywords = [],
   faqItems = [],
   lang = 'en',
 } = Astro.props;
+
+const defaultDescription =
+  lang === 'fr'
+    ? 'Je conçois des websites orientés conversion, des applications full-stack et des workflows d\'automatisation IA avec n8n ou des outils no-code. Basé à Marseille, disponible partout.'
+    : 'Premium web & app development. Built fast, built right. Fullstack developer based in Marseille.';
+
+const pageDescription = description ?? defaultDescription;
 
 const siteUrl = 'https://merwanguerrib.com';
 const canonicalPath = Astro.url?.pathname ?? (lang === 'fr' ? '/fr/' : '/');
@@ -43,6 +50,7 @@ const inLanguage = lang === 'fr' ? 'fr-FR' : 'en-US';
 const alternateOgLocale = lang === 'fr' ? 'en_US' : 'fr_FR';
 const marseilleLat = 43.2965;
 const marseilleLng = 5.3698;
+const knownLanguages = ['en-US', 'fr-FR'];
 
 const offeredServices =
   lang === 'fr'
@@ -61,6 +69,29 @@ const offeredServices =
         'n8n workflow integration',
         'No-code automation',
         'SEO and GEO optimization',
+      ];
+
+const serviceCatalogGroups =
+  lang === 'fr'
+    ? [
+        {
+          name: 'Websites orientés conversion & applications full-stack',
+          items: offeredServices.slice(0, 2),
+        },
+        {
+          name: 'Automatisation IA, workflows n8n & optimisation SEO/GEO',
+          items: offeredServices.slice(2),
+        },
+      ]
+    : [
+        {
+          name: 'Conversion-focused websites & full-stack web apps',
+          items: offeredServices.slice(0, 2),
+        },
+        {
+          name: 'AI automation, n8n workflows & SEO/GEO optimization',
+          items: offeredServices.slice(2),
+        },
       ];
 
 const breadcrumbItems =
@@ -97,6 +128,7 @@ const personSchema = {
   worksFor: {
     '@id': organizationId,
   },
+  knowsLanguage: knownLanguages,
   knowsAbout: offeredServices,
 };
 
@@ -107,6 +139,7 @@ const organizationSchema = {
   name: 'Merwan Guerrib',
   url: siteUrl,
   logo: ogImage,
+  knowsLanguage: knownLanguages,
   sameAs: personSchema.sameAs,
   address: {
     '@type': 'PostalAddress',
@@ -131,7 +164,7 @@ const localBusinessSchema = {
   name: 'Merwan Guerrib',
   url: siteUrl,
   image: ogImage,
-  description,
+  description: pageDescription,
   email: 'merwanguerrib@gmail.com',
   priceRange: '€€',
   areaServed: [
@@ -144,7 +177,7 @@ const localBusinessSchema = {
       name: 'France',
     },
   ],
-  availableLanguage: ['en', 'fr'],
+  knowsLanguage: knownLanguages,
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Marseille',
@@ -177,9 +210,8 @@ const professionalServiceSchema = {
   '@id': serviceId,
   name: 'Merwan Guerrib',
   url: siteUrl,
-  description,
+  description: pageDescription,
   image: ogImage,
-  inLanguage,
   areaServed: 'Worldwide',
   provider: {
     '@id': personId,
@@ -187,7 +219,7 @@ const professionalServiceSchema = {
   brand: {
     '@id': organizationId,
   },
-  availableLanguage: ['en', 'fr'],
+  knowsLanguage: knownLanguages,
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'sales',
@@ -196,14 +228,17 @@ const professionalServiceSchema = {
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: lang === 'fr' ? 'Services' : 'Services',
-    itemListElement: offeredServices.map((serviceName, index) => ({
-      '@type': 'Offer',
-      position: index + 1,
-      itemOffered: {
-        '@type': 'Service',
-        name: serviceName,
-      },
+    name: lang === 'fr' ? 'Catalogue de services' : 'Service catalog',
+    itemListElement: serviceCatalogGroups.map((group) => ({
+      '@type': 'OfferCatalog',
+      name: group.name,
+      itemListElement: group.items.map((serviceName) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: serviceName,
+        },
+      })),
     })),
   },
 };
@@ -214,7 +249,7 @@ const webPageSchema = {
   '@id': webPageId,
   url: canonicalUrl,
   name: title,
-  description,
+  description: pageDescription,
   inLanguage,
   isPartOf: {
     '@id': websiteId,
@@ -274,7 +309,7 @@ const websiteSchema = {
     '@id': organizationId,
   },
   potentialAction: {
-    '@type': 'ContactAction',
+    '@type': 'CommunicateAction',
     target: `${siteUrl}/#contact`,
   },
 };
@@ -288,7 +323,6 @@ const structuredServicesSchema = offeredServices.map((serviceName, index) => ({
     '@id': personId,
   },
   areaServed: 'Worldwide',
-  availableLanguage: ['en', 'fr'],
 }));
 
 const schemaGraph = {
@@ -313,7 +347,7 @@ const schemaGraph = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#F9F8F5" />
-    <meta name="description" content={description} />
+    <meta name="description" content={pageDescription} />
     <meta http-equiv="content-language" content={inLanguage} />
     <meta name="language" content={inLanguage} />
     {keywordsContent && <meta name="keywords" content={keywordsContent} />}
@@ -348,7 +382,7 @@ const schemaGraph = {
       />
     </noscript>
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={pageDescription} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImage} />
@@ -357,7 +391,7 @@ const schemaGraph = {
     <meta property="og:locale:alternate" content={alternateOgLocale} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:image" content={ogImage} />
     <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />
   </head>

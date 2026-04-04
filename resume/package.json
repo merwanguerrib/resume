@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "rebuild:hero-frames": "bash ./scripts/rebuild-hero-frames.sh"
+    "rebuild:hero-frames": "bash ./scripts/rebuild-hero-frames.sh",
+    "schema:validate": "node ./scripts/validate-schema.mjs"
   },
   "dependencies": {
     "@astrojs/tailwind": "^5.1.0",
