@@ -4,24 +4,33 @@ import Nav from '../../components/Layout/Nav.astro';
 import Hero from '../../components/Home/Hero.astro';
 import ScrollShowcase from '../../components/Home/ScrollShowcase.astro';
 import Services from '../../components/Home/Services.astro';
+import LeadMagnet from '../../components/Home/LeadMagnet.astro';
 import Work from '../../components/Home/Work.astro';
 import Process from '../../components/Home/Process.astro';
+import Faq from '../../components/Home/Faq.astro';
 import About from '../../components/Home/About.astro';
 import Contact from '../../components/Home/Contact.astro';
 import Footer from '../../components/Layout/Footer.astro';
+import { t } from '../../data/site-strings';
+
+const strings = t('fr');
 ---
 <BaseLayout
   lang="fr"
-  title="Merwan Guerrib — Just dev it. Développement web & app premium"
-  description="Développement web & app premium. Vite fait, bien fait. Développeur fullstack basé à Marseille."
+  title={strings.seo.title}
+  description={strings.seo.description}
+  keywords={strings.seo.keywords}
+  faqItems={strings.faq.items}
 >
   <Nav lang="fr" />
   <main id="main-content">
     <Hero lang="fr" />
     <ScrollShowcase lang="fr" />
     <Services lang="fr" />
+    <LeadMagnet lang="fr" />
     <Work lang="fr" />
     <Process lang="fr" />
+    <Faq lang="fr" />
     <About lang="fr" />
     <Contact lang="fr" />
   </main>

@@ -8,7 +8,8 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 const sectionId = `scroll-transition-${lang}`;
 const frameCount = 144;
-const framePrefix = '/assets/hero-scroll/frames/frame_';
+const desktopFramePrefix = '/assets/hero-scroll/frames-desktop/frame_';
+const mobileFramePrefix = '/assets/hero-scroll/frames/frame_';
 ---
 
 <section id={sectionId} class="scroll-transition" aria-label="Scroll transition animation">
@@ -35,7 +36,7 @@ const framePrefix = '/assets/hero-scroll/frames/frame_';
       #ffffff 86%,
       #f9f8f5 100%
     );
-    padding: 0 0 5rem;
+    padding: 0 0 1.5rem;
   }
 
   .scroll-transition::before,
@@ -56,13 +57,13 @@ const framePrefix = '/assets/hero-scroll/frames/frame_';
 
   .scroll-transition::after {
     bottom: 0;
-    height: 8.5rem;
+    height: 4.5rem;
     background: linear-gradient(0deg, #f9f8f5 0%, rgba(249, 248, 245, 0) 72%);
   }
 
   .scroll-transition-track {
     position: relative;
-    height: 165vh;
+    height: 142vh;
   }
 
   .scroll-transition-sticky {
@@ -75,7 +76,7 @@ const framePrefix = '/assets/hero-scroll/frames/frame_';
     gap: 1rem;
     width: min(100% - 2rem, 1200px);
     margin: 0 auto;
-    padding-top: 8vh;
+    padding-top: 6.5vh;
     background: transparent;
   }
 
@@ -102,12 +103,12 @@ const framePrefix = '/assets/hero-scroll/frames/frame_';
 
   .scroll-transition-stage::before {
     top: 0;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.84) 0%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0) 100%);
   }
 
   .scroll-transition-stage::after {
     bottom: 0;
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 100%);
   }
 
   .scroll-transition-canvas {
@@ -122,29 +123,29 @@ const framePrefix = '/assets/hero-scroll/frames/frame_';
     inset: 0;
     pointer-events: none;
     z-index: 3;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(12, 12, 10, 0.015) 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.018) 0%, rgba(12, 12, 10, 0.004) 100%);
   }
 
   @media (max-width: 1023px) {
     .scroll-transition {
       margin-top: -2.75rem;
-      padding-bottom: 4rem;
+      padding-bottom: 1.25rem;
     }
 
     .scroll-transition-track {
-      height: 145vh;
+      height: 132vh;
     }
 
     .scroll-transition-sticky {
       width: min(100% - 1.25rem, 1000px);
-      padding-top: 7vh;
+      padding-top: 5.75vh;
     }
   }
 
   @media (max-width: 767px) {
     .scroll-transition {
       margin-top: -1.5rem;
-      padding-bottom: 3rem;
+      padding-bottom: 0.75rem;
     }
 
     .scroll-transition::before {
@@ -152,11 +153,11 @@ const framePrefix = '/assets/hero-scroll/frames/frame_';
     }
 
     .scroll-transition::after {
-      height: 4rem;
+      height: 2.75rem;
     }
 
     .scroll-transition-track {
-      height: 122vh;
+      height: 112vh;
     }
 
     .scroll-transition-sticky {
@@ -167,7 +168,7 @@ const framePrefix = '/assets/hero-scroll/frames/frame_';
   }
 </style>
 
-<script define:vars={{ sectionId, frameCount, framePrefix }}>
+<script define:vars={{ sectionId, frameCount, desktopFramePrefix, mobileFramePrefix }}>
   (function () {
     const section = document.getElementById(sectionId);
     if (!section) return;
@@ -183,8 +184,20 @@ const framePrefix = '/assets/hero-scroll/frames/frame_';
     if (!Number.isFinite(totalFrames) || totalFrames < 2) return;
 
     const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    const isTabletOrBelow = window.matchMedia('(max-width: 1023px)').matches;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const prefersReducedData = window.matchMedia('(prefers-reduced-data: reduce)').matches;
+    const saveData = navigator.connection?.saveData === true;
+    const lowBandwidth = /(^|slow-)2g/.test(navigator.connection?.effectiveType || '');
+    const highDensityDesktop = window.devicePixelRatio > 1.25 || window.innerWidth >= 1280;
+    const useDesktopFrames =
+      !isTabletOrBelow &&
+      !prefersReducedMotion &&
+      !prefersReducedData &&
+      !saveData &&
+      !lowBandwidth &&
+      highDensityDesktop;
+    const selectedFramePrefix = useDesktopFrames ? desktopFramePrefix : mobileFramePrefix;
     const lowPowerMode = isMobile || prefersReducedMotion || prefersReducedData;
     const sampledFrameCount = lowPowerMode ? Math.min(totalFrames, 48) : totalFrames;
 
@@ -192,10 +205,12 @@ const framePrefix = '/assets/hero-scroll/frames/frame_';
       const progress = sampledFrameCount === 1 ? 0 : index / (sampledFrameCount - 1);
       const mappedFrame = Math.round(progress * (totalFrames - 1)) + 1;
       const frameNumber = String(mappedFrame).padStart(4, '0');
-      return `${framePrefix}${frameNumber}.jpg`;
+      return `${selectedFramePrefix}${frameNumber}.jpg`;
     });
 
     const frames = new Array(sampledFrameCount);
+    let sourceWidth = 0;
+    let sourceHeight = 0;
     let activeFrame = 0;
     let targetProgress = 0;
     let currentProgress = 0;
@@ -219,14 +234,19 @@ const framePrefix = '/assets/hero-scroll/frames/frame_';
       const sourceHeight = Math.max(1, image.height - sourceTopCrop);
       const canvasWidth = canvas.width;
       const canvasHeight = canvas.height;
-      const fit = Math.min(canvasWidth / sourceWidth, canvasHeight / sourceHeight);
+      const desktopCoverFit = Math.max(canvasWidth / sourceWidth, canvasHeight / sourceHeight);
+      const mobileContainFit = Math.min(canvasWidth / sourceWidth, canvasHeight / sourceHeight) * 1.04;
+      const fit = isMobile ? mobileContainFit : desktopCoverFit;
       const drawWidth = sourceWidth * fit;
       const drawHeight = sourceHeight * fit;
-      const dx = (canvasWidth - drawWidth) * 0.5;
-      const dy = (canvasHeight - drawHeight) * 0.5;
+      const dx = Math.round((canvasWidth - drawWidth) * 0.5);
+      const dy = Math.round((canvasHeight - drawHeight) * 0.5);
+      const upscaleRatio = Math.max(drawWidth / sourceWidth, drawHeight / sourceHeight);
 
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = upscaleRatio > 1.15 ? 'high' : 'medium';
       ctx.drawImage(
         image,
         0,
@@ -242,7 +262,14 @@ const framePrefix = '/assets/hero-scroll/frames/frame_';
 
     const resizeCanvas = () => {
       const rect = canvas.getBoundingClientRect();
-      const ratio = pixelRatio();
+      const ratio = (() => {
+        if (!sourceWidth || !sourceHeight) return pixelRatio();
+        const sourceBoundRatio = Math.min(
+          sourceWidth / Math.max(rect.width, 1),
+          sourceHeight / Math.max(rect.height, 1)
+        );
+        return Math.max(1, Math.min(pixelRatio(), sourceBoundRatio));
+      })();
       canvas.width = Math.max(1, Math.round(rect.width * ratio));
       canvas.height = Math.max(1, Math.round(rect.height * ratio));
       drawFrame(activeFrame);
@@ -281,6 +308,10 @@ const framePrefix = '/assets/hero-scroll/frames/frame_';
         image.decoding = 'async';
         image.onload = () => {
           frames[index] = image;
+          if (index === 0) {
+            sourceWidth = image.width;
+            sourceHeight = image.height;
+          }
           if (index === 0) {
             drawFrame(0);
           }

@@ -1,0 +1,177 @@
+---
+import type { Lang } from '../../data/site-strings';
+import { t } from '../../data/site-strings';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+const strings = t(lang);
+const leadMagnet = strings.leadMagnet;
+---
+
+<section id="lead-magnet" class="py-section px-4 bg-elevated">
+  <div class="mx-auto max-w-6xl">
+    <div class="grid items-start gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
+      <div class="reveal card-shell">
+        <div class="card-core p-7 md:p-10">
+          {leadMagnet.eyebrow && <span class="eyebrow mb-5">{leadMagnet.eyebrow}</span>}
+          <h2 class="whitespace-pre-line font-display text-display-md font-black text-dark">
+            {leadMagnet.title}
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-muted md:text-lg">
+            {leadMagnet.subtitle}
+          </p>
+
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#contact" class="group btn-primary text-sm px-6 py-3">
+              {leadMagnet.ctaPrimary}
+              <span class="btn-icon">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+            </a>
+            <a href="#work" class="btn-ghost text-sm px-6 py-3">{leadMagnet.ctaSecondary}</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid auto-rows-max content-start gap-6">
+        <div class="reveal self-start card-shell" data-delay="80">
+          <div class="card-core h-full p-6 md:p-7">
+            <h3 class="font-display text-xl font-bold text-dark">
+              {leadMagnet.highlightsTitle}
+            </h3>
+            <ul class="mt-4 grid gap-2.5">
+              {leadMagnet.highlights.map((item) => (
+                <li class="lead-item">{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div class="reveal self-start card-shell" data-delay="140">
+          <div class="card-core h-full p-6 md:p-7">
+            <h3 class="font-display text-xl font-bold text-dark">
+              {leadMagnet.deliverablesTitle}
+            </h3>
+            <ul class="mt-4 grid gap-2.5">
+              {leadMagnet.deliverables.map((item) => (
+                <li class="lead-item">{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 reveal card-shell" data-delay="180">
+      <div class="card-core p-6 md:p-7">
+        <h3 class="font-display text-xl font-bold text-dark">{leadMagnet.form.title}</h3>
+        <p class="mt-2 text-sm text-muted">{leadMagnet.form.subtitle}</p>
+
+        <form
+          name="lead-magnet-audit"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          class="mt-5 grid gap-3 md:grid-cols-[1fr_1fr_auto]"
+          id={`lead-magnet-form-${lang}`}
+        >
+          <div class="hidden" aria-hidden="true">
+            <input name="bot-field" tabindex="-1" autocomplete="off" />
+          </div>
+          <input type="hidden" name="form-name" value="lead-magnet-audit" />
+          <input type="hidden" name="lead_source" value="home_lead_magnet" />
+          <input type="hidden" name="locale" value={lang} />
+
+          <label class="sr-only" for={`lead-email-${lang}`}>{leadMagnet.form.email}</label>
+          <input
+            id={`lead-email-${lang}`}
+            name="email"
+            type="email"
+            required
+            placeholder="you@company.com"
+            class="w-full rounded-xl border border-black/8 bg-canvas px-4 py-3 text-sm text-ink placeholder:text-muted/50 outline-none focus:border-dark/30 focus:ring-2 focus:ring-dark/8 transition-all duration-200"
+          />
+
+          <label class="sr-only" for={`lead-website-${lang}`}>{leadMagnet.form.website}</label>
+          <input
+            id={`lead-website-${lang}`}
+            name="website"
+            type="url"
+            placeholder="https://your-site.com"
+            class="w-full rounded-xl border border-black/8 bg-canvas px-4 py-3 text-sm text-ink placeholder:text-muted/50 outline-none focus:border-dark/30 focus:ring-2 focus:ring-dark/8 transition-all duration-200"
+          />
+
+          <button type="submit" class="group btn-primary justify-center text-sm px-5 py-3 md:py-0">
+            {leadMagnet.form.cta}
+            <span class="btn-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+          </button>
+        </form>
+
+        <p class="mt-3 text-xs text-muted">{leadMagnet.form.privacy}</p>
+
+        <div id={`lead-magnet-success-${lang}`} class="hidden mt-4 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800">
+          {leadMagnet.form.success}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .lead-item {
+    position: relative;
+    padding-left: 1rem;
+    color: #1f1e1b;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .lead-item::before {
+    content: '';
+    position: absolute;
+    top: 0.55rem;
+    left: 0;
+    width: 0.38rem;
+    height: 0.38rem;
+    border-radius: 9999px;
+    background: rgba(12, 12, 10, 0.75);
+    box-shadow: 0 0 0 4px rgba(12, 12, 10, 0.08);
+  }
+</style>
+
+<script define:vars={{ lang }}>
+  (() => {
+    const form = document.getElementById(`lead-magnet-form-${lang}`) as HTMLFormElement | null;
+    const success = document.getElementById(`lead-magnet-success-${lang}`);
+    if (!form || !success) return;
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const payload = new FormData(form);
+      const params = new URLSearchParams();
+      payload.forEach((value, key) => {
+        params.append(key, String(value));
+      });
+      try {
+        await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: params.toString(),
+        });
+        form.classList.add('hidden');
+        success.classList.remove('hidden');
+      } catch {
+        form.submit();
+      }
+    });
+  })();
+</script>

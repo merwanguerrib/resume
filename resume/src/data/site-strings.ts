@@ -1,85 +1,260 @@
 export type Lang = 'en' | 'fr';
 
 export const t = (lang: Lang) => ({
+  seo: {
+    title:
+      lang === 'en'
+        ? 'Merwan Guerrib | Website, App & AI Automation Developer'
+        : 'Merwan Guerrib | Développeur Website, App & Automatisation IA',
+    description:
+      lang === 'en'
+        ? 'I build conversion-focused websites, full-stack apps, and AI automation workflows with n8n or no-code tools. Based in Marseille, working worldwide.'
+        : 'Je conçois des websites orientés conversion, des applications full-stack et des workflows d\'automatisation IA avec n8n ou des outils no-code. Basé à Marseille, disponible partout.',
+    keywords:
+      lang === 'en'
+        ? [
+            'website developer',
+            'web application development',
+            'ai automation developer',
+            'n8n workflow integration',
+            'nocode automation',
+            'freelance fullstack developer',
+            'conversion focused website',
+          ]
+        : [
+            'developpeur website',
+            'developpement application web',
+            'automatisation IA',
+            'integration workflow n8n',
+            'automatisation no-code',
+            'developpeur fullstack freelance',
+            'site web orienté conversion',
+          ],
+  },
   nav: {
     services: lang === 'en' ? 'Services' : 'Services',
     work: lang === 'en' ? 'Work' : 'Projets',
     about: lang === 'en' ? 'About' : 'À propos',
-    contact: lang === 'en' ? 'Start a project' : 'Démarrer',
+    contact: lang === 'en' ? 'Get free audit' : 'Audit gratuit',
   },
   hero: {
     available: lang === 'en' ? 'Available for new projects' : 'Disponible pour de nouveaux projets',
     tagline: 'Just dev it.',
     subtitle:
       lang === 'en'
-        ? 'Premium web & app development.\nBuilt fast, built right.'
-        : 'Développement web & app premium.\nVite fait, bien fait.',
-    cta_primary: lang === 'en' ? 'Start a project' : 'Démarrer un projet',
+        ? 'Websites, apps, and AI automations built for growth.\nFrom strategy to production, with clear ROI.'
+        : 'Websites, apps et automatisations IA conçus pour la croissance.\nDe la stratégie à la production, avec un ROI clair.',
+    cta_primary: lang === 'en' ? 'Get free audit' : 'Recevoir un audit gratuit',
     cta_secondary: lang === 'en' ? 'See my work' : 'Voir mes projets',
     trustedBy: lang === 'en' ? 'Trusted by' : 'Ils me font confiance',
   },
   stats: [
-    { value: '6+', label: lang === 'en' ? 'Years of experience' : "Années d'expérience" },
-    { value: '12+', label: lang === 'en' ? 'Projects delivered' : 'Projets livrés' },
-    { value: '100%', label: lang === 'en' ? 'Remote-ready' : 'Full remote' },
+    { value: '10+', label: lang === 'en' ? 'Years of experience' : "Années d'expérience" },
+    { value: '50+', label: lang === 'en' ? 'Missions delivered' : 'Missions livrées' },
+    { value: '24h', label: lang === 'en' ? 'Average response time' : 'Délai moyen de réponse' },
   ],
   services: {
-    eyebrow: lang === 'en' ? 'What I do' : 'Ce que je fais',
+    eyebrow: lang === 'en' ? 'What I build' : 'Ce que je construis',
     title:
       lang === 'en'
-        ? 'Every layer of the stack,\ncovered.'
-        : 'Toutes les couches du stack,\ncouvertes.',
+        ? 'Website, app, and AI workflows,\nbuilt with n8n + no-code.'
+        : 'Website, app et workflows IA,\navec n8n + no-code.',
   },
   work: {
-    eyebrow: lang === 'en' ? 'Selected work' : 'Projets sélectionnés',
-    title: lang === 'en' ? 'Results that speak\nfor themselves.' : 'Des résultats qui\nparlent d\'eux-mêmes.',
+    eyebrow: lang === 'en' ? 'Case studies' : 'Cas clients',
+    title:
+      lang === 'en'
+        ? 'Projects shipped with\nbusiness impact.'
+        : 'Projets livrés avec\nimpact business.',
     cta: lang === 'en' ? 'View case study' : 'Voir le cas client',
   },
   process: {
-    eyebrow: lang === 'en' ? 'How it works' : 'Comment ça marche',
-    title: lang === 'en' ? 'Fast, transparent,\nno surprises.' : 'Rapide, transparent,\nsans surprises.',
+    eyebrow: lang === 'en' ? 'How we work' : 'Méthode',
+    title:
+      lang === 'en'
+        ? 'Clear process.\nFast execution.'
+        : 'Process clair.\nExécution rapide.',
     steps: [
       {
         number: '01',
-        title: lang === 'en' ? 'Discovery' : 'Découverte',
+        title: lang === 'en' ? 'Audit & scope' : 'Audit & cadrage',
         description:
           lang === 'en'
-            ? 'We align on goals, scope, and timeline. I ask the right questions so nothing gets lost in translation.'
-            : 'On s\'aligne sur les objectifs, le périmètre et le calendrier. Je pose les bonnes questions.',
+            ? 'We define your goals, user journey, and priority outcomes before writing any code.'
+            : 'On définit vos objectifs, le parcours utilisateur et les résultats prioritaires avant d\'écrire une ligne de code.',
       },
       {
         number: '02',
-        title: 'Design',
+        title: lang === 'en' ? 'Architecture & UX' : 'Architecture & UX',
         description:
           lang === 'en'
-            ? 'Wireframes and high-fidelity mockups in Figma. You see exactly what we\'re building before a line of code is written.'
-            : 'Wireframes et maquettes haute fidélité en Figma. Vous voyez exactement ce qu\'on construit avant d\'écrire une ligne de code.',
+            ? 'You get a clean technical plan and interface direction aligned with conversion and usability.'
+            : 'Vous obtenez un plan technique clair et une direction interface alignée conversion et usage.',
       },
       {
         number: '03',
-        title: lang === 'en' ? 'Build' : 'Développement',
+        title: lang === 'en' ? 'Build & automate' : 'Build & automate',
         description:
           lang === 'en'
-            ? 'Clean, documented code. Weekly updates. You\'re never left wondering where the project stands.'
-            : 'Code propre et documenté. Updates hebdomadaires. Vous savez toujours où en est le projet.',
+            ? 'I deliver production-ready code plus AI automations and n8n/no-code workflows when relevant.'
+            : 'Je livre un code prêt production avec automatisations IA et workflows n8n/no-code si pertinent.',
       },
       {
         number: '04',
-        title: 'Launch',
+        title: lang === 'en' ? 'Launch & optimize' : 'Launch & optimise',
         description:
           lang === 'en'
-            ? 'Deployed, tested, and handed over with full documentation. I stay available for 30 days post-launch.'
-            : 'Déployé, testé et livré avec documentation complète. Je reste disponible 30 jours après le lancement.',
+            ? 'Deployment, QA, documentation, and post-launch optimization to improve conversion and operations.'
+            : 'Déploiement, QA, documentation et optimisation post-lancement pour améliorer conversion et opérations.',
       },
     ],
+  },
+  leadMagnet: {
+    eyebrow: '',
+    title:
+      lang === 'en'
+        ? 'Free growth audit for your website,\napp, or AI workflow.'
+        : 'Audit croissance gratuit pour votre website,\napp ou workflow IA.',
+    subtitle:
+      lang === 'en'
+        ? 'Get a concise action plan to increase leads, reduce manual work, and improve your technical foundations.'
+        : 'Recevez un plan d\'action concret pour augmenter vos leads, réduire le travail manuel et renforcer vos fondations techniques.',
+    highlightsTitle: lang === 'en' ? 'What we analyze' : 'Ce que j\'analyse',
+    highlights:
+      lang === 'en'
+        ? [
+            'Conversion leaks on your website or landing pages',
+            'Automation opportunities with n8n and no-code tools',
+            'AI workflow bottlenecks and quick wins',
+            'SEO + GEO opportunities for visibility in Google and AI assistants',
+          ]
+        : [
+            'Fuites de conversion sur votre website ou vos landing pages',
+            'Opportunités d\'automatisation avec n8n et les outils no-code',
+            'Bottlenecks sur vos workflows IA et quick wins',
+            'Opportunités SEO + GEO pour Google et les assistants IA',
+          ],
+    deliverablesTitle:
+      lang === 'en' ? 'What you get in 5 business days' : 'Ce que vous recevez en 5 jours ouvrés',
+    deliverables:
+      lang === 'en'
+        ? [
+            'A 10-point diagnostic with priority score',
+            '3 actions to launch in the next 30 days',
+            'Estimated budget and implementation timeline',
+          ]
+        : [
+            'Un diagnostic en 10 points avec score de priorité',
+            '3 actions à lancer dans les 30 prochains jours',
+            'Une estimation budget + délai de mise en oeuvre',
+          ],
+    form: {
+      title:
+        lang === 'en'
+          ? 'Get the audit by email'
+          : 'Recevoir l\'audit par email',
+      subtitle:
+        lang === 'en'
+          ? 'Delivery format: actionable PDF summary + implementation roadmap.'
+          : 'Format livré: synthèse PDF actionnable + roadmap de mise en oeuvre.',
+      email: 'Email',
+      website: lang === 'en' ? 'Website URL (optional)' : 'URL du website (optionnel)',
+      cta:
+        lang === 'en'
+          ? 'Send me the free audit'
+          : 'Envoyer mon audit gratuit',
+      privacy:
+        lang === 'en'
+          ? 'No spam. You can unsubscribe anytime.'
+          : 'Pas de spam. Désinscription possible à tout moment.',
+      success:
+        lang === 'en'
+          ? 'Request received. Check your inbox shortly.'
+          : 'Demande reçue. Vérifiez votre boîte mail.',
+    },
+    ctaPrimary: lang === 'en' ? 'Get my free audit' : 'Je veux mon audit gratuit',
+    ctaSecondary: lang === 'en' ? 'See case studies' : 'Voir les cas clients',
+  },
+  faq: {
+    eyebrow: lang === 'en' ? 'FAQ' : 'FAQ',
+    title:
+      lang === 'en'
+        ? 'Questions about websites, apps,\nAI automation, and n8n.'
+        : 'Questions sur les websites, apps,\nautomatisation IA et n8n.',
+    items:
+      lang === 'en'
+        ? [
+            {
+              question: 'What services do you offer?',
+              answer:
+                'I build conversion-focused websites, full-stack web applications, AI automation systems, and workflow integrations with n8n or no-code tools.',
+            },
+            {
+              question: 'Can you integrate n8n with my current stack?',
+              answer:
+                'Yes. I design and implement n8n workflows connected to your CRM, forms, databases, APIs, and AI tools to remove repetitive manual work.',
+            },
+            {
+              question: 'Do you also handle SEO and GEO optimization?',
+              answer:
+                'Yes. I optimize technical SEO, on-page structure, and AI-search readiness (GEO) so your website can rank in Google and be easier to cite by AI assistants.',
+            },
+            {
+              question: 'How long does a typical project take?',
+              answer:
+                'Most focused projects are delivered in about 3 to 6 weeks depending on scope, integrations, and number of pages or workflows.',
+            },
+            {
+              question: 'What do you include in the free audit?',
+              answer:
+                'You receive a prioritized diagnostic, quick wins, and a practical delivery roadmap for website performance, automation, and acquisition.',
+            },
+            {
+              question: 'Do you work in white-label mode for agencies?',
+              answer:
+                'Yes. I regularly collaborate in white-label with agencies and product teams, with clear communication, strict deadlines, and clean handover documentation.',
+            },
+          ]
+        : [
+            {
+              question: 'Quels services proposez-vous ?',
+              answer:
+                'Je conçois des websites orientés conversion, des applications web full-stack, des systèmes d\'automatisation IA, et des intégrations de workflows avec n8n ou des outils no-code.',
+            },
+            {
+              question: 'Pouvez-vous intégrer n8n à mon stack actuel ?',
+              answer:
+                'Oui. Je conçois et implémente des workflows n8n connectés à votre CRM, formulaires, bases de données, APIs et outils IA pour réduire les tâches manuelles.',
+            },
+            {
+              question: 'Gérez-vous aussi l\'optimisation SEO et GEO ?',
+              answer:
+                'Oui. J\'optimise le SEO technique, la structure on-page et la préparation GEO pour mieux performer sur Google et dans les réponses d\'assistants IA.',
+            },
+            {
+              question: 'Quel est le délai moyen pour un projet ?',
+              answer:
+                'La plupart des projets ciblés sont livrés en 3 à 6 semaines selon le périmètre, les intégrations et le volume de pages ou workflows.',
+            },
+            {
+              question: 'Que contient l\'audit gratuit ?',
+              answer:
+                'Vous recevez un diagnostic priorisé, des quick wins et une roadmap opérationnelle pour la performance website, l\'automatisation et l\'acquisition.',
+            },
+            {
+              question: 'Travaillez-vous en marque blanche pour les agences ?',
+              answer:
+                'Oui. Je collabore en marque blanche avec des agences et des équipes produit, avec communication claire, respect des délais et documentation de handover.',
+            },
+          ],
   },
   about: {
     eyebrow: lang === 'en' ? 'About me' : 'À propos',
     title: lang === 'en' ? 'Merwan Guerrib' : 'Merwan Guerrib',
     bio:
       lang === 'en'
-        ? 'Fullstack developer with 6+ years building web products for startups and scale-ups. I\'ve shipped features used by hundreds of thousands of people at companies like PayFit and Capgemini.\n\nI work best at the intersection of solid engineering and product thinking — writing code that\'s clean, fast, and built for the real world.\n\nBased in Marseille, available worldwide.'
-        : 'Développeur fullstack avec 6+ ans d\'expérience à construire des produits web pour des startups et scale-ups. J\'ai livré des fonctionnalités utilisées par des centaines de milliers de personnes chez PayFit et Capgemini.\n\nJe suis à mon meilleur à l\'intersection de l\'ingénierie solide et de la pensée produit.\n\nBasé à Marseille, disponible dans le monde entier.',
+        ? 'I am a fullstack developer focused on one thing: shipping digital products that generate measurable business outcomes.\n\nOver the last 10+ years, I have delivered projects for teams like PayFit and Capgemini, from high-traffic websites to complex product features.\n\nToday, I combine development, AI automation, and product thinking to help founders and teams move faster without sacrificing quality.'
+        : 'Je suis développeur fullstack avec une obsession: livrer des produits digitaux qui génèrent des résultats business mesurables.\n\nDepuis plus de 10 ans, j\'accompagne des équipes comme PayFit et Capgemini, du site web à fort trafic aux fonctionnalités produit complexes.\n\nAujourd\'hui, je combine développement, automatisation IA et vision produit pour aider les équipes à aller vite sans compromettre la qualité.',
     values: [
       { icon: 'lightning', label: lang === 'en' ? 'Fast delivery' : 'Livraison rapide' },
       { icon: 'shield', label: lang === 'en' ? 'Clean code' : 'Code propre' },
@@ -91,16 +266,20 @@ export const t = (lang: Lang) => ({
     eyebrow: lang === 'en' ? 'Get in touch' : 'Contact',
     title:
       lang === 'en'
-        ? "Let's build something\ntogether."
-        : 'Construisons quelque\nchose ensemble.',
+        ? "Let's build your next\ngrowth system."
+        : 'Construisons votre prochain\nsystème de croissance.',
     subtitle:
       lang === 'en'
-        ? 'Tell me about your project. I\'ll get back to you within 24 hours.'
-        : 'Parlez-moi de votre projet. Je vous réponds sous 24 heures.',
+        ? 'Tell me what you need: website, app, AI automation, or n8n/no-code workflow. I reply within 24 hours.'
+        : 'Expliquez votre besoin: website, app, automatisation IA, ou workflow n8n/no-code. Réponse sous 24h.',
     fields: {
       name: lang === 'en' ? 'Full name' : 'Nom complet',
       email: 'Email',
-      project: lang === 'en' ? 'Project description' : 'Description du projet',
+      project: lang === 'en' ? 'Project goals' : 'Objectifs du projet',
+      projectPlaceholder:
+        lang === 'en'
+          ? 'Example: we need a new website + n8n automations for lead qualification'
+          : 'Exemple: nous voulons un nouveau website + des automatisations n8n pour qualifier les leads',
       budget: lang === 'en' ? 'Estimated budget' : 'Budget estimé',
       budgetOptions: [
         lang === 'en' ? 'Select a range' : 'Sélectionner une fourchette',

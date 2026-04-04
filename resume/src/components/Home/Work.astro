@@ -11,107 +11,340 @@ const { lang = 'en' } = Astro.props;
 const strings = t(lang);
 ---
 
-<section id="work" class="py-section px-4 bg-elevated">
+<section id="work" class="relative z-0 px-4 py-section bg-elevated overflow-hidden">
   <div class="mx-auto max-w-6xl">
-
-    <!-- Header -->
     <div class="mb-20 reveal">
       <span class="eyebrow mb-5">{strings.work.eyebrow}</span>
-      <h2 class="font-display text-display-lg font-black text-dark mt-5 whitespace-pre-line">
+      <h2 class="mt-5 whitespace-pre-line font-display text-display-lg font-black text-dark">
         {strings.work.title}
       </h2>
     </div>
 
-    <!-- Projects list -->
-    <div class="flex flex-col gap-4">
-      {projectsData.map((project, i) => (
-        <div
-          class="reveal card-shell group work-card"
-          data-delay={String(i * 100)}
-        >
-          <div class="card-core p-6 md:p-8">
-            <div class="flex flex-col md:flex-row gap-6 md:gap-12 items-start">
+    <div class="work-deck" data-work-deck>
+      <div class="work-deck-stage" data-work-stage>
+        {projectsData.map((project, i) => (
+          <article class="work-deck-card" data-work-card data-card-index={String(i)}>
+            <div class="card-shell group work-card h-full">
+              <div class="card-core relative h-full overflow-hidden p-6 md:p-8">
+                <div class="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white to-transparent"></div>
 
-              <!-- Left: content -->
-              <div class="flex-1 min-w-0">
-
-                <!-- Category + year -->
-                <div class="flex items-center gap-3 mb-4">
-                  <span class="font-mono text-[10px] uppercase tracking-widest text-muted">
-                    {project.category[lang]}
-                  </span>
-                  <span class="w-1 h-1 rounded-full bg-muted/40"></span>
-                  <span class="font-mono text-[10px] text-muted">{project.year}</span>
-                </div>
-
-                <!-- Client name -->
-                <div class="flex items-center gap-3 mb-3">
-                  {project.logo && (
-                    <img
-                      src={project.logo}
-                      alt={project.client}
-                      class="h-6 w-auto object-contain rounded"
-                    />
-                  )}
-                  <span class="font-display font-black text-xs uppercase tracking-widest text-muted">
-                    {project.client}
-                  </span>
-                </div>
-
-                <h3 class="font-display text-xl md:text-2xl font-bold text-dark mb-3 leading-snug">
-                  {project.title[lang]}
-                </h3>
-                <p class="text-muted leading-relaxed text-sm md:text-base mb-4">
-                  {project.description[lang]}
-                </p>
-                <p class="text-ink/70 text-sm leading-relaxed italic">
-                  {project.result[lang]}
-                </p>
-
-                <!-- Stack -->
-                <div class="flex flex-wrap gap-1.5 mt-5">
-                  {project.stack.map((tech) => (
-                    <span class="font-mono text-[10px] bg-elevated rounded-md px-2 py-1 text-muted border border-black/6">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <!-- Right: metric -->
-              <div class="shrink-0 flex flex-col items-start md:items-end gap-1 md:min-w-[120px]">
-                <div class="card-shell">
-                  <div class="card-core px-5 py-4 text-center">
-                    <div class="font-display font-black text-2xl md:text-3xl text-dark leading-none">
-                      {project.metric}
+                <div class="relative grid gap-6 lg:grid-cols-[1.4fr_0.6fr] lg:gap-8">
+                  <div class="min-w-0">
+                    <div class="mb-4 flex items-center gap-3">
+                      <span class="font-mono text-[10px] uppercase tracking-widest text-muted">
+                        {project.category[lang]}
+                      </span>
+                      <span class="h-1 w-1 rounded-full bg-muted/40"></span>
+                      <span class="font-mono text-[10px] text-muted">
+                        {project.period?.[lang] ?? String(project.year)}
+                      </span>
                     </div>
-                    <div class="text-xs text-muted mt-1 font-medium">
-                      {project.metricLabel[lang]}
+
+                    <div class="mb-4 flex items-center gap-3">
+                      {project.logo && (
+                        <img
+                          src={project.logo}
+                          alt={project.client}
+                          class="h-6 w-6 rounded-md object-cover"
+                          loading="lazy"
+                        />
+                      )}
+                      <span class="font-display text-xs font-black uppercase tracking-widest text-muted">
+                        {project.client}
+                      </span>
+                    </div>
+
+                    <h3 class="font-display text-xl font-bold leading-snug text-dark md:text-2xl">
+                      {project.title[lang]}
+                    </h3>
+
+                    <p class="mt-3 text-sm leading-relaxed text-muted md:text-base">
+                      {project.description[lang]}
+                    </p>
+
+                    <p class="mt-3 text-sm italic leading-relaxed text-ink/70 md:text-base">
+                      {project.result[lang]}
+                    </p>
+
+                    <ul class="mt-4 space-y-2">
+                      {project.achievements[lang].map((item) => (
+                        <li class="flex items-start gap-2 text-sm leading-relaxed text-ink/80">
+                          <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-sky-500"></span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div class="mt-5 flex flex-wrap gap-1.5">
+                      {project.stack.map((tech) => (
+                        <span class="rounded-md border border-black/8 bg-elevated px-2 py-1 font-mono text-[10px] text-muted">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div class="flex h-full flex-col gap-4">
+                    <div class="self-start md:self-end">
+                      <div class="card-shell">
+                        <div class="card-core px-5 py-4 text-center">
+                          <div class="font-display text-2xl font-black leading-none text-dark md:text-3xl">
+                            {project.metric}
+                          </div>
+                          <div class="mt-1 text-xs font-medium text-muted">
+                            {project.metricLabel[lang]}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="relative overflow-hidden rounded-2xl border border-black/8 bg-white">
+                      <img
+                        src={project.image}
+                        alt={project.imageAlt[lang]}
+                        class="aspect-[16/10] w-full object-cover"
+                        loading="lazy"
+                      />
+                      <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-dark/20 via-transparent to-transparent"></div>
                     </div>
                   </div>
                 </div>
               </div>
-
             </div>
-          </div>
-        </div>
-      ))}
+          </article>
+        ))}
+      </div>
     </div>
-
   </div>
 </section>
 
 <style>
   .work-card {
-    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .work-card:hover {
-    transform: translateY(-3px);
-  }
+
   .work-card .card-core {
-    transition: box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   }
+
   .work-card:hover .card-core {
-    box-shadow: 0 4px 8px rgba(12,12,10,0.06), 0 20px 48px rgba(12,12,10,0.09);
+    box-shadow: 0 4px 10px rgba(12, 12, 10, 0.06),
+      0 24px 56px rgba(12, 12, 10, 0.1);
+  }
+
+  .work-deck-stage {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .work-deck {
+    position: relative;
+    isolation: isolate;
+    z-index: 0;
+  }
+
+  .work-deck-card {
+    position: relative;
+    will-change: transform, opacity;
+    transform-origin: 50% 50%;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .work-deck-card.is-active {
+    pointer-events: auto;
+  }
+
+  @media (min-width: 1024px) {
+    .work-deck-stage {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: stretch;
+    }
+
+    .work-deck.is-complete .work-deck-card {
+      transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .work-deck.is-complete .work-deck-card:hover .card-core {
+      box-shadow: 0 8px 20px rgba(12, 12, 10, 0.08),
+        0 28px 62px rgba(12, 12, 10, 0.12);
+    }
   }
 </style>
+
+<script is:inline>
+  (() => {
+    const section = document.querySelector('[data-work-deck]');
+    if (!section) return;
+
+    const cards = Array.from(section.querySelectorAll('[data-work-card]'));
+    if (!cards.length) return;
+
+    const desktopQuery = window.matchMedia('(min-width: 1024px)');
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+    const easeOutCubic = (value) => 1 - Math.pow(1 - value, 3);
+    const cardsPerRowDesktop = 2;
+
+    let hoveredIndex = -1;
+    let hasPlayed = false;
+
+    const clearInline = () => {
+      cards.forEach((card) => {
+        card.style.transform = '';
+        card.style.opacity = '';
+        card.style.zIndex = '';
+        card.classList.add('is-active');
+      });
+    };
+
+    const setCompletedLayout = () => {
+      section.classList.add('is-complete');
+      cards.forEach((card, index) => {
+        let y = 0;
+        let scale = 1;
+        let rotate = 0;
+        let opacity = 1;
+        let zIndex = 2 + index;
+
+        if (desktopQuery.matches && hoveredIndex === index) {
+          y = -10;
+          scale = 1.015;
+          rotate = 0;
+          zIndex = 20;
+        } else if (desktopQuery.matches && hoveredIndex !== -1) {
+          y = 1;
+          scale = 0.998;
+          opacity = 0.93;
+        }
+
+        card.style.transform = `translate3d(0, ${y}px, 0) scale(${scale}) rotate(${rotate}deg)`;
+        card.style.opacity = String(opacity);
+        card.style.zIndex = String(zIndex);
+        card.classList.add('is-active');
+      });
+    };
+
+    const resetForResponsive = () => {
+      section.classList.remove('is-complete');
+      hoveredIndex = -1;
+      clearInline();
+    };
+
+    const renderEntry = () => {
+      if (!desktopQuery.matches || reducedMotionQuery.matches) {
+        resetForResponsive();
+        return;
+      }
+
+      if (hasPlayed) {
+        setCompletedLayout();
+        return;
+      }
+
+      section.classList.remove('is-complete');
+
+      const rect = section.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || 1;
+      const entryProgress = clamp(
+        (viewportHeight * 0.9 - rect.top) / (viewportHeight * 0.95),
+        0,
+        1
+      );
+      const cardsPerRow = desktopQuery.matches ? cardsPerRowDesktop : 1;
+      const rowCount = Math.ceil(cards.length / cardsPerRow);
+      const activeRow = entryProgress * rowCount;
+
+      if (entryProgress >= 0.99) {
+        hasPlayed = true;
+        hoveredIndex = -1;
+        setCompletedLayout();
+        return;
+      }
+
+      cards.forEach((card, index) => {
+        const rowIndex = Math.floor(index / cardsPerRow);
+        const rowDelta = activeRow - rowIndex;
+        let x = 88;
+        let y = 0;
+        let scale = 0.98;
+        let opacity = 0;
+        let rotate = 0;
+        let zIndex = 2 + index;
+
+        if (rowDelta >= 0 && rowDelta <= 1) {
+          const entry = easeOutCubic(rowDelta);
+          x = (1 - entry) * 88;
+          y = (1 - entry) * 6;
+          scale = 0.98 + entry * 0.02;
+          opacity = entry;
+        } else if (rowDelta > 1) {
+          x = 0;
+          y = 0;
+          scale = 1;
+          opacity = 1;
+        }
+
+        card.style.transform = `translate3d(${x}vw, ${y}px, 0) scale(${scale}) rotate(${rotate}deg)`;
+        card.style.opacity = String(opacity);
+        card.style.zIndex = String(zIndex);
+        card.classList.add('is-active');
+      });
+    };
+
+    let ticking = false;
+    const requestRender = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        renderEntry();
+      });
+    };
+
+    const onMediaChange = () => {
+      if (!desktopQuery.matches || reducedMotionQuery.matches) {
+        hasPlayed = false;
+      }
+      requestRender();
+    };
+
+    cards.forEach((card, index) => {
+      card.addEventListener('mouseenter', () => {
+        if (!hasPlayed || !desktopQuery.matches) return;
+        hoveredIndex = index;
+        requestRender();
+      });
+
+      card.addEventListener('mouseleave', () => {
+        if (!hasPlayed || !desktopQuery.matches) return;
+        if (hoveredIndex !== index) return;
+        hoveredIndex = -1;
+        requestRender();
+      });
+    });
+
+    section.addEventListener('mouseleave', () => {
+      if (hoveredIndex === -1) return;
+      hoveredIndex = -1;
+      requestRender();
+    });
+
+    window.addEventListener('scroll', requestRender, { passive: true });
+    window.addEventListener('resize', requestRender);
+
+    if (desktopQuery.addEventListener) {
+      desktopQuery.addEventListener('change', onMediaChange);
+      reducedMotionQuery.addEventListener('change', onMediaChange);
+    } else {
+      desktopQuery.addListener(onMediaChange);
+      reducedMotionQuery.addListener(onMediaChange);
+    }
+
+    requestRender();
+  })();
+</script>

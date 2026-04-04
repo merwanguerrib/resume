@@ -5,95 +5,112 @@ export interface Service {
   description: { en: string; fr: string };
   tags: string[];
   size: 'large' | 'medium' | 'small';
+  tone:
+    | 'sky'
+    | 'emerald'
+    | 'rose'
+    | 'amber'
+    | 'teal'
+    | 'slate'
+    | 'cyan'
+    | 'lime';
 }
 
 export const servicesData: Service[] = [
   {
     id: 'web-dev',
     icon: 'browser',
-    title: { en: 'Web Development', fr: 'Développement Web' },
+    title: { en: 'Website Development', fr: 'Développement Website' },
     description: {
-      en: 'Marketing sites, SaaS landing pages, and full-stack web apps built for speed, clarity, and conversion. From Figma to production in days, not months.',
-      fr: 'Sites marketing, landing pages SaaS et apps web full-stack conçus pour la performance et la conversion. De Figma à la production en jours, pas en mois.',
+      en: 'Conversion-focused websites and landing pages built to turn traffic into qualified leads and sales calls.',
+      fr: 'Websites et landing pages orientés conversion pour transformer le trafic en prospects qualifiés et rendez-vous commerciaux.',
     },
-    tags: ['React', 'Next.js', 'Astro', 'TypeScript'],
+    tags: ['Astro', 'Next.js', 'React', 'TypeScript'],
     size: 'large',
+    tone: 'sky',
   },
   {
     id: 'app-dev',
     icon: 'device-mobile',
     title: { en: 'App Development', fr: 'Développement App' },
     description: {
-      en: 'Scalable web applications with solid architecture. APIs, databases, auth systems — all wired up and ready to grow.',
-      fr: 'Applications web scalables avec une architecture solide. APIs, bases de données, systèmes d\'auth — tout est câblé pour grandir.',
+      en: 'Full-stack web applications with clean architecture, secure auth, and maintainable code designed for long-term growth.',
+      fr: 'Applications web full-stack avec architecture propre, auth sécurisée et code maintenable pour soutenir la croissance.',
     },
     tags: ['Node.js', 'PostgreSQL', 'AWS', 'Docker'],
     size: 'medium',
+    tone: 'emerald',
   },
   {
     id: 'ui-design',
     icon: 'palette',
     title: { en: 'UI/UX Design', fr: 'Design UI/UX' },
     description: {
-      en: 'Design systems and interfaces that look premium and feel intuitive. Figma to pixel-perfect code.',
-      fr: 'Systèmes de design et interfaces qui semblent premium et intuitifs. Figma to code pixel-perfect.',
+      en: 'UI systems and interfaces built for clarity, trust, and conversion from first visit to final action.',
+      fr: 'Interfaces et systèmes UI pensés pour la clarté, la confiance et la conversion de la première visite à l\'action finale.',
     },
     tags: ['Figma', 'Design System', 'Tailwind'],
     size: 'small',
+    tone: 'rose',
   },
   {
     id: 'ai-integration',
     icon: 'robot',
     title: { en: 'AI Integration', fr: 'Intégration IA' },
     description: {
-      en: 'Chatbots, automation workflows, and AI-powered features embedded directly into your product. Fast to ship, built to last.',
-      fr: 'Chatbots, workflows automatisés et fonctionnalités IA intégrées directement dans votre produit.',
+      en: 'AI assistants, copilots, and automations connected to your product and internal tools for faster execution.',
+      fr: 'Assistants IA, copilotes et automatisations connectés à votre produit et à vos outils internes pour accélérer l\'exécution.',
     },
-    tags: ['Claude API', 'OpenAI', 'n8n', 'Agents'],
+    tags: ['OpenAI', 'Claude API', 'Agents', 'Automation'],
     size: 'medium',
+    tone: 'amber',
   },
   {
     id: 'product-marketing',
     icon: 'megaphone',
     title: { en: 'Product Marketing', fr: 'Product Marketing' },
     description: {
-      en: 'Positioning, messaging, and go-to-market strategy that turns your product into a story people want to tell.',
-      fr: 'Positionnement, messaging et stratégie go-to-market qui transforment votre produit en une histoire que les gens veulent raconter.',
+      en: 'Positioning and messaging that clarify your offer and improve conversion across your website and funnel.',
+      fr: 'Positionnement et messaging pour clarifier votre offre et améliorer la conversion sur votre website et votre funnel.',
     },
     tags: ['Positioning', 'GTM', 'Messaging'],
     size: 'small',
+    tone: 'teal',
   },
   {
     id: 'product-management',
     icon: 'clipboard',
     title: { en: 'Product Management', fr: 'Product Management' },
     description: {
-      en: 'Roadmaps, specs, and prioritization frameworks that keep teams aligned and shipping the right things.',
-      fr: 'Roadmaps, specs et frameworks de priorisation qui gardent les équipes alignées et livrent les bonnes choses.',
+      en: 'Roadmaps and specs that align stakeholders, reduce ambiguity, and keep delivery predictable.',
+      fr: 'Roadmaps et specs qui alignent les équipes, réduisent les zones floues et sécurisent la delivery.',
     },
     tags: ['Roadmap', 'Agile', 'Specs'],
     size: 'small',
+    tone: 'slate',
   },
   {
     id: 'marketing',
     icon: 'chart',
     title: { en: 'Marketing', fr: 'Marketing' },
     description: {
-      en: 'Content, email campaigns, and growth strategies built around real user data — not guesses.',
-      fr: 'Contenu, campagnes email et stratégies de croissance construits autour de vraies données utilisateurs.',
+      en: 'Acquisition-focused content and growth actions connected to measurable KPIs, not vanity metrics.',
+      fr: 'Actions de croissance et contenus orientés acquisition, pilotés par des KPI mesurables.',
     },
     tags: ['Content', 'Email', 'Growth'],
     size: 'small',
+    tone: 'cyan',
   },
   {
     id: 'seo',
     icon: 'search',
-    title: { en: 'SEO', fr: 'SEO' },
+    title: { en: 'SEO + GEO', fr: 'SEO + GEO' },
     description: {
-      en: 'Technical audits, on-page optimization, and content strategy that compounds over time.',
-      fr: 'Audits techniques, optimisation on-page et stratégie de contenu qui s\'amplifient dans le temps.',
+      en: 'Technical SEO, on-page structure, and AI-search optimization so your brand is visible in search and AI answers.',
+      fr: 'SEO technique, structure on-page et optimisation pour la recherche IA afin d\'augmenter votre visibilité sur Google et dans les réponses IA.',
     },
-    tags: ['Technical SEO', 'On-page', 'Analytics'],
+    tags: ['Technical SEO', 'On-page', 'AI Search'],
     size: 'small',
+    tone: 'lime',
   },
 ];

@@ -2,39 +2,308 @@
 import '../styles/global.css';
 import type { Lang } from '../data/site-strings';
 
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
 interface Props {
   title?: string;
   description?: string;
+  keywords?: string[];
+  faqItems?: FaqItem[];
   lang?: Lang;
 }
 
 const {
   title = 'Merwan Guerrib — Just dev it.',
   description = 'Premium web & app development. Built fast, built right. Fullstack developer based in Marseille.',
+  keywords = [],
+  faqItems = [],
   lang = 'en',
 } = Astro.props;
 
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: 'Merwan Guerrib',
-  description: 'Premium web & app development services',
-  url: 'https://merwanguerrib.com',
-  founder: {
-    '@type': 'Person',
-    name: 'Merwan Guerrib',
-    jobTitle: 'Fullstack Developer',
-    email: 'merwanguerrib@gmail.com',
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Marseille',
-      addressCountry: 'FR',
+const siteUrl = 'https://merwanguerrib.com';
+const canonicalPath = Astro.url?.pathname ?? (lang === 'fr' ? '/fr/' : '/');
+const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
+const enUrl = new URL('/', siteUrl).toString();
+const frUrl = new URL('/fr/', siteUrl).toString();
+const ogImage = new URL('/merwan-photo.png', siteUrl).toString();
+const robotsContent = 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1';
+const keywordsContent = keywords.join(', ');
+const websiteId = `${siteUrl}#website`;
+const organizationId = `${siteUrl}#organization`;
+const personId = `${siteUrl}#person`;
+const serviceId = `${siteUrl}#professional-service`;
+const localBusinessId = `${siteUrl}#local-business`;
+const webPageId = `${canonicalUrl}#webpage`;
+const breadcrumbId = `${canonicalUrl}#breadcrumb`;
+const faqId = `${canonicalUrl}#faq`;
+const inLanguage = lang === 'fr' ? 'fr-FR' : 'en-US';
+const alternateOgLocale = lang === 'fr' ? 'en_US' : 'fr_FR';
+const marseilleLat = 43.2965;
+const marseilleLng = 5.3698;
+
+const offeredServices =
+  lang === 'fr'
+    ? [
+        'Développement de websites orientés conversion',
+        'Développement d\'applications web full-stack',
+        'Automatisation IA',
+        'Intégration de workflows n8n',
+        'Automatisation no-code',
+        'Optimisation SEO et GEO',
+      ]
+    : [
+        'Conversion-focused website development',
+        'Full-stack web application development',
+        'AI automation development',
+        'n8n workflow integration',
+        'No-code automation',
+        'SEO and GEO optimization',
+      ];
+
+const breadcrumbItems =
+  [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: lang === 'fr' ? 'Accueil' : 'Home',
+      item: lang === 'fr' ? frUrl : enUrl,
     },
+  ];
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': personId,
+  name: 'Merwan Guerrib',
+  jobTitle:
+    lang === 'en'
+      ? 'Website, App and AI Automation Developer'
+      : 'Développeur Website, App et Automatisation IA',
+  url: siteUrl,
+  email: 'merwanguerrib@gmail.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Marseille',
+    addressRegion: 'Provence-Alpes-Côte d\'Azur',
+    addressCountry: 'FR',
   },
   sameAs: [
     'https://www.linkedin.com/in/merwanguerrib',
     'https://github.com/merwanguerrib',
   ],
+  worksFor: {
+    '@id': organizationId,
+  },
+  knowsAbout: offeredServices,
+};
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': organizationId,
+  name: 'Merwan Guerrib',
+  url: siteUrl,
+  logo: ogImage,
+  sameAs: personSchema.sameAs,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Marseille',
+    addressRegion: 'Provence-Alpes-Côte d\'Azur',
+    addressCountry: 'FR',
+  },
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      email: 'merwanguerrib@gmail.com',
+      availableLanguage: ['en', 'fr'],
+    },
+  ],
+};
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': localBusinessId,
+  name: 'Merwan Guerrib',
+  url: siteUrl,
+  image: ogImage,
+  description,
+  email: 'merwanguerrib@gmail.com',
+  priceRange: '€€',
+  areaServed: [
+    {
+      '@type': 'City',
+      name: 'Marseille',
+    },
+    {
+      '@type': 'Country',
+      name: 'France',
+    },
+  ],
+  availableLanguage: ['en', 'fr'],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Marseille',
+    addressRegion: 'Provence-Alpes-Côte d\'Azur',
+    addressCountry: 'FR',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: marseilleLat,
+    longitude: marseilleLng,
+  },
+  sameAs: personSchema.sameAs,
+  founder: {
+    '@id': personId,
+  },
+  parentOrganization: {
+    '@id': organizationId,
+  },
+  makesOffer: {
+    '@type': 'Offer',
+    itemOffered: {
+      '@id': serviceId,
+    },
+  },
+};
+
+const professionalServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': serviceId,
+  name: 'Merwan Guerrib',
+  url: siteUrl,
+  description,
+  image: ogImage,
+  inLanguage,
+  areaServed: 'Worldwide',
+  provider: {
+    '@id': personId,
+  },
+  brand: {
+    '@id': organizationId,
+  },
+  availableLanguage: ['en', 'fr'],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    email: 'merwanguerrib@gmail.com',
+    availableLanguage: ['en', 'fr'],
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: lang === 'fr' ? 'Services' : 'Services',
+    itemListElement: offeredServices.map((serviceName, index) => ({
+      '@type': 'Offer',
+      position: index + 1,
+      itemOffered: {
+        '@type': 'Service',
+        name: serviceName,
+      },
+    })),
+  },
+};
+
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': webPageId,
+  url: canonicalUrl,
+  name: title,
+  description,
+  inLanguage,
+  isPartOf: {
+    '@id': websiteId,
+  },
+  about: [
+    {
+      '@id': personId,
+    },
+    {
+      '@id': serviceId,
+    },
+    {
+      '@id': localBusinessId,
+    },
+  ],
+  primaryImageOfPage: {
+    '@type': 'ImageObject',
+    url: ogImage,
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  '@id': breadcrumbId,
+  itemListElement: breadcrumbItems,
+};
+
+const faqSchema =
+  faqItems.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        '@id': faqId,
+        isPartOf: {
+          '@id': webPageId,
+        },
+        mainEntity: faqItems.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer,
+          },
+        })),
+      }
+    : null;
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': websiteId,
+  name: 'Merwan Guerrib',
+  url: siteUrl,
+  inLanguage: ['en', 'fr'],
+  publisher: {
+    '@id': organizationId,
+  },
+  potentialAction: {
+    '@type': 'ContactAction',
+    target: `${siteUrl}/#contact`,
+  },
+};
+
+const structuredServicesSchema = offeredServices.map((serviceName, index) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${siteUrl}#service-${index + 1}-${lang}`,
+  name: serviceName,
+  provider: {
+    '@id': personId,
+  },
+  areaServed: 'Worldwide',
+  availableLanguage: ['en', 'fr'],
+}));
+
+const schemaGraph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    organizationSchema,
+    personSchema,
+    localBusinessSchema,
+    websiteSchema,
+    webPageSchema,
+    breadcrumbSchema,
+    professionalServiceSchema,
+    ...structuredServicesSchema,
+    faqSchema,
+  ].filter(Boolean),
 };
 ---
 
@@ -45,7 +314,19 @@ const schema = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#F9F8F5" />
     <meta name="description" content={description} />
+    <meta http-equiv="content-language" content={inLanguage} />
+    <meta name="language" content={inLanguage} />
+    {keywordsContent && <meta name="keywords" content={keywordsContent} />}
+    <meta name="robots" content={robotsContent} />
+    <meta name="geo.region" content="FR-13" />
+    <meta name="geo.placename" content="Marseille" />
+    <meta name="geo.position" content={`${marseilleLat};${marseilleLng}`} />
+    <meta name="ICBM" content={`${marseilleLat}, ${marseilleLng}`} />
     <title>{title}</title>
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="fr" href={frUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -69,7 +350,16 @@ const schema = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="Merwan Guerrib" />
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
+    <meta property="og:locale:alternate" content={alternateOgLocale} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />
   </head>
   <body class="bg-canvas">
     <div class="grain-overlay" aria-hidden="true"></div>

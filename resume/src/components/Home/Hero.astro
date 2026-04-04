@@ -1,7 +1,6 @@
 ---
 import type { Lang } from '../../data/site-strings';
 import { t } from '../../data/site-strings';
-import { clientsData } from '../../data/clients-data';
 
 interface Props {
   lang?: Lang;
@@ -13,21 +12,19 @@ const strings = t(lang);
 const typewriterWords =
   lang === 'en'
     ? [
-        'an idea',
-        'a product',
+        'a website',
         'an app',
-        'a workflow',
-        'a SaaS',
-        'a vision',
+        'an AI workflow',
+        'an n8n stack',
+        'a product',
         'Just dev it.',
       ]
     : [
-        'une idée',
-        'un projet',
+        'un site web',
         'une app',
-        'un process métier',
-        'un SaaS',
-        'une vision',
+        'un workflow IA',
+        'une stack n8n',
+        'un produit',
         'Just dev it.',
       ];
 
@@ -35,36 +32,36 @@ const offerPanel =
   lang === 'en'
     ? {
         label: 'Offer format',
-        heading: 'Build and launch sprint',
+        heading: 'Growth build sprint',
         summary:
-          'A focused engagement to ship one high-impact product milestone without wasting cycles.',
+          'A focused sprint to ship a conversion-ready website, app module, or AI automation with clear priorities.',
         includesTitle: 'Included in the sprint',
         includes: [
-          'Scope lock workshop (90 min)',
-          'UX/UI + fullstack implementation',
-          'QA, deployment, and handover docs',
+          'Strategy workshop and scope lock',
+          'Design + fullstack implementation',
+          'QA, launch, and actionable handover',
         ],
         terms: [
           { label: 'Kickoff', value: 'within 7 days' },
-          { label: 'Delivery window', value: '~4 weeks' },
+          { label: 'Delivery window', value: '3 to 6 weeks' },
           { label: 'Replies', value: '< 24h on weekdays' },
         ],
       }
     : {
         label: "Format d'offre",
-        heading: 'Sprint build & launch',
+        heading: 'Sprint de build & lancement',
         summary:
-          'Un format ciblé pour livrer un jalon produit à fort impact, sans dispersion.',
+          'Un sprint ciblé pour livrer un site web orienté conversion, un module d’application ou une automatisation IA avec des priorités claires.',
         includesTitle: 'Inclus dans le sprint',
         includes: [
-          'Atelier de cadrage (90 min)',
-          'Conception UX/UI + implémentation fullstack',
-          'QA, mise en production, documentation',
+          'Atelier de cadrage stratégique',
+          'Conception UX/UI + développement full-stack',
+          'QA, mise en production et documentation actionnable',
         ],
         terms: [
-          { label: 'Kickoff', value: 'sous 7 jours' },
-          { label: 'Fenêtre de livraison', value: '~4 semaines' },
-          { label: 'Réponses', value: '< 24h en semaine' },
+          { label: 'Démarrage', value: 'sous 7 jours' },
+          { label: 'Fenêtre de livraison', value: '3 à 6 semaines' },
+          { label: 'Temps de réponse', value: '< 24 h en semaine' },
         ],
       };
 ---
@@ -89,7 +86,7 @@ const offerPanel =
 
   <div class="relative mx-auto w-full max-w-6xl">
     <div
-      class="grid lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)] gap-14 lg:gap-12 items-center"
+      class="grid lg:grid-cols-[minmax(0,1.16fr)_minmax(320px,0.84fr)] gap-10 lg:gap-10 items-center"
     >
       <!-- Left: Text content -->
       <div class="flex flex-col gap-10 min-w-0 overflow-hidden">
@@ -112,17 +109,17 @@ const offerPanel =
         <div class="animate-fade-up-1 flex flex-col gap-3">
           <!-- Rotating word — clipped to column width, never wraps -->
           <div
-            class="flex items-baseline gap-1 overflow-x-hidden overflow-y-visible pb-1 w-full max-w-[30rem]"
+            class="flex items-baseline gap-1 overflow-visible pb-1 w-full"
           >
             <h1
               id="typewriter-word"
-              class="font-display text-[clamp(2.2rem,5.6vw,4rem)] font-black leading-[1.02] tracking-[-0.03em] transition-colors duration-300 whitespace-nowrap min-w-0"
+              class="font-display text-[clamp(1.95rem,5.35vw,4rem)] font-black leading-[1.02] tracking-[-0.03em] transition-colors duration-300 whitespace-nowrap min-w-0 block"
               style="color: rgba(155,151,145,0.5)"
             >
             </h1>
             <span
               id="typewriter-cursor"
-              class="font-display text-[clamp(2.2rem,5.6vw,4rem)] font-black text-muted/40 leading-[1.02] select-none shrink-0"
+              class="font-display text-[clamp(1.95rem,5.35vw,4rem)] font-black text-muted/40 leading-[1.02] select-none shrink-0"
               >_</span
             >
           </div>
@@ -139,7 +136,7 @@ const offerPanel =
 
         <!-- CTAs -->
         <div class="flex flex-wrap gap-3 animate-fade-up-3">
-          <a href="#contact" class="group btn-primary text-base px-7 py-3.5">
+          <a href="#lead-magnet" class="group btn-primary text-base px-7 py-3.5">
             {strings.hero.cta_primary}
             <span class="btn-icon">
               <svg
@@ -216,38 +213,6 @@ const offerPanel =
       </div>
     </div>
 
-    <!-- Client logo strip -->
-    <div class="mt-24 reveal trusted-clients" data-delay="300">
-      <p
-        class="text-xs text-muted uppercase tracking-widest font-medium mb-8 text-center"
-      >
-        {strings.hero.trustedBy}
-      </p>
-      <div class="trusted-row">
-        {
-          clientsData.map((client, index) =>
-            client.logo ? (
-              <div class="trusted-item" style={`--item-index:${index};`}>
-                <img
-                  src={client.logo}
-                  alt={client.name}
-                  class="trusted-mark h-7 w-auto object-contain grayscale opacity-35 hover:opacity-65 hover:grayscale-0 transition-all duration-500"
-                />
-              </div>
-            ) : (
-              <div class="trusted-item" style={`--item-index:${index};`}>
-                <span
-                  class="font-display font-bold text-sm tracking-tight"
-                  style="color: rgba(155,151,145,0.5)"
-                >
-                  {client.name}
-                </span>
-              </div>
-            )
-          )
-        }
-      </div>
-    </div>
   </div>
 </section>
 
@@ -357,14 +322,20 @@ const offerPanel =
   }
 
   .offer-term {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    align-content: start;
     border-radius: 0.85rem;
     border: 1px solid rgba(12, 12, 10, 0.08);
     background: rgba(255, 255, 255, 0.72);
     padding: 9px 10px;
+    min-height: 100px;
   }
 
   .offer-term-label {
     font-size: 10px;
+    line-height: 1.35;
+    min-height: 2.7em;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: #9b9791;
@@ -372,61 +343,13 @@ const offerPanel =
   }
 
   .offer-term-value {
-    margin-top: 5px;
+    margin-top: 6px;
     font-size: 13px;
     font-weight: 600;
     color: #1f1e1b;
-    line-height: 1.3;
-    text-wrap: balance;
-  }
-
-  .trusted-clients {
-    position: relative;
-  }
-
-  .trusted-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(1.5rem, 3vw, 2.8rem);
-  }
-
-  .trusted-item {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 2.2rem;
-    animation:
-      trustedReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both,
-      trustedBreathe 5.8s ease-in-out infinite;
-    animation-delay:
-      calc(var(--item-index) * 120ms), calc(var(--item-index) * 220ms + 900ms);
-  }
-
-  .trusted-mark {
-    transform-origin: center;
-  }
-
-  @keyframes trustedReveal {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes trustedBreathe {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-2px);
-    }
+    line-height: 1.28;
+    min-height: 2.6em;
+    text-wrap: pretty;
   }
 
   @media (max-width: 1023px) {
