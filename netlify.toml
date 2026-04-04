@@ -2,3 +2,13 @@
   base = "resume"
   command = "npm run build"
   publish = "dist"
+
+# Auto language routing on the root URL:
+# - French browser => /fr/
+# - Other languages => keep /
+[[redirects]]
+  from = "/"
+  to = "/fr/"
+  status = 302
+  force = false
+  conditions = { Language = ["fr"] }
