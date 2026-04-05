@@ -18,3 +18,15 @@
   [headers.values]
     Content-Type = "application/xml; charset=UTF-8"
     X-Content-Type-Options = "nosniff"
+
+[[headers]]
+  for = "/sitemap-en.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=UTF-8"
+    X-Content-Type-Options = "nosniff"
+
+[[headers]]
+  for = "/sitemap-fr.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=UTF-8"
+    X-Content-Type-Options = "nosniff"
