@@ -10,26 +10,6 @@ export const t = (lang: Lang) => ({
       lang === 'en'
         ? 'I build conversion-focused websites, full-stack apps, and AI automation workflows with n8n or no-code tools. Based in Marseille, working worldwide.'
         : 'Je conçois des websites orientés conversion, des applications full-stack et des workflows d\'automatisation IA avec n8n ou des outils no-code. Basé à Marseille, disponible partout.',
-    keywords:
-      lang === 'en'
-        ? [
-            'website developer',
-            'web application development',
-            'ai automation developer',
-            'n8n workflow integration',
-            'nocode automation',
-            'freelance fullstack developer',
-            'conversion focused website',
-          ]
-        : [
-            'developpeur website',
-            'developpement application web',
-            'automatisation IA',
-            'integration workflow n8n',
-            'automatisation no-code',
-            'developpeur fullstack freelance',
-            'site web orienté conversion',
-          ],
   },
   nav: {
     services: lang === 'en' ? 'Services' : 'Services',
@@ -96,10 +76,10 @@ export const t = (lang: Lang) => ({
     { value: '24h', label: lang === 'en' ? 'Average response time' : 'Délai moyen de réponse' },
   ],
   services: {
-    eyebrow: lang === 'en' ? 'What I build' : 'Ce que je construis',
+    eyebrow: lang === 'en' ? 'How I help' : 'Ce que je construis',
     title:
       lang === 'en'
-        ? 'Website, app, and AI workflows,\nbuilt with n8n + no-code.'
+        ? 'Four service tracks.\nOne growth system.'
         : 'Website, app et workflows IA,\navec n8n + no-code.',
   },
   work: {

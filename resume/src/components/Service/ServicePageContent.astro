@@ -1,0 +1,269 @@
+---
+import type { Lang } from '../../data/site-strings';
+import type { ServiceSlug } from '../../data/service-pages-data';
+import {
+  getRelatedServiceSlugs,
+  getServicePage,
+  getServicePath,
+} from '../../data/service-pages-data';
+
+interface Props {
+  lang?: Lang;
+  slug: ServiceSlug;
+}
+
+const { lang = 'en', slug } = Astro.props;
+const page = getServicePage(slug);
+const relatedSlugs = getRelatedServiceSlugs(slug);
+const homePath = lang === 'fr' ? '/fr/' : '/';
+const servicesPath = `${homePath}#services`;
+const contactPath = `${homePath}#contact`;
+const leadMagnetPath = `${homePath}#lead-magnet`;
+const workPath = `${homePath}#work`;
+---
+
+<section class="px-4 pt-32 pb-section bg-elevated">
+  <div class="mx-auto max-w-6xl">
+    <nav
+      aria-label={lang === 'fr' ? 'Fil d’ariane' : 'Breadcrumb'}
+      class="mb-6 text-xs font-mono uppercase tracking-widest text-muted"
+    >
+      <a href={homePath} class="hover:text-dark transition-colors duration-200">
+        {lang === 'fr' ? 'Accueil' : 'Home'}
+      </a>
+      <span class="px-2">/</span>
+      <a href={servicesPath} class="hover:text-dark transition-colors duration-200">
+        {lang === 'fr' ? 'Services' : 'Services'}
+      </a>
+      <span class="px-2">/</span>
+      <span class="text-dark">{page.label[lang]}</span>
+    </nav>
+
+    <div class="card-shell reveal">
+      <div class="card-core p-8 md:p-12">
+        <span class="eyebrow mb-5">
+          {lang === 'fr' ? 'Service dédié' : 'Dedicated service'}
+        </span>
+        <h1 class="font-display text-display-lg font-black text-dark whitespace-pre-line">
+          {page.h1[lang]}
+        </h1>
+        <p class="mt-5 text-base leading-relaxed text-muted md:text-lg">
+          {page.intro[lang]}
+        </p>
+
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href={contactPath} class="group btn-primary text-sm px-6 py-3">
+            {lang === 'fr' ? 'Parler du projet' : 'Discuss your project'}
+            <span class="btn-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+          </a>
+          <a href={leadMagnetPath} class="btn-ghost text-sm px-6 py-3">
+            {page.leadMagnetCtaLabel[lang]}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-3">
+      <article class="card-shell reveal lg:col-span-2" data-delay="60">
+        <div class="card-core h-full p-6 md:p-8">
+          <h2 class="font-display text-2xl font-bold text-dark">{page.offerTitle[lang]}</h2>
+          <ul class="mt-4 grid gap-2.5">
+            {page.offerItems[lang].map((item) => (
+              <li class="service-list-item">{item}</li>
+            ))}
+          </ul>
+        </div>
+      </article>
+
+      <article class="card-shell reveal" data-delay="120">
+        <div class="card-core h-full p-6 md:p-8">
+          <h2 class="font-display text-2xl font-bold text-dark">{page.outcomesTitle[lang]}</h2>
+          <ul class="mt-4 grid gap-2.5">
+            {page.outcomesItems[lang].map((item) => (
+              <li class="service-list-item">{item}</li>
+            ))}
+          </ul>
+        </div>
+      </article>
+    </div>
+
+    <div class="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
+      <article class="card-shell reveal" data-delay="180">
+        <div class="card-core h-full p-6 md:p-8">
+          <h2 class="font-display text-2xl font-bold text-dark">{page.processTitle[lang]}</h2>
+          <ol class="mt-4 grid gap-2.5">
+            {page.processSteps[lang].map((item, index) => (
+              <li class="service-list-item">
+                <span class="font-mono text-xs uppercase tracking-widest text-muted mr-2">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                {item}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </article>
+
+      <article class="card-shell reveal" data-delay="220">
+        <div class="card-core h-full p-6 md:p-8">
+          <h2 class="font-display text-2xl font-bold text-dark">{page.proofTitle[lang]}</h2>
+          <ul class="mt-4 grid gap-2.5">
+            {page.proofItems[lang].map((item) => (
+              <li class="service-list-item">{item}</li>
+            ))}
+          </ul>
+        </div>
+      </article>
+
+      <article class="card-shell reveal" data-delay="260">
+        <div class="card-core h-full p-6 md:p-8">
+          <h2 class="font-display text-2xl font-bold text-dark">
+            {lang === 'fr' ? 'Services liés' : 'Related services'}
+          </h2>
+          <p class="mt-3 text-sm leading-relaxed text-muted">
+            {lang === 'fr'
+              ? 'Renforcez votre delivery avec des services complémentaires.'
+              : 'Strengthen delivery with complementary service tracks.'}
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            {relatedSlugs.map((relatedSlug) => (
+              <a
+                href={getServicePath(relatedSlug, lang)}
+                class="inline-flex items-center rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-medium text-dark transition-colors duration-200 hover:bg-canvas"
+              >
+                {getServicePage(relatedSlug).label[lang]}
+              </a>
+            ))}
+          </div>
+          <a href={workPath} class="inline-flex mt-6 text-sm font-medium text-muted hover:text-dark transition-colors duration-200">
+            {lang === 'fr' ? 'Voir les projets livrés' : 'See delivered projects'}
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <div class="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <article class="card-shell reveal" data-delay="300">
+        <div class="card-core h-full p-6 md:p-8">
+          <h2 class="font-display text-2xl font-bold text-dark">{page.leadMagnetTitle[lang]}</h2>
+          <p class="mt-3 text-sm leading-relaxed text-muted md:text-base">
+            {page.leadMagnetSubtitle[lang]}
+          </p>
+          <h3 class="mt-5 font-display text-lg font-bold text-dark">
+            {page.leadMagnetDeliverablesTitle[lang]}
+          </h3>
+          <ul class="mt-3 grid gap-2.5">
+            {page.leadMagnetDeliverables[lang].map((item) => (
+              <li class="service-list-item">{item}</li>
+            ))}
+          </ul>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href={leadMagnetPath} class="group btn-primary text-sm px-6 py-3">
+              {page.leadMagnetCtaLabel[lang]}
+              <span class="btn-icon">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+            </a>
+            <a href={contactPath} class="btn-ghost text-sm px-6 py-3">
+              {lang === 'fr' ? 'Parler du besoin' : 'Discuss your needs'}
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card-shell reveal" data-delay="340">
+        <div class="card-core h-full p-6 md:p-8">
+          <h2 class="font-display text-2xl font-bold text-dark">{page.faqTitle[lang]}</h2>
+          <div class="mt-4 grid gap-3">
+            {page.faqItems[lang].map((item) => (
+              <details class="faq-item">
+                <summary class="faq-question">{item.question}</summary>
+                <p class="faq-answer">{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <article class="mt-4 card-shell reveal" data-delay="380">
+      <div class="card-core p-6 md:p-8">
+        <h2 class="font-display text-2xl font-bold text-dark">{page.finalCtaTitle[lang]}</h2>
+        <p class="mt-3 text-sm leading-relaxed text-muted md:text-base">
+          {page.finalCtaBody[lang]}
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href={contactPath} class="group btn-primary text-sm px-6 py-3">
+            {page.finalCtaPrimary[lang]}
+            <span class="btn-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+          </a>
+          <a href={servicesPath} class="btn-ghost text-sm px-6 py-3">
+            {page.finalCtaSecondary[lang]}
+          </a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  .service-list-item {
+    position: relative;
+    padding-left: 1rem;
+    color: #1f1e1b;
+    font-size: 0.96rem;
+    line-height: 1.55;
+  }
+
+  .service-list-item::before {
+    content: '';
+    position: absolute;
+    top: 0.55rem;
+    left: 0;
+    width: 0.38rem;
+    height: 0.38rem;
+    border-radius: 9999px;
+    background: rgba(12, 12, 10, 0.75);
+    box-shadow: 0 0 0 4px rgba(12, 12, 10, 0.08);
+  }
+
+  .faq-item {
+    border: 1px solid rgba(12, 12, 10, 0.08);
+    border-radius: 0.9rem;
+    background: #fff;
+    padding: 0.8rem 1rem;
+  }
+
+  .faq-item[open] {
+    border-color: rgba(12, 12, 10, 0.22);
+  }
+
+  .faq-question {
+    list-style: none;
+    cursor: pointer;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #1f1e1b;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-answer {
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #4f4d46;
+  }
+</style>

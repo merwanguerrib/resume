@@ -13,6 +13,11 @@ const copy = strings.notFound;
   lang={lang}
   title={copy.title}
   description={copy.description}
+  schemaPageType="notFound"
+  breadcrumbTrail={[
+    { name: lang === 'fr' ? 'Accueil' : 'Home', path: homeHref },
+    { name: '404', path: pathname },
+  ]}
 >
   <main class="relative min-h-[100dvh] overflow-hidden bg-canvas px-4 py-10 md:py-16">
     <div class="pointer-events-none absolute inset-0">

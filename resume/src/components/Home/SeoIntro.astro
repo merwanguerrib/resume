@@ -1,0 +1,39 @@
+---
+import type { Lang } from '../../data/site-strings';
+import { getServicePage, getServicePath, servicePageSlugs } from '../../data/service-pages-data';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+---
+
+<section class="px-4 pb-14 md:pb-20 bg-canvas">
+  <div class="mx-auto max-w-6xl">
+    <article class="card-shell reveal" data-delay="40">
+      <div class="card-core p-7 md:p-10">
+        <h2 class="font-display text-display-md font-black text-dark">
+          {lang === 'fr'
+            ? 'Partenaire technique à Marseille, orienté acquisition et exécution'
+            : 'Technical partner in Marseille for acquisition and execution'}
+        </h2>
+        <p class="mt-4 text-base leading-relaxed text-muted md:text-lg">
+          {lang === 'fr'
+            ? 'Basé à Marseille et actif avec des équipes partout en France et à l’international, je conçois des websites orientés conversion, des applications web full-stack et des systèmes d’automatisation IA connectés à vos opérations réelles. Depuis plus de 10 ans et 50+ missions livrées, j’interviens pour transformer des stacks dispersées en dispositifs cohérents: acquisition plus lisible, delivery plus rapide, décisions mieux outillées. Mon approche combine vision produit, UX, architecture technique, SEO/GEO et automatisation n8n pour créer des parcours qui génèrent des leads qualifiés et réduisent les frictions internes. Si votre website convertit mal, si vos équipes répètent trop de tâches manuelles, ou si votre roadmap ralentit, je peux structurer un sprint clair avec priorités, délais et impact mesurable.'
+            : 'Based in Marseille and working with teams across France and internationally, I build conversion-focused websites, full-stack web applications, and AI automation systems connected to real operations. Over 10+ years and 50+ delivered missions, I help teams move from fragmented stacks to consistent execution: clearer acquisition, faster delivery, and stronger decision support. My approach combines product thinking, UX, technical architecture, SEO/GEO, and n8n automation to create experiences that generate qualified leads while reducing internal friction. If your website under-converts, your team repeats too many manual tasks, or your roadmap is slowing down, I can structure a focused sprint with clear priorities, realistic timelines, and measurable impact from strategy to production.'}
+        </p>
+        <div class="mt-6 flex flex-wrap gap-2.5">
+          {servicePageSlugs.map((slug) => (
+            <a
+              href={getServicePath(slug, lang)}
+              class="inline-flex items-center rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-medium text-dark transition-colors duration-200 hover:bg-elevated"
+            >
+              {getServicePage(slug).label[lang]}
+            </a>
+          ))}
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Layout/Nav.astro';
 import Hero from '../../components/Home/Hero.astro';
+import SeoIntro from '../../components/Home/SeoIntro.astro';
 import ScrollShowcase from '../../components/Home/ScrollShowcase.astro';
 import Services from '../../components/Home/Services.astro';
 import LeadMagnet from '../../components/Home/LeadMagnet.astro';
@@ -19,12 +20,16 @@ const strings = t('fr');
   lang="fr"
   title={strings.seo.title}
   description={strings.seo.description}
-  keywords={strings.seo.keywords}
   faqItems={strings.faq.items}
+  schemaPageType="home"
+  breadcrumbTrail={[
+    { name: 'Accueil', path: '/fr/' },
+  ]}
 >
   <Nav lang="fr" />
   <main id="main-content">
     <Hero lang="fr" />
+    <SeoIntro lang="fr" />
     <ScrollShowcase lang="fr" />
     <Services lang="fr" />
     <LeadMagnet lang="fr" />

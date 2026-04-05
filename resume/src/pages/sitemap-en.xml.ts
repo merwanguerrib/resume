@@ -1,9 +1,10 @@
 import type { APIRoute } from 'astro';
-import { buildSitemapIndexXml } from '../lib/sitemap';
+import { buildSitemapUrlSetXml, getSitemapEntries } from '../lib/sitemap';
 
-export const GET: APIRoute = () => {
+export const GET: APIRoute = async () => {
   const lastmod = new Date().toISOString().split('T')[0];
-  const xml = buildSitemapIndexXml(lastmod);
+  const entries = await getSitemapEntries('en');
+  const xml = buildSitemapUrlSetXml(entries, lastmod);
 
   return new Response(xml, {
     headers: {

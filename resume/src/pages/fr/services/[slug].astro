@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Layout/Nav.astro';
+import Footer from '../../../components/Layout/Footer.astro';
+import ServicePageContent from '../../../components/Service/ServicePageContent.astro';
+import type { ServiceSlug } from '../../../data/service-pages-data';
+import {
+  getServicePage,
+  getServicePath,
+  servicePageSlugs,
+} from '../../../data/service-pages-data';
+
+export function getStaticPaths() {
+  return servicePageSlugs.map((slug) => ({
+    params: { slug },
+  }));
+}
+
+const { slug } = Astro.params as { slug: ServiceSlug };
+const page = getServicePage(slug);
+const enPath = getServicePath(slug, 'en');
+const frPath = getServicePath(slug, 'fr');
+---
+
+<BaseLayout
+  lang="fr"
+  title={page.seoTitle.fr}
+  description={page.seoDescription.fr}
+  faqItems={page.faqItems.fr}
+  schemaPageType="service"
+  serviceSchemaName={page.label.fr}
+  serviceSchemaDescription={page.seoDescription.fr}
+  breadcrumbTrail={[
+    { name: 'Accueil', path: '/fr/' },
+    { name: page.label.fr, path: frPath },
+  ]}
+  alternateEnPath={enPath}
+  alternateFrPath={frPath}
+  xDefaultPath={enPath}
+>
+  <Nav lang="fr" altHref={enPath} sectionBasePath="/fr/" />
+  <main id="main-content">
+    <ServicePageContent lang="fr" slug={slug} />
+  </main>
+  <Footer lang="fr" />
+</BaseLayout>

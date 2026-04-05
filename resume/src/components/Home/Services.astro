@@ -1,7 +1,12 @@
 ---
 import type { Lang } from '../../data/site-strings';
 import { t } from '../../data/site-strings';
-import { servicesData } from '../../data/services-data';
+import type { ServiceSlug } from '../../data/service-pages-data';
+import {
+  getServicePage,
+  getServicePath,
+  servicePageSlugs,
+} from '../../data/service-pages-data';
 
 interface Props {
   lang?: Lang;
@@ -10,215 +15,217 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 const strings = t(lang);
 
-const tones = {
-  sky: {
-    icon: 'bg-sky-100 text-sky-700',
-    chip: 'bg-sky-50 border-sky-200/80 text-sky-700',
-    glow: 'from-sky-400/30 via-sky-300/10 to-transparent',
-    panel: 'bg-sky-100/80 border-sky-200/80',
-    pulse: 'bg-sky-500',
-  },
-  emerald: {
-    icon: 'bg-emerald-100 text-emerald-700',
-    chip: 'bg-emerald-50 border-emerald-200/80 text-emerald-700',
-    glow: 'from-emerald-400/30 via-emerald-300/10 to-transparent',
-    panel: 'bg-emerald-100/80 border-emerald-200/80',
-    pulse: 'bg-emerald-500',
-  },
-  rose: {
-    icon: 'bg-rose-100 text-rose-700',
-    chip: 'bg-rose-50 border-rose-200/80 text-rose-700',
-    glow: 'from-rose-400/25 via-rose-300/10 to-transparent',
-    panel: 'bg-rose-100/80 border-rose-200/80',
-    pulse: 'bg-rose-500',
-  },
-  amber: {
-    icon: 'bg-amber-100 text-amber-700',
-    chip: 'bg-amber-50 border-amber-200/80 text-amber-700',
-    glow: 'from-amber-400/30 via-amber-300/10 to-transparent',
-    panel: 'bg-amber-100/80 border-amber-200/80',
-    pulse: 'bg-amber-500',
-  },
-  teal: {
-    icon: 'bg-teal-100 text-teal-700',
-    chip: 'bg-teal-50 border-teal-200/80 text-teal-700',
-    glow: 'from-teal-400/30 via-teal-300/10 to-transparent',
-    panel: 'bg-teal-100/80 border-teal-200/80',
-    pulse: 'bg-teal-500',
-  },
-  slate: {
-    icon: 'bg-slate-100 text-slate-700',
-    chip: 'bg-slate-50 border-slate-200/80 text-slate-700',
-    glow: 'from-slate-400/25 via-slate-300/10 to-transparent',
-    panel: 'bg-slate-100/80 border-slate-200/80',
-    pulse: 'bg-slate-500',
-  },
-  cyan: {
-    icon: 'bg-cyan-100 text-cyan-700',
-    chip: 'bg-cyan-50 border-cyan-200/80 text-cyan-700',
-    glow: 'from-cyan-400/30 via-cyan-300/10 to-transparent',
-    panel: 'bg-cyan-100/80 border-cyan-200/80',
-    pulse: 'bg-cyan-500',
-  },
-  lime: {
-    icon: 'bg-lime-100 text-lime-700',
-    chip: 'bg-lime-50 border-lime-200/80 text-lime-700',
-    glow: 'from-lime-400/30 via-lime-300/10 to-transparent',
-    panel: 'bg-lime-100/80 border-lime-200/80',
-    pulse: 'bg-lime-500',
-  },
-} as const;
+interface ServiceCardMeta {
+  slug: ServiceSlug;
+  eyebrow: { en: string; fr: string };
+  short: { en: string; fr: string };
+  outcomes: { en: string[]; fr: string[] };
+  cta: { en: string; fr: string };
+}
 
-const getTone = (tone: keyof typeof tones) => tones[tone] ?? tones.sky;
-
-const icons: Record<string, string> = {
-  browser:
-    '<svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="26" height="20" rx="3"/><line x1="3" y1="12" x2="29" y2="12"/><circle cx="8" cy="9" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="9" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="9" r="1" fill="currentColor" stroke="none"/></svg>',
-  'device-mobile':
-    '<svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="14" height="28" rx="3"/><line x1="14" y1="26" x2="18" y2="26"/></svg>',
-  palette:
-    '<svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4C9.4 4 4 9.4 4 16c0 5.5 4.5 8 8 8h1.5c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.4-.3-.4-.5-.9-.5-1.4 0-1.1.9-2 2-2H20c3.3 0 8-2.7 8-8 0-6.6-5.4-8-12-8z"/><circle cx="11" cy="14" r="1.5" fill="currentColor" stroke="none"/><circle cx="16" cy="10" r="1.5" fill="currentColor" stroke="none"/><circle cx="21" cy="14" r="1.5" fill="currentColor" stroke="none"/></svg>',
-  robot:
-    '<svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="12" width="24" height="16" rx="3"/><path d="M16 12V8"/><circle cx="16" cy="6" r="2"/><circle cx="11" cy="20" r="2"/><circle cx="21" cy="20" r="2"/><line x1="8" y1="24" x2="24" y2="24"/></svg>',
-  megaphone:
-    '<svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h4l12-7v18L9 16H5a2 2 0 01-2-2v-2a2 2 0 012-2z"/><path d="M9 16v7"/></svg>',
-  clipboard:
-    '<svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="6" width="16" height="22" rx="2"/><path d="M12 6V4h8v2"/><line x1="12" y1="14" x2="20" y2="14"/><line x1="12" y1="19" x2="17" y2="19"/></svg>',
-  chart:
-    '<svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="28" x2="28" y2="28"/><rect x="6" y="18" width="5" height="10"/><rect x="13" y="11" width="5" height="17"/><rect x="20" y="5" width="5" height="23"/></svg>',
-  search:
-    '<svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="14" r="9"/><line x1="21" y1="21" x2="28" y2="28"/></svg>',
+const cardMetaBySlug: Record<ServiceSlug, ServiceCardMeta> = {
+  website: {
+    slug: 'website',
+    eyebrow: {
+      en: 'Pipeline Growth',
+      fr: 'Acquisition & Conversion',
+    },
+    short: {
+      en: 'Turn your site into a pipeline with sharper positioning, search-ready structure, and pages built to convert qualified demand.',
+      fr: 'Construisez un website rapide et orienté conversion, avec un message clair, des fondations SEO solides et une structure qui transforme le trafic en leads qualifiés.',
+    },
+    outcomes: {
+      en: [
+        'Offer and messaging clarity',
+        'Conversion UX and page architecture',
+        'Technical SEO and schema foundations',
+        'Analytics-ready website delivery',
+      ],
+      fr: [
+        'Développement website',
+        'Design UI/UX',
+        'Contenu product marketing',
+        'Structure SEO/GEO',
+      ],
+    },
+    cta: {
+      en: 'Explore website growth service',
+      fr: 'Voir la page service website',
+    },
+  },
+  app: {
+    slug: 'app',
+    eyebrow: {
+      en: 'Product Velocity',
+      fr: 'Delivery Produit',
+    },
+    short: {
+      en: 'Ship product faster with a senior full-stack partner who can scope, build, and release features without stacking technical risk.',
+      fr: 'Livrez des features d\'applications web full-stack avec une architecture stable, une auth sécurisée et une delivery prévisible de la discovery à la production.',
+    },
+    outcomes: {
+      en: [
+        'Feature scoping with technical guardrails',
+        'Frontend + backend implementation',
+        'API, data model, and auth alignment',
+      ],
+      fr: [
+        'Support product management',
+        'Delivery frontend + backend',
+        'Alignement API et modèle de données',
+      ],
+    },
+    cta: {
+      en: 'Explore app delivery service',
+      fr: 'Voir la page service app',
+    },
+  },
+  'ai-automation': {
+    slug: 'ai-automation',
+    eyebrow: {
+      en: 'Operational AI',
+      fr: 'Opérations IA',
+    },
+    short: {
+      en: 'Automate repetitive workflows with AI systems connected to your stack so your team saves time and executes with fewer handoffs.',
+      fr: 'Automatisez les workflows répétitifs avec des systèmes IA connectés à votre stack, pour faire gagner du temps à votre équipe et accélérer les délais de réponse.',
+    },
+    outcomes: {
+      en: [
+        'AI integrations tied to business workflows',
+        'Lead qualification and support triage automation',
+        'Guardrails for quality and reliability',
+      ],
+      fr: [
+        'Intégration IA',
+        'Automatisation qualification leads',
+        'Accélération opérations marketing',
+      ],
+    },
+    cta: {
+      en: 'Explore AI automation service',
+      fr: 'Voir la page automatisation IA',
+    },
+  },
+  n8n: {
+    slug: 'n8n',
+    eyebrow: {
+      en: 'Workflow Reliability',
+      fr: 'Backbone Workflow',
+    },
+    short: {
+      en: 'Build reliable n8n workflows for CRM sync, routing, alerts, and cross-tool orchestration with proper monitoring and ownership.',
+      fr: 'Concevez des workflows n8n robustes pour la sync CRM, le routing, les alertes et l\'orchestration cross-tools avec ownership clair et monitoring fiable.',
+    },
+    outcomes: {
+      en: [
+        'n8n architecture standards and naming',
+        'Retries, fallbacks, and failure visibility',
+        'Automation stability at scale',
+      ],
+      fr: [
+        'Standards d\'architecture n8n',
+        'Gestion des retries et erreurs',
+        'Fiabilité opérationnelle à l\'échelle',
+      ],
+    },
+    cta: {
+      en: 'Explore n8n integration service',
+      fr: 'Voir la page service n8n',
+    },
+  },
 };
 
-const mainServices = servicesData.slice(0, 4);
-const secondaryServices = servicesData.slice(4);
-const aiTone = getTone(mainServices[3].tone);
+const orderedSlugs: ServiceSlug[] = ['website', 'app', 'ai-automation', 'n8n'];
+const cards = orderedSlugs.map((slug) => {
+  const page = getServicePage(slug);
+  const meta = cardMetaBySlug[slug];
+  return {
+    slug,
+    label: page.label[lang],
+    href: getServicePath(slug, lang),
+    eyebrow: meta.eyebrow[lang],
+    short: meta.short[lang],
+    outcomes: meta.outcomes[lang],
+    cta: meta.cta[lang],
+  };
+});
 ---
 
 <section id="services" class="pt-12 md:pt-16 pb-section px-4 overflow-hidden bg-white">
   <div class="mx-auto max-w-6xl">
-    <div class="mb-20 reveal">
+    <div class="mb-14 reveal">
       <span class="eyebrow mb-5">{strings.services.eyebrow}</span>
       <h2 class="mt-5 whitespace-pre-line font-display text-display-lg font-black text-dark">
         {strings.services.title}
       </h2>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-muted md:text-lg">
+        {lang === 'fr'
+          ? 'Chaque carte ci-dessous correspond à une page service dédiée, avec une offre claire, une FAQ ciblée et un parcours de conversion cohérent.'
+          : 'Each card leads to a dedicated service page with offer scope, targeted FAQ, and a clear next step.'}
+      </p>
     </div>
 
-    <div class="grid auto-rows-auto grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-      <div class="reveal card-shell group cursor-default service-card lg:col-span-2" data-delay="0">
-        <div class="card-core relative flex h-full flex-col gap-6 overflow-hidden p-8 transition-all duration-500 group-hover:shadow-card-hover">
-          <div class={`pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-gradient-to-br blur-2xl ${getTone(mainServices[0].tone).glow}`}></div>
-          <div class="relative flex items-start justify-between gap-4">
-            <div class={`flex h-12 w-12 items-center justify-center rounded-2xl ${getTone(mainServices[0].tone).icon}`}>
-              <Fragment set:html={icons[mainServices[0].icon]} />
-            </div>
-            <div class="flex flex-wrap justify-end gap-1.5">
-              {mainServices[0].tags.map((tag) => (
-                <span class={`rounded-md border px-2 py-1 font-mono text-[10px] ${getTone(mainServices[0].tone).chip}`}>
-                  {tag}
-                </span>
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      {cards.map((card, index) => (
+        <a
+          href={card.href}
+          class="reveal card-shell group service-card block focus:outline-none focus-visible:ring-2 focus-visible:ring-dark/20"
+          data-delay={String(index * 80)}
+        >
+          <div class="card-core flex h-full flex-col p-7 md:p-8">
+            <span class="font-mono text-[10px] uppercase tracking-[0.15em] text-muted">{card.eyebrow}</span>
+            <h3 class="service-title mt-3">{card.label}</h3>
+            <p class="service-copy mt-3">{card.short}</p>
+
+            <ul class="mt-5 grid gap-2">
+              {card.outcomes.map((item) => (
+                <li class="service-list-item">{item}</li>
               ))}
-            </div>
-          </div>
-          <div class="relative">
-            <h3 class="service-title mb-2">{mainServices[0].title[lang]}</h3>
-            <p class="service-copy">{mainServices[0].description[lang]}</p>
-          </div>
-        </div>
-      </div>
+            </ul>
 
-      <div class="reveal card-shell group cursor-default service-card" data-delay="100">
-        <div class="card-core relative flex h-full flex-col gap-5 overflow-hidden p-7 transition-shadow duration-500 group-hover:shadow-card-hover">
-          <div class={`pointer-events-none absolute -right-14 -top-14 h-36 w-36 rounded-full bg-gradient-to-br blur-2xl ${getTone(mainServices[1].tone).glow}`}></div>
-          <div class={`relative flex h-12 w-12 items-center justify-center rounded-2xl ${getTone(mainServices[1].tone).icon}`}>
-            <Fragment set:html={icons[mainServices[1].icon]} />
+            <span class="service-cta mt-6 inline-flex items-center gap-2 text-sm font-semibold text-dark">
+              {card.cta}
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M3 11L11 3M11 3H5.5M11 3V8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
           </div>
-          <div class="relative">
-            <h3 class="service-title mb-2">{mainServices[1].title[lang]}</h3>
-            <p class="service-copy">{mainServices[1].description[lang]}</p>
-          </div>
-          <div class="relative mt-auto flex flex-wrap gap-1.5">
-            {mainServices[1].tags.map((tag) => (
-              <span class={`rounded-md border px-2 py-1 font-mono text-[10px] ${getTone(mainServices[1].tone).chip}`}>
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
+        </a>
+      ))}
+    </div>
 
-      <div class="reveal card-shell group cursor-default service-card" data-delay="150">
-        <div class="card-core relative flex h-full flex-col gap-4 overflow-hidden p-7 transition-shadow duration-500 group-hover:shadow-card-hover">
-          <div class={`pointer-events-none absolute -right-14 -top-14 h-36 w-36 rounded-full bg-gradient-to-br blur-2xl ${getTone(mainServices[2].tone).glow}`}></div>
-          <div class={`relative flex h-12 w-12 items-center justify-center rounded-2xl ${getTone(mainServices[2].tone).icon}`}>
-            <Fragment set:html={icons[mainServices[2].icon]} />
-          </div>
-          <div class="relative">
-            <h3 class="service-title mb-2">{mainServices[2].title[lang]}</h3>
-            <p class="service-copy">{mainServices[2].description[lang]}</p>
-          </div>
-          <div class="relative mt-auto flex flex-wrap gap-1.5">
-            {mainServices[2].tags.map((tag) => (
-              <span class={`rounded-md border px-2 py-1 font-mono text-[10px] ${getTone(mainServices[2].tone).chip}`}>
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div class="reveal card-shell group cursor-default lg:col-span-2" data-delay="200">
-        <div class="card-core relative flex h-full flex-col items-start gap-6 overflow-hidden p-7 transition-shadow duration-500 group-hover:shadow-card-hover md:flex-row">
-          <div class={`pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-gradient-to-br blur-2xl ${aiTone.glow}`}></div>
-          <div class={`relative flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${aiTone.icon}`}>
-            <Fragment set:html={icons[mainServices[3].icon]} />
-          </div>
-          <div class="relative flex-1">
-            <h3 class="service-title mb-2">{mainServices[3].title[lang]}</h3>
-            <p class="service-copy mb-4">{mainServices[3].description[lang]}</p>
-            <div class="flex flex-wrap gap-1.5">
-              {mainServices[3].tags.map((tag) => (
-                <span class={`rounded-md border px-2 py-1 font-mono text-[10px] ${aiTone.chip}`}>
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div class={`hidden shrink-0 items-center gap-2 rounded-2xl border px-4 py-3 md:flex ${aiTone.panel}`}>
-            <span class={`h-2.5 w-2.5 rounded-full animate-pulse ${aiTone.pulse}`}></span>
-            <span class="font-mono text-[10px] uppercase tracking-wider text-dark">live workflows</span>
+    <div class="mt-8 reveal" data-delay="380">
+      <div class="card-shell">
+        <div class="card-core p-5 md:p-6">
+          <p class="text-sm font-medium text-muted">
+            {lang === 'fr'
+              ? 'Besoin d\'un diagnostic rapide avant de choisir le bon service ?'
+              : 'Not sure where to start? Get a fast diagnostic and prioritized plan.'}
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2.5">
+            <a href={lang === 'fr' ? '/fr/#lead-magnet' : '/#lead-magnet'} class="btn-primary text-sm px-5 py-3">
+              {lang === 'fr' ? 'Recevoir l\'audit gratuit' : 'Get the free diagnostic'}
+            </a>
+            <a href={lang === 'fr' ? '/fr/#contact' : '/#contact'} class="btn-ghost text-sm px-5 py-3">
+              {lang === 'fr' ? 'Parler de votre projet' : 'Discuss your project scope'}
+            </a>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {secondaryServices.map((service, index) => {
-        const tone = getTone(service.tone);
-        const isWide = index === 0 || index === 3;
-        return (
-          <div
-            class={`reveal card-shell group cursor-default service-card ${isWide ? 'lg:col-span-2' : ''}`}
-            data-delay={String(80 + index * 80)}
+    <div class="mt-6 reveal" data-delay="440">
+      <div class="flex flex-wrap gap-2">
+        {servicePageSlugs.map((slug) => (
+          <a
+            href={getServicePath(slug, lang)}
+            class="inline-flex items-center rounded-full border border-black/10 bg-canvas px-4 py-2 text-sm font-medium text-dark transition-colors duration-200 hover:bg-white"
           >
-            <div class="card-core relative flex h-full flex-col gap-4 overflow-hidden p-6 transition-shadow duration-500 group-hover:shadow-card-hover">
-              <div class={`pointer-events-none absolute -right-14 -top-14 h-36 w-36 rounded-full bg-gradient-to-br blur-2xl ${tone.glow}`}></div>
-              <div class={`relative flex h-10 w-10 items-center justify-center rounded-xl ${tone.icon}`}>
-                <Fragment set:html={icons[service.icon]} />
-              </div>
-              <div class="relative">
-                <h3 class="service-title mb-1.5">{service.title[lang]}</h3>
-                <p class="service-copy">{service.description[lang]}</p>
-              </div>
-              <div class="relative mt-auto flex flex-wrap gap-1.5">
-                {service.tags.map((tag) => (
-                  <span class={`rounded-md border px-2 py-1 font-mono text-[10px] ${tone.chip}`}>{tag}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        );
-      })}
+            {getServicePage(slug).label[lang]}
+          </a>
+        ))}
+      </div>
     </div>
   </div>
 </section>
@@ -239,8 +246,28 @@ const aiTone = getTone(mainServices[3].tone);
     color: #6d6962;
   }
 
+  .service-list-item {
+    position: relative;
+    padding-left: 1rem;
+    color: #1f1e1b;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .service-list-item::before {
+    content: '';
+    position: absolute;
+    top: 0.5rem;
+    left: 0;
+    width: 0.36rem;
+    height: 0.36rem;
+    border-radius: 9999px;
+    background: rgba(12, 12, 10, 0.75);
+    box-shadow: 0 0 0 4px rgba(12, 12, 10, 0.08);
+  }
+
   .service-card {
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .service-card:hover {
@@ -248,20 +275,15 @@ const aiTone = getTone(mainServices[3].tone);
   }
 
   .service-card .card-core {
-    transition: box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .service-card:hover .card-core {
-    box-shadow: 0 2px 4px rgba(12, 12, 10, 0.06), 0 16px 40px rgba(12, 12, 10, 0.1);
+    box-shadow: 0 2px 4px rgba(12, 12, 10, 0.06), 0 14px 36px rgba(12, 12, 10, 0.1);
+  }
+
+  .service-card:hover .service-cta {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 </style>
-
-<script>
-  document.querySelectorAll<HTMLElement>('#services .card-shell').forEach((card) => {
-    card.addEventListener('mousemove', (e: MouseEvent) => {
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-      card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-    });
-  });
-</script>

@@ -4,12 +4,19 @@ import { t } from '../../data/site-strings';
 
 interface Props {
   lang?: Lang;
+  altHref?: string;
+  sectionBasePath?: string;
 }
 
-const { lang = 'en' } = Astro.props;
+const { lang = 'en', altHref, sectionBasePath = '' } = Astro.props;
 const strings = t(lang);
 const altLang = lang === 'en' ? 'FR' : 'EN';
-const altHref = lang === 'en' ? '/fr/' : '/';
+const computedAltHref = altHref ?? (lang === 'en' ? '/fr/' : '/');
+const sectionPrefix = sectionBasePath || '';
+const servicesHref = `${sectionPrefix}#services`;
+const workHref = `${sectionPrefix}#work`;
+const aboutHref = `${sectionPrefix}#about`;
+const leadMagnetHref = `${sectionPrefix}#lead-magnet`;
 ---
 
 <header class="fixed top-0 left-0 right-0 z-40 flex justify-center pt-5 px-4">
@@ -27,19 +34,19 @@ const altHref = lang === 'en' ? '/fr/' : '/';
     </a>
 
     <!-- Nav links -->
-    <a href="#services" class="hidden md:block px-4 py-2 text-sm font-medium text-muted hover:text-ink rounded-full hover:bg-elevated transition-all duration-200 whitespace-nowrap">
+    <a href={servicesHref} class="hidden md:block px-4 py-2 text-sm font-medium text-muted hover:text-ink rounded-full hover:bg-elevated transition-all duration-200 whitespace-nowrap">
       {strings.nav.services}
     </a>
-    <a href="#work" class="hidden md:block px-4 py-2 text-sm font-medium text-muted hover:text-ink rounded-full hover:bg-elevated transition-all duration-200 whitespace-nowrap">
+    <a href={workHref} class="hidden md:block px-4 py-2 text-sm font-medium text-muted hover:text-ink rounded-full hover:bg-elevated transition-all duration-200 whitespace-nowrap">
       {strings.nav.work}
     </a>
-    <a href="#about" class="hidden md:block px-4 py-2 text-sm font-medium text-muted hover:text-ink rounded-full hover:bg-elevated transition-all duration-200 whitespace-nowrap">
+    <a href={aboutHref} class="hidden md:block px-4 py-2 text-sm font-medium text-muted hover:text-ink rounded-full hover:bg-elevated transition-all duration-200 whitespace-nowrap">
       {strings.nav.about}
     </a>
 
     <!-- Lang toggle -->
     <a
-      href={altHref}
+      href={computedAltHref}
       class="px-3 py-2 text-xs font-mono font-medium text-muted hover:text-ink rounded-full hover:bg-elevated transition-all duration-200 border border-transparent hover:border-black/8"
     >
       {altLang}
@@ -47,7 +54,7 @@ const altHref = lang === 'en' ? '/fr/' : '/';
 
     <!-- CTA -->
     <a
-      href="#lead-magnet"
+      href={leadMagnetHref}
       class="group btn-primary text-sm px-5 py-2.5 whitespace-nowrap shrink-0"
     >
       {strings.nav.contact}

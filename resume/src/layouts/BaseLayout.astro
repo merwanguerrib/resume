@@ -1,26 +1,51 @@
 ---
 import '../styles/global.css';
 import type { Lang } from '../data/site-strings';
+import {
+  getServicePage,
+  getServicePath,
+  servicePageSlugs,
+  type ServiceSlug,
+} from '../data/service-pages-data';
 
 interface FaqItem {
   question: string;
   answer: string;
 }
 
+interface BreadcrumbTrailItem {
+  name: string;
+  path: string;
+}
+
+type SchemaPageType = 'home' | 'service' | 'notFound' | 'generic';
+
 interface Props {
   title?: string;
   description?: string;
-  keywords?: string[];
   faqItems?: FaqItem[];
   lang?: Lang;
+  alternateEnPath?: string;
+  alternateFrPath?: string;
+  xDefaultPath?: string;
+  schemaPageType?: SchemaPageType;
+  serviceSchemaName?: string;
+  serviceSchemaDescription?: string;
+  breadcrumbTrail?: BreadcrumbTrailItem[];
 }
 
 const {
   title = 'Merwan Guerrib — Just dev it.',
   description,
-  keywords = [],
   faqItems = [],
   lang = 'en',
+  alternateEnPath,
+  alternateFrPath,
+  xDefaultPath,
+  schemaPageType = 'generic',
+  serviceSchemaName,
+  serviceSchemaDescription,
+  breadcrumbTrail = [],
 } = Astro.props;
 
 const defaultDescription =
@@ -33,8 +58,13 @@ const pageDescription = description ?? defaultDescription;
 const siteUrl = 'https://merwanguerrib.com';
 const canonicalPath = Astro.url?.pathname ?? (lang === 'fr' ? '/fr/' : '/');
 const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
-const enUrl = new URL('/', siteUrl).toString();
-const frUrl = new URL('/fr/', siteUrl).toString();
+const toAbsoluteUrl = (path: string) =>
+  path.startsWith('http://') || path.startsWith('https://')
+    ? path
+    : new URL(path.startsWith('/') ? path : `/${path}`, siteUrl).toString();
+const enUrl = toAbsoluteUrl(alternateEnPath ?? '/');
+const frUrl = toAbsoluteUrl(alternateFrPath ?? '/fr/');
+const xDefaultUrl = toAbsoluteUrl(xDefaultPath ?? alternateEnPath ?? '/');
 const logoImage = new URL('/merwan-photo.png', siteUrl).toString();
 const ogImagePath = lang === 'fr' ? '/justdevit_fr.png' : '/justdevit_en.png';
 const ogImage = new URL(ogImagePath, siteUrl).toString();
@@ -44,73 +74,91 @@ const ogImageAlt =
   lang === 'fr'
     ? 'Aperçu de la page d’accueil Just dev it en français'
     : 'Preview of the Just dev it English homepage';
-const robotsContent = 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1';
-const keywordsContent = keywords.join(', ');
+const robotsContent =
+  schemaPageType === 'notFound'
+    ? 'noindex,nofollow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'
+    : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1';
 const websiteId = `${siteUrl}#website`;
 const organizationId = `${siteUrl}#organization`;
 const personId = `${siteUrl}#person`;
-const serviceId = `${siteUrl}#professional-service`;
 const localBusinessId = `${siteUrl}#local-business`;
 const webPageId = `${canonicalUrl}#webpage`;
 const breadcrumbId = `${canonicalUrl}#breadcrumb`;
 const faqId = `${canonicalUrl}#faq`;
+const currentServiceId = `${canonicalUrl}#service`;
 const inLanguage = lang === 'fr' ? 'fr-FR' : 'en-US';
 const alternateOgLocale = lang === 'fr' ? 'en_US' : 'fr_FR';
 const marseilleLat = 43.2965;
 const marseilleLng = 5.3698;
-const knownLanguages = ['en-US', 'fr-FR'];
+const contactUrl = toAbsoluteUrl(lang === 'fr' ? '/fr/#contact' : '/#contact');
+const isServiceSlug = (value: string): value is ServiceSlug =>
+  servicePageSlugs.includes(value as ServiceSlug);
+const servicePathMatch = canonicalPath.match(/^\/(?:fr\/)?services\/([^/]+)\/?$/);
+const currentServiceSlug =
+  servicePathMatch && isServiceSlug(servicePathMatch[1]) ? servicePathMatch[1] : null;
+
+const serviceCatalogEntries = servicePageSlugs.map((slug) => {
+  const page = getServicePage(slug);
+  const localizedPath = getServicePath(slug, lang);
+  const localizedUrl = toAbsoluteUrl(localizedPath);
+  const alternatePath = getServicePath(slug, lang === 'fr' ? 'en' : 'fr');
+  const alternateUrl = toAbsoluteUrl(alternatePath);
+  return {
+    slug,
+    name: page.label[lang],
+    headline: page.h1[lang],
+    description: page.seoDescription[lang],
+    url: localizedUrl,
+    alternateUrl,
+    id: `${localizedUrl}#service`,
+  };
+});
+const serviceCatalogBySlug = new Map(serviceCatalogEntries.map((entry) => [entry.slug, entry]));
+const currentServiceEntry =
+  currentServiceSlug ? (serviceCatalogBySlug.get(currentServiceSlug) ?? null) : null;
 
 const offeredServices =
-  lang === 'fr'
-    ? [
-        'Développement de websites orientés conversion',
-        'Développement d\'applications web full-stack',
-        'Automatisation IA',
-        'Intégration de workflows n8n',
-        'Automatisation no-code',
-        'Optimisation SEO et GEO',
-      ]
-    : [
-        'Conversion-focused website development',
-        'Full-stack web application development',
-        'AI automation development',
-        'n8n workflow integration',
-        'No-code automation',
-        'SEO and GEO optimization',
-      ];
+  serviceCatalogEntries.map((entry) => entry.name);
 
 const serviceCatalogGroups =
   lang === 'fr'
     ? [
         {
-          name: 'Websites orientés conversion & applications full-stack',
-          items: offeredServices.slice(0, 2),
+          name: 'Websites orientes conversion et applications full-stack',
+          slugs: ['website', 'app'],
         },
         {
-          name: 'Automatisation IA, workflows n8n & optimisation SEO/GEO',
-          items: offeredServices.slice(2),
+          name: 'Automatisation IA et workflows n8n',
+          slugs: ['ai-automation', 'n8n'],
         },
       ]
     : [
         {
-          name: 'Conversion-focused websites & full-stack web apps',
-          items: offeredServices.slice(0, 2),
+          name: 'Conversion websites and product engineering',
+          slugs: ['website', 'app'],
         },
         {
-          name: 'AI automation, n8n workflows & SEO/GEO optimization',
-          items: offeredServices.slice(2),
+          name: 'AI automation and n8n workflow systems',
+          slugs: ['ai-automation', 'n8n'],
         },
       ];
 
-const breadcrumbItems =
-  [
-    {
-      '@type': 'ListItem',
-      position: 1,
-      name: lang === 'fr' ? 'Accueil' : 'Home',
-      item: lang === 'fr' ? frUrl : enUrl,
-    },
-  ];
+const defaultBreadcrumbTrail: BreadcrumbTrailItem[] = [
+  {
+    name: lang === 'fr' ? 'Accueil' : 'Home',
+    path: lang === 'fr' ? '/fr/' : '/',
+  },
+];
+
+const resolvedBreadcrumbTrail =
+  breadcrumbTrail.length > 0 ? breadcrumbTrail : defaultBreadcrumbTrail;
+
+const breadcrumbItems = resolvedBreadcrumbTrail.map((entry, index) => ({
+  '@type': 'ListItem',
+  position: index + 1,
+  name: entry.name,
+  item: toAbsoluteUrl(entry.path),
+}));
 
 const languageSchema = [
   {
@@ -226,25 +274,61 @@ const primaryServiceSchema = {
     itemListElement: serviceCatalogGroups.map((group) => ({
       '@type': 'OfferCatalog',
       name: group.name,
-      itemListElement: group.items.map((serviceName) => ({
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: serviceName,
-          provider: {
-            '@id': organizationId,
+      itemListElement: group.slugs
+        .map((groupSlug) => serviceCatalogBySlug.get(groupSlug as ServiceSlug))
+        .filter(Boolean)
+        .map((entry) => ({
+          '@type': 'Offer',
+          url: entry.url,
+          itemOffered: {
+            '@id': entry.id,
           },
-          areaServed: 'Worldwide',
-        },
-      })),
+        })),
     })),
   },
   availableChannel: {
     '@type': 'ServiceChannel',
-    serviceUrl: `${canonicalUrl}#contact`,
+    serviceUrl: contactUrl,
     availableLanguage: languageRefs,
   },
 };
+
+const currentServiceSchema =
+  schemaPageType === 'service'
+    ? {
+        '@type': 'Service',
+        '@id': currentServiceId,
+        name: serviceSchemaName ?? currentServiceEntry?.headline ?? title,
+        serviceType: currentServiceEntry?.name,
+        description: serviceSchemaDescription ?? currentServiceEntry?.description ?? pageDescription,
+        url: canonicalUrl,
+        provider: {
+          '@id': organizationId,
+        },
+        areaServed: 'Worldwide',
+        availableChannel: {
+          '@type': 'ServiceChannel',
+          serviceUrl: contactUrl,
+          availableLanguage: languageRefs,
+        },
+        isRelatedTo: {
+          '@id': primaryServiceId,
+        },
+        ...(currentServiceEntry
+          ? {
+              sameAs: currentServiceEntry.alternateUrl,
+            }
+          : {}),
+      }
+    : null;
+
+const webPageAbout = [
+  { '@id': personId },
+  { '@id': organizationId },
+  { '@id': localBusinessId },
+  ...(schemaPageType === 'home' ? [{ '@id': primaryServiceId }] : []),
+  ...(currentServiceSchema ? [{ '@id': currentServiceId }] : []),
+];
 
 const webPageSchema = {
   '@type': 'WebPage',
@@ -256,12 +340,7 @@ const webPageSchema = {
   isPartOf: {
     '@id': websiteId,
   },
-  about: [
-    { '@id': personId },
-    { '@id': organizationId },
-    { '@id': primaryServiceId },
-    { '@id': localBusinessId },
-  ],
+  about: webPageAbout,
   breadcrumb: {
     '@id': breadcrumbId,
   },
@@ -307,14 +386,23 @@ const websiteSchema = {
   },
 };
 
-const structuredServicesSchema = offeredServices.map((serviceName, index) => ({
+const structuredServicesSchema = serviceCatalogEntries.map((entry) => ({
   '@type': 'Service',
-  '@id': `${siteUrl}#service-${index + 1}-${lang}`,
-  name: serviceName,
+  '@id': entry.id,
+  name: entry.headline,
+  serviceType: entry.name,
+  description: entry.description,
+  url: entry.url,
   provider: {
     '@id': organizationId,
   },
   areaServed: 'Worldwide',
+  availableChannel: {
+    '@type': 'ServiceChannel',
+    serviceUrl: contactUrl,
+    availableLanguage: languageRefs,
+  },
+  sameAs: entry.alternateUrl,
   isRelatedTo: {
     '@id': primaryServiceId,
   },
@@ -329,8 +417,8 @@ const schemaGraph = {
     websiteSchema,
     webPageSchema,
     breadcrumbSchema,
-    primaryServiceSchema,
-    ...structuredServicesSchema,
+    ...(schemaPageType === 'home' ? [primaryServiceSchema, ...structuredServicesSchema] : []),
+    currentServiceSchema,
     ...languageSchema,
     faqSchema,
   ].filter(Boolean),
@@ -346,7 +434,6 @@ const schemaGraph = {
     <meta name="description" content={pageDescription} />
     <meta http-equiv="content-language" content={inLanguage} />
     <meta name="language" content={inLanguage} />
-    {keywordsContent && <meta name="keywords" content={keywordsContent} />}
     <meta name="robots" content={robotsContent} />
     <meta name="geo.region" content="FR-13" />
     <meta name="geo.placename" content="Marseille" />
@@ -356,7 +443,7 @@ const schemaGraph = {
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" hreflang="en" href={enUrl} />
     <link rel="alternate" hreflang="fr" href={frUrl} />
-    <link rel="alternate" hreflang="x-default" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
