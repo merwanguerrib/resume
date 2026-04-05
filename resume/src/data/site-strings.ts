@@ -77,6 +77,10 @@ export const t = (lang: Lang) => ({
   },
   hero: {
     available: lang === 'en' ? 'Available for new projects' : 'Disponible pour de nouveaux projets',
+    seoH1:
+      lang === 'en'
+        ? 'Freelance Full-Stack Developer in Marseille'
+        : 'Développeur Full-Stack à Marseille',
     tagline: 'Just dev it.',
     subtitle:
       lang === 'en'

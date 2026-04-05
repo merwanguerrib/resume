@@ -58,6 +58,49 @@ function createFinding(level, code, message, path) {
   return { level, code, message, path };
 }
 
+function collectTypes(node, output) {
+  if (Array.isArray(node)) {
+    node.forEach((item) => collectTypes(item, output));
+    return;
+  }
+
+  if (!node || typeof node !== 'object') return;
+
+  toTypeList(node).forEach((type) => output.add(type));
+
+  for (const value of Object.values(node)) {
+    collectTypes(value, output);
+  }
+}
+
+function ensureCoreTypes(types, findings) {
+  const requiredTypes = ['Organization', 'Person', 'WebSite', 'WebPage', 'BreadcrumbList', 'Service'];
+
+  requiredTypes.forEach((type) => {
+    if (!types.has(type)) {
+      findings.push(
+        createFinding(
+          'error',
+          `MISSING_TYPE_${type.toUpperCase()}`,
+          `Expected schema type "${type}" is missing from JSON-LD.`,
+          'jsonld'
+        )
+      );
+    }
+  });
+
+  if (!types.has('FAQPage')) {
+    findings.push(
+      createFinding(
+        'warning',
+        'MISSING_TYPE_FAQPAGE',
+        'FAQPage not found in JSON-LD. If this page contains FAQ content, add FAQPage markup.',
+        'jsonld'
+      )
+    );
+  }
+}
+
 function traverseSchemaNode(node, path, findings) {
   if (Array.isArray(node)) {
     node.forEach((item, index) => traverseSchemaNode(item, `${path}[${index}]`, findings));
@@ -205,10 +248,12 @@ async function validateUrl(url, withRemote) {
   const html = await htmlRes.text();
   const jsonLdBlocks = extractJsonLdBlocks(html);
   const findings = [];
+  const types = new Set();
 
   jsonLdBlocks.forEach((raw, index) => {
     try {
       const parsed = JSON.parse(raw);
+      collectTypes(parsed, types);
       traverseSchemaNode(parsed, `jsonld[${index}]`, findings);
     } catch (error) {
       findings.push(
@@ -222,6 +267,8 @@ async function validateUrl(url, withRemote) {
     }
   });
 
+  ensureCoreTypes(types, findings);
+
   const errors = findings.filter((f) => f.level === 'error');
   const warnings = findings.filter((f) => f.level === 'warning');
   const remote = withRemote ? await tryRemoteValidation(url) : null;
@@ -229,6 +276,7 @@ async function validateUrl(url, withRemote) {
   return {
     url,
     blocks: jsonLdBlocks.length,
+    types: [...types].sort(),
     errors,
     warnings,
     remote,
@@ -265,6 +313,7 @@ async function main() {
 
     console.log(`\nURL: ${url}`);
     console.log(`JSON-LD blocks: ${result.blocks}`);
+    console.log(`Detected local types: ${result.types.join(', ')}`);
     console.log(`Local errors: ${result.errors.length}`);
     console.log(`Local warnings: ${result.warnings.length}`);
 
