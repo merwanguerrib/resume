@@ -35,7 +35,15 @@ const canonicalPath = Astro.url?.pathname ?? (lang === 'fr' ? '/fr/' : '/');
 const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
 const enUrl = new URL('/', siteUrl).toString();
 const frUrl = new URL('/fr/', siteUrl).toString();
-const ogImage = new URL('/merwan-photo.png', siteUrl).toString();
+const logoImage = new URL('/merwan-photo.png', siteUrl).toString();
+const ogImagePath = lang === 'fr' ? '/justdevit_fr.png' : '/justdevit_en.png';
+const ogImage = new URL(ogImagePath, siteUrl).toString();
+const ogImageWidth = lang === 'fr' ? '1521' : '1408';
+const ogImageHeight = lang === 'fr' ? '704' : '736';
+const ogImageAlt =
+  lang === 'fr'
+    ? 'Aperçu de la page d’accueil Just dev it en français'
+    : 'Preview of the Just dev it English homepage';
 const robotsContent = 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1';
 const keywordsContent = keywords.join(', ');
 const websiteId = `${siteUrl}#website`;
@@ -138,7 +146,7 @@ const organizationSchema = {
   '@id': organizationId,
   name: 'Merwan Guerrib',
   url: siteUrl,
-  logo: ogImage,
+  logo: logoImage,
   knowsLanguage: knownLanguages,
   sameAs: personSchema.sameAs,
   address: {
@@ -163,7 +171,7 @@ const localBusinessSchema = {
   '@id': localBusinessId,
   name: 'Merwan Guerrib',
   url: siteUrl,
-  image: ogImage,
+  image: logoImage,
   description: pageDescription,
   email: 'merwanguerrib@gmail.com',
   priceRange: '€€',
@@ -211,7 +219,7 @@ const professionalServiceSchema = {
   name: 'Merwan Guerrib',
   url: siteUrl,
   description: pageDescription,
-  image: ogImage,
+  image: logoImage,
   areaServed: 'Worldwide',
   provider: {
     '@id': personId,
@@ -325,20 +333,17 @@ const structuredServicesSchema = offeredServices.map((serviceName, index) => ({
   areaServed: 'Worldwide',
 }));
 
-const schemaGraph = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    organizationSchema,
-    personSchema,
-    localBusinessSchema,
-    websiteSchema,
-    webPageSchema,
-    breadcrumbSchema,
-    professionalServiceSchema,
-    ...structuredServicesSchema,
-    faqSchema,
-  ].filter(Boolean),
-};
+const schemaNodes = [
+  organizationSchema,
+  personSchema,
+  localBusinessSchema,
+  websiteSchema,
+  webPageSchema,
+  breadcrumbSchema,
+  professionalServiceSchema,
+  ...structuredServicesSchema,
+  faqSchema,
+].filter(Boolean);
 ---
 
 <!doctype html>
@@ -386,6 +391,11 @@ const schemaGraph = {
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:secure_url" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content={ogImageWidth} />
+    <meta property="og:image:height" content={ogImageHeight} />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta property="og:site_name" content="Merwan Guerrib" />
     <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
     <meta property="og:locale:alternate" content={alternateOgLocale} />
@@ -393,7 +403,12 @@ const schemaGraph = {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:image" content={ogImage} />
-    <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+    {
+      schemaNodes.map((node) => (
+        <script type="application/ld+json" set:html={JSON.stringify(node)} />
+      ))
+    }
   </head>
   <body class="bg-canvas">
     <div class="grain-overlay" aria-hidden="true"></div>
