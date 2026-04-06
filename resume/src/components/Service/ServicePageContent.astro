@@ -17,12 +17,64 @@ const page = getServicePage(slug);
 const relatedSlugs = getRelatedServiceSlugs(slug);
 const homePath = lang === 'fr' ? '/fr/' : '/';
 const servicesPath = `${homePath}#services`;
-const contactPath = `${homePath}#contact`;
-const leadMagnetPath = `${homePath}#lead-magnet`;
+const serviceLeadPath = '#service-lead-magnet';
 const workPath = `${homePath}#work`;
+const formName = 'service-lead-audit';
+const formId = `service-lead-form-${slug}-${lang}`;
+const successId = `service-lead-success-${slug}-${lang}`;
+
+const contextPlaceholderBySlug = {
+  website: {
+    en: 'https://your-site.com',
+    fr: 'https://votre-site.fr',
+  },
+  app: {
+    en: 'https://app.yourcompany.com',
+    fr: 'https://app.votreentreprise.com',
+  },
+  'ai-automation': {
+    en: 'HubSpot + Notion + support inbox',
+    fr: 'HubSpot + Notion + inbox support',
+  },
+  n8n: {
+    en: 'Lead form -> CRM -> Slack alert',
+    fr: 'Formulaire lead -> CRM -> alerte Slack',
+  },
+};
+
+const formText =
+  lang === 'fr'
+    ? {
+        title: 'Recevoir l’audit priorisé',
+        subtitle:
+          '2 champs requis. Réponse sous 24h ouvrées avec la meilleure prochaine action.',
+        email: 'Email professionnel',
+        context: 'URL ou contexte stack',
+        objective: 'Objectif principal (optionnel)',
+        objectivePlaceholder:
+          'Ex: augmenter les leads qualifiés sans refaire tout le site',
+        cta: page.leadMagnetCtaLabel.fr,
+        trust: 'Sans spam. Désinscription possible à tout moment.',
+        success:
+          'Merci, c’est bien reçu. Je vous réponds rapidement avec la suite.',
+      }
+    : {
+        title: 'Get the prioritized audit',
+        subtitle:
+          '2 required fields. Response in 24 business hours with the best next action.',
+        email: 'Work email',
+        context: 'URL or stack context',
+        objective: 'Primary objective (optional)',
+        objectivePlaceholder:
+          'Ex: increase qualified leads without a full redesign',
+        cta: page.leadMagnetCtaLabel.en,
+        trust: 'No spam. Unsubscribe anytime.',
+        success:
+          'Thanks, received. I will reply quickly with the next best move.',
+      };
 ---
 
-<section class="px-4 pt-32 pb-section bg-elevated">
+<section id="overview" class="px-4 pt-32 pb-section bg-elevated scroll-mt-32">
   <div class="mx-auto max-w-6xl">
     <nav
       aria-label={lang === 'fr' ? 'Fil d’ariane' : 'Breadcrumb'}
@@ -52,7 +104,7 @@ const workPath = `${homePath}#work`;
         </p>
 
         <div class="mt-7 flex flex-wrap gap-3">
-          <a href={contactPath} class="group btn-primary text-sm px-6 py-3">
+          <a href={serviceLeadPath} class="group btn-primary text-sm px-6 py-3">
             {lang === 'fr' ? 'Parler du projet' : 'Discuss your project'}
             <span class="btn-icon">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -60,7 +112,7 @@ const workPath = `${homePath}#work`;
               </svg>
             </span>
           </a>
-          <a href={leadMagnetPath} class="btn-ghost text-sm px-6 py-3">
+          <a href={serviceLeadPath} class="btn-ghost text-sm px-6 py-3">
             {page.leadMagnetCtaLabel[lang]}
           </a>
         </div>
@@ -68,7 +120,7 @@ const workPath = `${homePath}#work`;
     </div>
 
     <div class="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-3">
-      <article class="card-shell reveal lg:col-span-2" data-delay="60">
+      <article id="scope" class="card-shell reveal lg:col-span-2 scroll-mt-32" data-delay="60">
         <div class="card-core h-full p-6 md:p-8">
           <h2 class="font-display text-2xl font-bold text-dark">{page.offerTitle[lang]}</h2>
           <ul class="mt-4 grid gap-2.5">
@@ -92,7 +144,7 @@ const workPath = `${homePath}#work`;
     </div>
 
     <div class="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
-      <article class="card-shell reveal" data-delay="180">
+      <article id="process" class="card-shell reveal scroll-mt-32" data-delay="180">
         <div class="card-core h-full p-6 md:p-8">
           <h2 class="font-display text-2xl font-bold text-dark">{page.processTitle[lang]}</h2>
           <ol class="mt-4 grid gap-2.5">
@@ -146,8 +198,7 @@ const workPath = `${homePath}#work`;
       </article>
     </div>
 
-    <div class="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
-      <article class="card-shell reveal" data-delay="300">
+    <article id="service-lead-magnet" class="mt-4 card-shell reveal scroll-mt-32" data-delay="300">
         <div class="card-core h-full p-6 md:p-8">
           <h2 class="font-display text-2xl font-bold text-dark">{page.leadMagnetTitle[lang]}</h2>
           <p class="mt-3 text-sm leading-relaxed text-muted md:text-base">
@@ -161,36 +212,118 @@ const workPath = `${homePath}#work`;
               <li class="service-list-item">{item}</li>
             ))}
           </ul>
-          <div class="mt-6 flex flex-wrap gap-3">
-            <a href={leadMagnetPath} class="group btn-primary text-sm px-6 py-3">
-              {page.leadMagnetCtaLabel[lang]}
-              <span class="btn-icon">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                  <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
-              </span>
-            </a>
-            <a href={contactPath} class="btn-ghost text-sm px-6 py-3">
-              {lang === 'fr' ? 'Parler du besoin' : 'Discuss your needs'}
-            </a>
-          </div>
-        </div>
-      </article>
+          <div class="mt-6 rounded-xl border border-black/8 bg-white p-4 md:p-5">
+            <h4 class="font-display text-lg font-bold text-dark">{formText.title}</h4>
+            <p class="mt-1 text-xs leading-relaxed text-muted">{formText.subtitle}</p>
 
-      <article class="card-shell reveal" data-delay="340">
-        <div class="card-core h-full p-6 md:p-8">
-          <h2 class="font-display text-2xl font-bold text-dark">{page.faqTitle[lang]}</h2>
-          <div class="mt-4 grid gap-3">
-            {page.faqItems[lang].map((item) => (
-              <details class="faq-item">
-                <summary class="faq-question">{item.question}</summary>
-                <p class="faq-answer">{item.answer}</p>
-              </details>
-            ))}
+            <form
+              name={formName}
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              class="mt-4 grid gap-3"
+              id={formId}
+            >
+              <div class="hidden" aria-hidden="true">
+                <input name="bot-field" tabindex="-1" autocomplete="off" />
+              </div>
+              <input type="hidden" name="form-name" value={formName} />
+              <input type="hidden" name="service_slug" value={slug} />
+              <input type="hidden" name="service_label" value={page.label[lang]} />
+              <input type="hidden" name="locale" value={lang} />
+              <input type="hidden" name="lead_source" value="service_page" />
+
+              <div class="flex flex-col gap-1.5">
+                <label
+                  for={`service-email-${slug}-${lang}`}
+                  class="text-xs font-medium text-ink uppercase tracking-wide"
+                >
+                  {formText.email}
+                </label>
+                <input
+                  id={`service-email-${slug}-${lang}`}
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="you@company.com"
+                  class="w-full rounded-xl border border-black/8 bg-canvas px-4 py-3 text-sm text-ink placeholder:text-muted/50 outline-none focus:border-dark/30 focus:ring-2 focus:ring-dark/8 transition-all duration-200"
+                />
+              </div>
+
+              <div class="flex flex-col gap-1.5">
+                <label
+                  for={`service-context-${slug}-${lang}`}
+                  class="text-xs font-medium text-ink uppercase tracking-wide"
+                >
+                  {formText.context}
+                </label>
+                <input
+                  id={`service-context-${slug}-${lang}`}
+                  name="context"
+                  type="text"
+                  required
+                  placeholder={contextPlaceholderBySlug[slug][lang]}
+                  class="w-full rounded-xl border border-black/8 bg-canvas px-4 py-3 text-sm text-ink placeholder:text-muted/50 outline-none focus:border-dark/30 focus:ring-2 focus:ring-dark/8 transition-all duration-200"
+                />
+              </div>
+
+              <div class="flex flex-col gap-1.5">
+                <label
+                  for={`service-objective-${slug}-${lang}`}
+                  class="text-xs font-medium text-ink uppercase tracking-wide"
+                >
+                  {formText.objective}
+                </label>
+                <textarea
+                  id={`service-objective-${slug}-${lang}`}
+                  name="objective"
+                  rows="3"
+                  placeholder={formText.objectivePlaceholder}
+                  class="w-full rounded-xl border border-black/8 bg-canvas px-4 py-3 text-sm text-ink placeholder:text-muted/50 outline-none focus:border-dark/30 focus:ring-2 focus:ring-dark/8 transition-all duration-200 resize-none"
+                ></textarea>
+              </div>
+
+              <button type="submit" class="group btn-primary w-full justify-center mt-1 py-3">
+                {formText.cta}
+                <span class="btn-icon">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                    <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+              </button>
+            </form>
+
+            <p class="mt-3 text-xs text-muted">{formText.trust}</p>
+
+            <div id={successId} class="hidden mt-4 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800">
+              {formText.success}
+            </div>
+          </div>
+
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href={workPath} class="btn-ghost text-sm px-6 py-3">
+              {lang === 'fr' ? 'Voir les projets livrés' : 'See delivered projects'}
+            </a>
+            <a href={servicesPath} class="btn-ghost text-sm px-6 py-3">
+              {lang === 'fr' ? 'Voir tous les services' : 'See all services'}
+            </a>
           </div>
         </div>
-      </article>
-    </div>
+    </article>
+
+    <article id="faq" class="mt-4 card-shell reveal scroll-mt-32" data-delay="340">
+      <div class="card-core p-6 md:p-8">
+        <h2 class="font-display text-2xl font-bold text-dark">{page.faqTitle[lang]}</h2>
+        <div class="mt-4 grid gap-3">
+          {page.faqItems[lang].map((item) => (
+            <details class="faq-item">
+              <summary class="faq-question">{item.question}</summary>
+              <p class="faq-answer">{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </article>
 
     <article class="mt-4 card-shell reveal" data-delay="380">
       <div class="card-core p-6 md:p-8">
@@ -199,7 +332,7 @@ const workPath = `${homePath}#work`;
           {page.finalCtaBody[lang]}
         </p>
         <div class="mt-6 flex flex-wrap gap-3">
-          <a href={contactPath} class="group btn-primary text-sm px-6 py-3">
+          <a href={serviceLeadPath} class="group btn-primary text-sm px-6 py-3">
             {page.finalCtaPrimary[lang]}
             <span class="btn-icon">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -267,3 +400,31 @@ const workPath = `${homePath}#work`;
     color: #4f4d46;
   }
 </style>
+
+<script define:vars={{ formId, successId }}>
+  (() => {
+    const form = document.getElementById(formId) as HTMLFormElement | null;
+    const success = document.getElementById(successId);
+    if (!form || !success) return;
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const payload = new FormData(form);
+      const params = new URLSearchParams();
+      payload.forEach((value, key) => {
+        params.append(key, String(value));
+      });
+      try {
+        await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: params.toString(),
+        });
+        form.classList.add('hidden');
+        success.classList.remove('hidden');
+      } catch {
+        form.submit();
+      }
+    });
+  })();
+</script>

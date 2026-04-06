@@ -45,21 +45,8 @@ const { contact } = strings;
               <input name="bot-field" tabindex="-1" autocomplete="off" />
             </div>
             <input type="hidden" name="form-name" value="contact" />
-
-            <!-- Name -->
-            <div class="flex flex-col gap-1.5">
-              <label for="name" class="text-xs font-medium text-ink uppercase tracking-wide">
-                {contact.fields.name}
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                required
-                placeholder="John Doe"
-                class="w-full rounded-xl border border-black/8 bg-canvas px-4 py-3 text-sm text-ink placeholder:text-muted/50 outline-none focus:border-dark/30 focus:ring-2 focus:ring-dark/8 transition-all duration-200"
-              />
-            </div>
+            <input type="hidden" name="lead_source" value="home_contact" />
+            <input type="hidden" name="locale" value={lang} />
 
             <!-- Email -->
             <div class="flex flex-col gap-1.5">
@@ -76,37 +63,33 @@ const { contact } = strings;
               />
             </div>
 
-            <!-- Project description -->
+            <!-- Context -->
             <div class="flex flex-col gap-1.5">
-              <label for="project" class="text-xs font-medium text-ink uppercase tracking-wide">
-                {contact.fields.project}
+              <label for="context" class="text-xs font-medium text-ink uppercase tracking-wide">
+                {contact.fields.context}
               </label>
-              <textarea
-                id="project"
-                name="project"
+              <input
+                id="context"
+                name="context"
+                type="text"
                 required
-                rows="4"
-                placeholder={contact.fields.projectPlaceholder}
-                class="w-full rounded-xl border border-black/8 bg-canvas px-4 py-3 text-sm text-ink placeholder:text-muted/50 outline-none focus:border-dark/30 focus:ring-2 focus:ring-dark/8 transition-all duration-200 resize-none"
-              ></textarea>
+                placeholder={contact.fields.contextPlaceholder}
+                class="w-full rounded-xl border border-black/8 bg-canvas px-4 py-3 text-sm text-ink placeholder:text-muted/50 outline-none focus:border-dark/30 focus:ring-2 focus:ring-dark/8 transition-all duration-200"
+              />
             </div>
 
-            <!-- Budget -->
+            <!-- Objective -->
             <div class="flex flex-col gap-1.5">
-              <label for="budget" class="text-xs font-medium text-ink uppercase tracking-wide">
-                {contact.fields.budget}
+              <label for="objective" class="text-xs font-medium text-ink uppercase tracking-wide">
+                {contact.fields.objective}
               </label>
-              <select
-                id="budget"
-                name="budget"
-                class="w-full rounded-xl border border-black/8 bg-canvas px-4 py-3 text-sm text-ink outline-none focus:border-dark/30 focus:ring-2 focus:ring-dark/8 transition-all duration-200 appearance-none cursor-pointer"
-              >
-                {contact.fields.budgetOptions.map((option, i) => (
-                  <option value={i === 0 ? '' : option} disabled={i === 0} selected={i === 0}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+              <textarea
+                id="objective"
+                name="objective"
+                rows="3"
+                placeholder={contact.fields.objectivePlaceholder}
+                class="w-full rounded-xl border border-black/8 bg-canvas px-4 py-3 text-sm text-ink placeholder:text-muted/50 outline-none focus:border-dark/30 focus:ring-2 focus:ring-dark/8 transition-all duration-200 resize-none"
+              ></textarea>
             </div>
 
             <!-- Submit -->
@@ -121,6 +104,8 @@ const { contact } = strings;
                 </svg>
               </span>
             </button>
+
+            <p class="text-xs text-muted">{contact.privacy}</p>
 
           </form>
 

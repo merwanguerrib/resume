@@ -6,9 +6,10 @@ interface Props {
   lang?: Lang;
   altHref?: string;
   sectionBasePath?: string;
+  contactHref?: string;
 }
 
-const { lang = 'en', altHref, sectionBasePath = '' } = Astro.props;
+const { lang = 'en', altHref, sectionBasePath = '', contactHref } = Astro.props;
 const strings = t(lang);
 const altLang = lang === 'en' ? 'FR' : 'EN';
 const computedAltHref = altHref ?? (lang === 'en' ? '/fr/' : '/');
@@ -16,7 +17,7 @@ const sectionPrefix = sectionBasePath || '';
 const servicesHref = `${sectionPrefix}#services`;
 const workHref = `${sectionPrefix}#work`;
 const aboutHref = `${sectionPrefix}#about`;
-const leadMagnetHref = `${sectionPrefix}#lead-magnet`;
+const leadMagnetHref = contactHref ?? `${sectionPrefix}#lead-magnet`;
 ---
 
 <header class="fixed top-0 left-0 right-0 z-40 flex justify-center pt-5 px-4">

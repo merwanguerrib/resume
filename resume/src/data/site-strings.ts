@@ -177,10 +177,19 @@ export const t = (lang: Lang) => ({
           : 'Recevoir l\'audit par email',
       subtitle:
         lang === 'en'
-          ? 'Delivery format: actionable PDF summary + implementation roadmap.'
-          : 'Format livré: synthèse PDF actionnable + roadmap de mise en oeuvre.',
-      email: 'Email',
-      website: lang === 'en' ? 'Website URL (optional)' : 'URL du website (optionnel)',
+          ? '2 required fields. Response in 24 business hours with the best next action.'
+          : '2 champs requis. Réponse sous 24h ouvrées avec la meilleure prochaine action.',
+      email: lang === 'en' ? 'Work email' : 'Email professionnel',
+      context: lang === 'en' ? 'URL or stack context' : 'URL ou contexte stack',
+      contextPlaceholder:
+        lang === 'en'
+          ? 'https://your-site.com or HubSpot + n8n + Notion'
+          : 'https://votre-site.fr ou HubSpot + n8n + Notion',
+      objective: lang === 'en' ? 'Primary objective (optional)' : 'Objectif principal (optionnel)',
+      objectivePlaceholder:
+        lang === 'en'
+          ? 'Ex: increase qualified leads without rebuilding everything'
+          : 'Ex: augmenter les leads qualifiés sans tout reconstruire',
       cta:
         lang === 'en'
           ? 'Send me the free audit'
@@ -295,23 +304,23 @@ export const t = (lang: Lang) => ({
         ? 'Tell me what you need: website, app, AI automation, or n8n/no-code workflow. I reply within 24 hours.'
         : 'Expliquez votre besoin: website, app, automatisation IA, ou workflow n8n/no-code. Réponse sous 24h.',
     fields: {
-      name: lang === 'en' ? 'Full name' : 'Nom complet',
-      email: 'Email',
-      project: lang === 'en' ? 'Project goals' : 'Objectifs du projet',
-      projectPlaceholder:
+      email: lang === 'en' ? 'Work email' : 'Email professionnel',
+      context: lang === 'en' ? 'URL or stack context' : 'URL ou contexte stack',
+      contextPlaceholder:
         lang === 'en'
-          ? 'Example: we need a new website + n8n automations for lead qualification'
-          : 'Exemple: nous voulons un nouveau website + des automatisations n8n pour qualifier les leads',
-      budget: lang === 'en' ? 'Estimated budget' : 'Budget estimé',
-      budgetOptions: [
-        lang === 'en' ? 'Select a range' : 'Sélectionner une fourchette',
-        '< 3 000€',
-        '3 000 – 8 000€',
-        '8 000 – 20 000€',
-        '20 000€+',
-      ],
-      submit: lang === 'en' ? 'Send message' : 'Envoyer le message',
+          ? 'https://your-site.com or current stack'
+          : 'https://votre-site.fr ou stack actuelle',
+      objective: lang === 'en' ? 'Primary objective (optional)' : 'Objectif principal (optionnel)',
+      objectivePlaceholder:
+        lang === 'en'
+          ? 'Ex: launch a conversion-focused website in 6 weeks'
+          : 'Ex: lancer un site orienté conversion en 6 semaines',
+      submit: lang === 'en' ? 'Send my request' : 'Envoyer ma demande',
     },
+    privacy:
+      lang === 'en'
+        ? 'No spam. You can unsubscribe anytime.'
+        : 'Pas de spam. Désinscription possible à tout moment.',
     success:
       lang === 'en'
         ? 'Message sent. I\'ll be in touch shortly.'
