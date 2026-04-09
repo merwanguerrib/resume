@@ -1,26 +1,35 @@
-# merwan-just-dev-it
+# 🚀 merwan-just-dev-it
 
-Site vitrine bilingue (EN/FR) de Merwan, construit avec Astro + Tailwind et deploye sur Netlify.
+> Site vitrine bilingue (EN/FR) de Merwan, construit avec Astro + Tailwind et deploye sur Netlify.
 
-- Production: [https://merwanguerrib.com](https://merwanguerrib.com)
-- Repo: [https://github.com/merwanguerrib/merwan-just-dev-it](https://github.com/merwanguerrib/merwan-just-dev-it)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/275215a4-fe38-421d-9760-ae1331e2f095/deploy-status)](https://app.netlify.com/projects/merwanguerrib/deploys)
+![Astro](https://img.shields.io/badge/Astro-5-FF5D01?logo=astro&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Node](https://img.shields.io/badge/Node.js-20+-339933?logo=nodedotjs&logoColor=white)
+![Bilingual](https://img.shields.io/badge/Lang-EN%20%7C%20FR-6D28D9)
 
-## Demarrage rapide
+## 🌐 Liens utiles
 
-Prerquis:
-- Node.js 20+ recommande
+- Production: [merwanguerrib.com](https://merwanguerrib.com)
+- Repository: [github.com/merwanguerrib/merwan-just-dev-it](https://github.com/merwanguerrib/merwan-just-dev-it)
+
+## ⚡ Demarrage rapide
+
+Pre-requis:
+- Node.js 20+
 - npm
 
-Installation et lancement local:
+Installation + lancement local:
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Puis ouvrir `http://localhost:4321`.
+Ouvre ensuite [http://localhost:4321](http://localhost:4321).
 
-## Scripts utiles
+## 🧰 Scripts
 
 ```bash
 npm run dev            # serveur local Astro
@@ -29,13 +38,13 @@ npm run preview        # preview local du build
 npm run schema:validate
 ```
 
-Helper assets (hero scroll):
+Generation des frames hero (optionnel):
 
 ```bash
 npm run rebuild:hero-frames -- <video-path> [fps] [desktop-width] [mobile-width] [desktop-jpeg-quality] [mobile-jpeg-quality]
 ```
 
-## Structure du projet
+## 🗂 Structure du projet
 
 ```text
 .
@@ -53,14 +62,14 @@ npm run rebuild:hero-frames -- <video-path> [fps] [desktop-width] [mobile-width]
 └── package.json
 ```
 
-## Ou modifier le contenu
+## ✍️ Modifier le contenu
 
-- `src/data/site-strings.ts`: textes globaux (navigation, sections, labels, FR/EN)
-- `src/data/service-pages-data.ts`: contenu des pages services (`/services/*` et `/fr/services/*`)
-- `src/data/projects-data.ts`: projets/cas clients affiches sur la home
-- `src/components/Home/*`: structure des sections de la page d'accueil
+- `src/data/site-strings.ts`: navigation, labels et textes globaux FR/EN
+- `src/data/service-pages-data.ts`: pages services (`/services/*` et `/fr/services/*`)
+- `src/data/projects-data.ts`: projets/cas clients de la home
+- `src/components/Home/*`: structure et presentation des sections d'accueil
 
-## Routes principales
+## 🛣 Routes principales
 
 - `/` (anglais)
 - `/fr/` (francais)
@@ -68,20 +77,20 @@ npm run rebuild:hero-frames -- <video-path> [fps] [desktop-width] [mobile-width]
 - `/fr/services/:slug`
 - `/sitemap.xml`, `/sitemap-en.xml`, `/sitemap-fr.xml`
 
-## Deploiement (Netlify)
+## ☁️ Deploiement Netlify
 
-La config est geree dans `netlify.toml`:
+La config est versionnee dans `netlify.toml`:
 - `base = "."`
 - `command = "npm run build"`
 - `publish = "dist"`
 
-Une redirection linguistique est active:
-- navigateur FR sur `/` -> redirection 302 vers `/fr/`
+Redirection linguistique active:
+- navigateur FR sur `/` -> redirection `302` vers `/fr/`
 
-## Verification avant merge
+## ✅ Verification avant merge
 
 ```bash
 npm run build
 ```
 
-Si le build passe localement, le deploy preview Netlify doit passer egalement.
+Si le build passe localement, le deploy preview Netlify doit normalement passer aussi.
