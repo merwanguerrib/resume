@@ -1,46 +1,42 @@
-# Merwan's Resume Website 🌐
+# Merwan Just Dev It - Website
 
-[merwanguerrib.com](https://merwanguerrib.com) [![Netlify Status](https://api.netlify.com/api/v1/badges/275215a4-fe38-421d-9760-ae1331e2f095/deploy-status)](https://app.netlify.com/sites/merwanguerrib/deploys)
+Astro 5 + Tailwind website deployed on Netlify.
 
-[![Strapi Badge](https://img.shields.io/badge/Strapi-2F2E8B?style=for-the-badge&logo=strapi&logoColor=white)](https://strapi.io/)
-[![React Badge](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
-[![Apollo Badge](https://img.shields.io/badge/Apollo%20GraphQL-311C87?style=for-the-badge&logo=apollo-graphql&logoColor=white)](https://www.apollographql.com/docs/react/)
-[![GraphQL Badge](https://img.shields.io/badge/GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white)](https://graphql.org/)
-[![Netlify Badge](https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://www.netlify.com/)
+## Structure
 
-## About Me 👋
+The app is now at repository root (flattened structure):
 
-Hey there! I'm Merwan, a javascript developper with strong digital marketing foundations. 
+```text
+.
+├── src/
+├── public/
+├── scripts/
+├── docs/
+├── dist/
+├── astro.config.mjs
+├── tailwind.config.mjs
+├── package.json
+└── netlify.toml
+```
 
-## Tech Stack 🚀
+## Commands
 
-This website was built using the following technologies:
+Run from repository root:
 
-* [Strapi](https://strapi.io/)
-* [React](https://reactjs.org/)
-* [Apollo Client](https://www.apollographql.com/docs/react/)
-* [GraphQL](https://graphql.org/)
-* [Netlify](https://www.netlify.com/)
+```bash
+npm run dev
+npm run build
+npm run preview
+```
 
-## Contact Me 📩
+Optional helper:
 
-If you like what you see and want to learn more, please don't hesitate to get in touch. You can reach me at merwanguerrib@gmail.com or connect with me on [LinkedIn](https://www.linkedin.com/in/merwanguerrib/).
+```bash
+npm run rebuild:hero-frames -- <video-path> [fps] [desktop-width] [mobile-width] [desktop-jpeg-quality] [mobile-jpeg-quality]
+```
 
-## Fun Facts 🎉
+## Deployment
 
-Here are a few fun facts about me:
-
-* I cook like a boss. 👨🏼‍🍳
-* I'm a huge fan of Nike Air max 1. 👟
-* I can't resist a good burger or tacos. 🍔 🌮
-  
-
-## Credits 🙏
-
-This website was designed and built by me. The design was inspired by the internet.
-
-## License 📝
-
-[![License Badge](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-
-This website is licensed under the MIT License. See the License File for more information.
+- Netlify build base: repository root (`.`)
+- Build command: `npm run build`
+- Publish directory: `dist`
