@@ -9,10 +9,22 @@
 ![Node](https://img.shields.io/badge/Node.js-20+-339933?logo=nodedotjs&logoColor=white)
 ![Bilingual](https://img.shields.io/badge/Lang-EN%20%7C%20FR-6D28D9)
 
+![Website Preview](./public/justdevit_en.png)
+
 ## 🌐 Liens utiles
 
 - Production: [merwanguerrib.com](https://merwanguerrib.com)
 - Repository: [github.com/merwanguerrib/merwan-just-dev-it](https://github.com/merwanguerrib/merwan-just-dev-it)
+
+## ✨ Ce que tu trouves dans ce repo
+
+| Bloc | Description |
+|---|---|
+| 🏠 Home | Landing bilingue avec sections conversion-oriented |
+| 🧩 Services | Pages dynamiques EN/FR par service (`website`, `app`, `ai-automation`, `n8n`) |
+| 📈 SEO | Sitemaps EN/FR + index sitemap |
+| 🎞️ Assets | Frames hero scroll + scripts de regeneration |
+| ☁️ CI/CD | Deploy auto Netlify sur `main` |
 
 ## ⚡ Demarrage rapide
 
@@ -28,6 +40,14 @@ npm run dev
 ```
 
 Ouvre ensuite [http://localhost:4321](http://localhost:4321).
+
+## 🧭 Commandes rapides
+
+```bash
+npm run dev      # local
+npm run build    # production build
+npm run preview  # preview du build
+```
 
 ## 🧰 Scripts
 
@@ -94,3 +114,9 @@ npm run build
 ```
 
 Si le build passe localement, le deploy preview Netlify doit normalement passer aussi.
+
+---
+
+### 👋 Maintainer notes
+
+Ce repo a ete aplati (plus de `resume/resume`). L'application vit desormais a la racine du projet.
