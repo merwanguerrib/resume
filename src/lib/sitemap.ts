@@ -1,6 +1,6 @@
 import { servicePageSlugs } from '../data/service-pages-data';
 
-export const SITE_URL = 'https://merwanguerrib.com';
+export const SITE_URL = 'https://justdevit.agency';
 
 type Locale = 'en' | 'fr';
 

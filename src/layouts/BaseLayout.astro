@@ -35,7 +35,7 @@ interface Props {
 }
 
 const {
-  title = 'Merwan Guerrib — Just dev it.',
+  title = 'Just Dev It Agency | Websites, Apps & AI Automation',
   description,
   faqItems = [],
   lang = 'en',
@@ -50,12 +50,12 @@ const {
 
 const defaultDescription =
   lang === 'fr'
-    ? 'Je conçois des websites orientés conversion, des applications full-stack et des workflows d\'automatisation IA avec n8n ou des outils no-code. Basé à Marseille, disponible partout.'
-    : 'Premium web & app development. Built fast, built right. Fullstack developer based in Marseille.';
+    ? 'Nous concevons des websites orientés conversion, des applications full-stack et des workflows d\'automatisation IA avec n8n ou des outils no-code. Basés à Marseille, nous accompagnons des clients partout.'
+    : 'We design and build conversion-focused websites, full-stack apps, and AI automation systems with n8n and modern no-code tooling. Based in Marseille, serving clients worldwide.';
 
 const pageDescription = description ?? defaultDescription;
 
-const siteUrl = 'https://merwanguerrib.com';
+const siteUrl = 'https://justdevit.agency';
 const canonicalPath = Astro.url?.pathname ?? (lang === 'fr' ? '/fr/' : '/');
 const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
 const toAbsoluteUrl = (path: string) =>
@@ -81,7 +81,7 @@ const robotsContent =
 const websiteId = `${siteUrl}#website`;
 const organizationId = `${siteUrl}#organization`;
 const personId = `${siteUrl}#person`;
-const localBusinessId = `${siteUrl}#local-business`;
+const professionalServiceId = `${siteUrl}#professional-service`;
 const webPageId = `${canonicalUrl}#webpage`;
 const breadcrumbId = `${canonicalUrl}#breadcrumb`;
 const faqId = `${canonicalUrl}#faq`;
@@ -184,11 +184,10 @@ const personSchema = {
   name: 'Merwan Guerrib',
   jobTitle:
     lang === 'en'
-      ? 'Website, App and AI Automation Developer'
-      : 'Développeur Website, App et Automatisation IA',
+      ? 'Founder and technical director'
+      : 'Fondateur et directeur technique',
   url: siteUrl,
   image: logoImage,
-  email: 'merwanguerrib@gmail.com',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Marseille',
@@ -209,8 +208,12 @@ const personSchema = {
 const organizationSchema = {
   '@type': 'Organization',
   '@id': organizationId,
-  name: 'Merwan Guerrib',
+  name: 'Just Dev It Agency',
   url: siteUrl,
+  description:
+    lang === 'fr'
+      ? 'Agence web spécialisée dans les sites orientés conversion, les applications full-stack et l’automatisation IA.'
+      : 'Agency focused on conversion-led websites, full-stack applications, and AI automation.',
   logo: {
     '@type': 'ImageObject',
     url: logoImage,
@@ -228,14 +231,13 @@ const organizationSchema = {
   ],
 };
 
-const localBusinessSchema = {
-  '@type': 'LocalBusiness',
-  '@id': localBusinessId,
-  name: 'Merwan Guerrib',
+const professionalServiceSchema = {
+  '@type': 'ProfessionalService',
+  '@id': professionalServiceId,
+  name: 'Just Dev It Agency',
   url: siteUrl,
   image: logoImage,
   description: pageDescription,
-  email: 'merwanguerrib@gmail.com',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Marseille',
@@ -314,18 +316,13 @@ const currentServiceSchema =
         isRelatedTo: {
           '@id': primaryServiceId,
         },
-        ...(currentServiceEntry
-          ? {
-              sameAs: currentServiceEntry.alternateUrl,
-            }
-          : {}),
+        inLanguage,
       }
     : null;
 
 const webPageAbout = [
-  { '@id': personId },
   { '@id': organizationId },
-  { '@id': localBusinessId },
+  { '@id': professionalServiceId },
   ...(schemaPageType === 'home' ? [{ '@id': primaryServiceId }] : []),
   ...(currentServiceSchema ? [{ '@id': currentServiceId }] : []),
 ];
@@ -340,6 +337,18 @@ const webPageSchema = {
   isPartOf: {
     '@id': websiteId,
   },
+  mainEntity:
+    schemaPageType === 'service'
+      ? {
+          '@id': currentServiceId,
+        }
+      : schemaPageType === 'home'
+        ? {
+            '@id': primaryServiceId,
+          }
+        : {
+            '@id': organizationId,
+          },
   about: webPageAbout,
   breadcrumb: {
     '@id': breadcrumbId,
@@ -378,7 +387,7 @@ const faqSchema =
 const websiteSchema = {
   '@type': 'WebSite',
   '@id': websiteId,
-  name: 'Merwan Guerrib',
+  name: 'Just Dev It Agency',
   url: siteUrl,
   inLanguage: languageRefs,
   publisher: {
@@ -402,10 +411,10 @@ const structuredServicesSchema = serviceCatalogEntries.map((entry) => ({
     serviceUrl: contactUrl,
     availableLanguage: languageRefs,
   },
-  sameAs: entry.alternateUrl,
   isRelatedTo: {
     '@id': primaryServiceId,
   },
+  inLanguage,
 }));
 
 const schemaGraph = {
@@ -413,7 +422,7 @@ const schemaGraph = {
   '@graph': [
     organizationSchema,
     personSchema,
-    localBusinessSchema,
+    professionalServiceSchema,
     websiteSchema,
     webPageSchema,
     breadcrumbSchema,
@@ -432,6 +441,7 @@ const schemaGraph = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#F9F8F5" />
     <meta name="description" content={pageDescription} />
+    <meta name="google-site-verification" content="vpjLfldnzKKjMOKbh1BBYPg_fC3ebiLmWGuwVspW1Mk" />
     <meta http-equiv="content-language" content={inLanguage} />
     <meta name="language" content={inLanguage} />
     <meta name="robots" content={robotsContent} />
@@ -479,7 +489,7 @@ const schemaGraph = {
     <meta property="og:image:width" content={ogImageWidth} />
     <meta property="og:image:height" content={ogImageHeight} />
     <meta property="og:image:alt" content={ogImageAlt} />
-    <meta property="og:site_name" content="Merwan Guerrib" />
+    <meta property="og:site_name" content="Just Dev It Agency" />
     <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
     <meta property="og:locale:alternate" content={alternateOgLocale} />
     <meta name="twitter:card" content="summary_large_image" />

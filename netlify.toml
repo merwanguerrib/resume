@@ -3,6 +3,47 @@
   command = "npm run build"
   publish = "dist"
 
+# Domain migration and canonicalization:
+# - Redirect old brand domain (all pages) to the new agency domain
+# - Force HTTPS
+# - Keep only the apex host as canonical
+# - Normalize trailing slash to avoid duplicate/dead URLs
+[[redirects]]
+  from = "http://merwanguerrib.com/*"
+  to = "https://justdevit.agency/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://merwanguerrib.com/*"
+  to = "https://justdevit.agency/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.merwanguerrib.com/*"
+  to = "https://justdevit.agency/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.merwanguerrib.com/*"
+  to = "https://justdevit.agency/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.justdevit.agency/*"
+  to = "https://justdevit.agency/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.justdevit.agency/*"
+  to = "https://justdevit.agency/:splat"
+  status = 301
+  force = true
+
 # Auto language routing on the root URL:
 # - French browser => /fr/
 # - Other languages => keep /

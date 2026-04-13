@@ -66,8 +66,8 @@ export const servicePages: Record<ServiceSlug, ServicePageContent> = {
       fr: 'Développement Website à Marseille | Sites Orientés Conversion',
     },
     seoDescription: {
-      en: 'Freelance website development in Marseille: conversion-first UX, technical SEO, and clean delivery to generate qualified leads.',
-      fr: 'Développement website freelance à Marseille: UX orientée conversion, SEO technique et delivery propre pour générer des leads qualifiés.',
+      en: 'Agency website development in Marseille: conversion-first UX, technical SEO, and clean delivery to generate qualified leads.',
+      fr: 'Développement website en agence à Marseille: UX orientée conversion, SEO technique et delivery propre pour générer des leads qualifiés.',
     },
     h1: {
       en: 'Conversion-Focused Website Development',

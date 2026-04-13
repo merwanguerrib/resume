@@ -23,4 +23,4 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://merwanguerrib.com/sitemap.xml
+Sitemap: https://justdevit.agency/sitemap.xml

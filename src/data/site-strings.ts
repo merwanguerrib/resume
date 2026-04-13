@@ -4,12 +4,12 @@ export const t = (lang: Lang) => ({
   seo: {
     title:
       lang === 'en'
-        ? 'Merwan Guerrib | Website, App & AI Automation Developer'
-        : 'Merwan Guerrib | Développeur Website, App & Automatisation IA',
+        ? 'Just Dev It Agency | Websites, Apps & AI Automation'
+        : 'Just Dev It Agency | Websites, Apps & Automatisation IA',
     description:
       lang === 'en'
-        ? 'I build conversion-focused websites, full-stack apps, and AI automation workflows with n8n or no-code tools. Based in Marseille, working worldwide.'
-        : 'Je conçois des websites orientés conversion, des applications full-stack et des workflows d\'automatisation IA avec n8n ou des outils no-code. Basé à Marseille, disponible partout.',
+        ? 'We design and build conversion-focused websites, full-stack apps, and AI automation systems with n8n and modern no-code tooling. Based in Marseille, serving clients worldwide.'
+        : 'Nous concevons des websites orientés conversion, des applications full-stack et des systèmes d\'automatisation IA avec n8n et les meilleurs outils no-code. Basés à Marseille, nous accompagnons des clients partout.',
   },
   nav: {
     services: lang === 'en' ? 'Services' : 'Services',
