@@ -11,6 +11,7 @@
 
 # local build/cache artifacts
 /.astro
+/.lighthouseci
 
 # local Netlify folder
 .netlify

@@ -9,7 +9,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "rebuild:hero-frames": "bash ./scripts/rebuild-hero-frames.sh",
-    "schema:validate": "node ./scripts/validate-schema.mjs"
+    "schema:validate": "node ./scripts/validate-schema.mjs",
+    "schema:validate:dist": "node ./scripts/validate-schema-dist.mjs",
+    "lighthouse:ci": "npx @lhci/cli@0.15.1 autorun --config=./lighthouserc.cjs"
   },
   "dependencies": {
     "@astrojs/tailwind": "^5.1.0",

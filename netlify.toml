@@ -1,6 +1,6 @@
 [build]
   base = "."
-  command = "npm run build"
+  command = "npm run build && npm run schema:validate:dist -- --strict"
   publish = "dist"
 
 # Domain migration and canonicalization:
