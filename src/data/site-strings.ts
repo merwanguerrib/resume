@@ -51,9 +51,9 @@ export const t = (lang: Lang) => ({
         : 'Transformons cette erreur en opportunité.',
     helpCardBody:
       lang === 'en'
-        ? 'Share your context and I will send a focused action plan to improve acquisition, conversion, and automation.'
-        : 'Partagez votre contexte, je vous envoie un plan d\'action concret pour améliorer acquisition, conversion et automatisation.',
-    helpCardCta: lang === 'en' ? 'Request my audit' : 'Demander mon audit',
+        ? 'Share your context and we will send a focused action plan to improve acquisition, conversion, and automation.'
+        : 'Partagez votre contexte, nous vous envoyons un plan d\'action concret pour améliorer acquisition, conversion et automatisation.',
+    helpCardCta: lang === 'en' ? 'Request a free audit' : 'Demander un audit gratuit',
   },
   hero: {
     available: lang === 'en' ? 'Available for new projects' : 'Disponible pour de nouveaux projets',
@@ -68,7 +68,7 @@ export const t = (lang: Lang) => ({
         : 'Websites, apps et automatisations IA conçus pour la croissance.\nDe la stratégie à la production, avec un ROI clair.',
     cta_primary: lang === 'en' ? 'Get free audit' : 'Recevoir un audit gratuit',
     cta_secondary: lang === 'en' ? 'See services' : 'Voir les services',
-    trustedBy: lang === 'en' ? 'Trusted by' : 'Ils me font confiance',
+    trustedBy: lang === 'en' ? 'Trusted by' : 'Ils nous font confiance',
   },
   stats: [
     { value: '10+', label: lang === 'en' ? 'Years of experience' : "Années d'expérience" },
@@ -76,7 +76,7 @@ export const t = (lang: Lang) => ({
     { value: '24h', label: lang === 'en' ? 'Average response time' : 'Délai moyen de réponse' },
   ],
   services: {
-    eyebrow: lang === 'en' ? 'How I help' : 'Ce que je construis',
+    eyebrow: lang === 'en' ? 'How we help' : 'Ce que nous construisons',
     title:
       lang === 'en'
         ? 'Four service tracks.\nOne growth system.'
@@ -118,8 +118,8 @@ export const t = (lang: Lang) => ({
         title: lang === 'en' ? 'Build & automate' : 'Build & automate',
         description:
           lang === 'en'
-            ? 'I deliver production-ready code plus AI automations and n8n/no-code workflows when relevant.'
-            : 'Je livre un code prêt production avec automatisations IA et workflows n8n/no-code si pertinent.',
+            ? 'We deliver production-ready code plus AI automations and n8n/no-code workflows when relevant.'
+            : 'Nous livrons un code prêt production avec automatisations IA et workflows n8n/no-code quand c\'est pertinent.',
       },
       {
         number: '04',
@@ -141,7 +141,7 @@ export const t = (lang: Lang) => ({
       lang === 'en'
         ? 'Get a concise action plan to increase leads, reduce manual work, and improve your technical foundations.'
         : 'Recevez un plan d\'action concret pour augmenter vos leads, réduire le travail manuel et renforcer vos fondations techniques.',
-    highlightsTitle: lang === 'en' ? 'What we analyze' : 'Ce que j\'analyse',
+    highlightsTitle: lang === 'en' ? 'What we analyze' : 'Ce que nous analysons',
     highlights:
       lang === 'en'
         ? [
@@ -192,8 +192,8 @@ export const t = (lang: Lang) => ({
           : 'Ex: augmenter les leads qualifiés sans tout reconstruire',
       cta:
         lang === 'en'
-          ? 'Send me the free audit'
-          : 'Envoyer mon audit gratuit',
+          ? 'Get your free audit'
+          : 'Recevoir votre audit gratuit',
       privacy:
         lang === 'en'
           ? 'No spam. You can unsubscribe anytime.'
@@ -203,7 +203,7 @@ export const t = (lang: Lang) => ({
           ? 'Request received. Check your inbox shortly.'
           : 'Demande reçue. Vérifiez votre boîte mail.',
     },
-    ctaPrimary: lang === 'en' ? 'Get my free audit' : 'Je veux mon audit gratuit',
+    ctaPrimary: lang === 'en' ? 'Get your free audit' : 'Recevoir votre audit gratuit',
     ctaSecondary: lang === 'en' ? 'See services' : 'Voir les services',
   },
   faq: {
@@ -218,17 +218,17 @@ export const t = (lang: Lang) => ({
             {
               question: 'What services do you offer?',
               answer:
-                'I build conversion-focused websites, full-stack web applications, AI automation systems, and workflow integrations with n8n or no-code tools.',
+                'We build conversion-focused websites, full-stack web applications, AI automation systems, and workflow integrations with n8n or no-code tools.',
             },
             {
               question: 'Can you integrate n8n with my current stack?',
               answer:
-                'Yes. I design and implement n8n workflows connected to your CRM, forms, databases, APIs, and AI tools to remove repetitive manual work.',
+                'Yes. We design and implement n8n workflows connected to your CRM, forms, databases, APIs, and AI tools to remove repetitive manual work.',
             },
             {
               question: 'Do you also handle SEO and GEO optimization?',
               answer:
-                'Yes. I optimize technical SEO, on-page structure, and AI-search readiness (GEO) so your website can rank in Google and be easier to cite by AI assistants.',
+                'Yes. We optimize technical SEO, on-page structure, and AI-search readiness (GEO) so your website can rank in Google and be easier to cite by AI assistants.',
             },
             {
               question: 'How long does a typical project take?',
@@ -243,24 +243,24 @@ export const t = (lang: Lang) => ({
             {
               question: 'Do you work in white-label mode for agencies?',
               answer:
-                'Yes. I regularly collaborate in white-label with agencies and product teams, with clear communication, strict deadlines, and clean handover documentation.',
+                'Yes. We regularly collaborate in white-label mode with agencies and product teams, with clear communication, strict deadlines, and clean handover documentation.',
             },
           ]
         : [
             {
               question: 'Quels services proposez-vous ?',
               answer:
-                'Je conçois des websites orientés conversion, des applications web full-stack, des systèmes d\'automatisation IA, et des intégrations de workflows avec n8n ou des outils no-code.',
+                'Nous concevons des websites orientés conversion, des applications web full-stack, des systèmes d\'automatisation IA, et des intégrations de workflows avec n8n ou des outils no-code.',
             },
             {
               question: 'Pouvez-vous intégrer n8n à mon stack actuel ?',
               answer:
-                'Oui. Je conçois et implémente des workflows n8n connectés à votre CRM, formulaires, bases de données, APIs et outils IA pour réduire les tâches manuelles.',
+                'Oui. Nous concevons et implémentons des workflows n8n connectés à votre CRM, formulaires, bases de données, APIs et outils IA pour réduire les tâches manuelles.',
             },
             {
               question: 'Gérez-vous aussi l\'optimisation SEO et GEO ?',
               answer:
-                'Oui. J\'optimise le SEO technique, la structure on-page et la préparation GEO pour mieux performer sur Google et dans les réponses d\'assistants IA.',
+                'Oui. Nous optimisons le SEO technique, la structure on-page et la préparation GEO pour mieux performer sur Google et dans les réponses d\'assistants IA.',
             },
             {
               question: 'Quel est le délai moyen pour un projet ?',
@@ -275,7 +275,7 @@ export const t = (lang: Lang) => ({
             {
               question: 'Travaillez-vous en marque blanche pour les agences ?',
               answer:
-                'Oui. Je collabore en marque blanche avec des agences et des équipes produit, avec communication claire, respect des délais et documentation de handover.',
+                'Oui. Nous collaborons en marque blanche avec des agences et des équipes produit, avec communication claire, respect des délais et documentation de handover.',
             },
           ],
   },
@@ -320,7 +320,7 @@ export const t = (lang: Lang) => ({
         : 'Construisons votre prochain\nsystème de croissance.',
     subtitle:
       lang === 'en'
-        ? 'Tell me what you need: website, app, AI automation, or n8n/no-code workflow. I reply within 24 hours.'
+        ? 'Tell us what you need: website, app, AI automation, or n8n/no-code workflow. We reply within 24 hours.'
         : 'Expliquez votre besoin: website, app, automatisation IA, ou workflow n8n/no-code. Réponse sous 24h.',
     fields: {
       email: lang === 'en' ? 'Work email' : 'Email professionnel',
@@ -334,7 +334,7 @@ export const t = (lang: Lang) => ({
         lang === 'en'
           ? 'Ex: launch a conversion-focused website in 6 weeks'
           : 'Ex: lancer un site orienté conversion en 6 semaines',
-      submit: lang === 'en' ? 'Send my request' : 'Envoyer ma demande',
+      submit: lang === 'en' ? 'Send your request' : 'Envoyer votre demande',
     },
     privacy:
       lang === 'en'
@@ -342,8 +342,8 @@ export const t = (lang: Lang) => ({
         : 'Pas de spam. Désinscription possible à tout moment.',
     success:
       lang === 'en'
-        ? 'Message sent. I\'ll be in touch shortly.'
-        : 'Message envoyé. Je reviens vers vous rapidement.',
+        ? 'Message sent. Our team will get back to you shortly.'
+        : 'Message envoyé. Notre équipe revient vers vous rapidement.',
   },
   footer: {
     tagline: 'Just dev it.',
