@@ -15,7 +15,8 @@ const altLang = lang === 'en' ? 'FR' : 'EN';
 const computedAltHref = altHref ?? (lang === 'en' ? '/fr/' : '/');
 const sectionPrefix = sectionBasePath || '';
 const servicesHref = `${sectionPrefix}#services`;
-const workHref = `${sectionPrefix}#work`;
+// Case studies are temporarily hidden; keep this slot pointing to an active section.
+const workHref = servicesHref;
 const aboutHref = `${sectionPrefix}#about`;
 const leadMagnetHref = contactHref ?? `${sectionPrefix}#lead-magnet`;
 ---

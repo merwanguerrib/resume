@@ -13,7 +13,7 @@ export const t = (lang: Lang) => ({
   },
   nav: {
     services: lang === 'en' ? 'Services' : 'Services',
-    work: lang === 'en' ? 'Work' : 'Projets',
+    work: lang === 'en' ? 'Solutions' : 'Solutions',
     about: lang === 'en' ? 'About' : 'À propos',
     contact: lang === 'en' ? 'Get free audit' : 'Audit gratuit',
   },
@@ -37,12 +37,12 @@ export const t = (lang: Lang) => ({
       lang === 'en'
         ? [
             { label: 'Services', section: 'services' },
-            { label: 'Case studies', section: 'work' },
+            { label: 'Team', section: 'about' },
             { label: 'Contact', section: 'contact' },
           ]
         : [
             { label: 'Services', section: 'services' },
-            { label: 'Cas clients', section: 'work' },
+            { label: 'Équipe', section: 'about' },
             { label: 'Contact', section: 'contact' },
           ],
     helpCardTitle:
@@ -59,15 +59,15 @@ export const t = (lang: Lang) => ({
     available: lang === 'en' ? 'Available for new projects' : 'Disponible pour de nouveaux projets',
     seoH1:
       lang === 'en'
-        ? 'Freelance Full-Stack Developer in Marseille'
-        : 'Développeur Full-Stack à Marseille',
+        ? 'Websites, Apps & AI Automation Agency in Marseille'
+        : 'Agence web, app et automatisation IA à Marseille',
     tagline: 'Just dev it.',
     subtitle:
       lang === 'en'
         ? 'Websites, apps, and AI automations built for growth.\nFrom strategy to production, with clear ROI.'
         : 'Websites, apps et automatisations IA conçus pour la croissance.\nDe la stratégie à la production, avec un ROI clair.',
     cta_primary: lang === 'en' ? 'Get free audit' : 'Recevoir un audit gratuit',
-    cta_secondary: lang === 'en' ? 'See my work' : 'Voir mes projets',
+    cta_secondary: lang === 'en' ? 'See services' : 'Voir les services',
     trustedBy: lang === 'en' ? 'Trusted by' : 'Ils me font confiance',
   },
   stats: [
@@ -204,7 +204,7 @@ export const t = (lang: Lang) => ({
           : 'Demande reçue. Vérifiez votre boîte mail.',
     },
     ctaPrimary: lang === 'en' ? 'Get my free audit' : 'Je veux mon audit gratuit',
-    ctaSecondary: lang === 'en' ? 'See case studies' : 'Voir les cas clients',
+    ctaSecondary: lang === 'en' ? 'See services' : 'Voir les services',
   },
   faq: {
     eyebrow: lang === 'en' ? 'FAQ' : 'FAQ',
@@ -280,17 +280,36 @@ export const t = (lang: Lang) => ({
           ],
   },
   about: {
-    eyebrow: lang === 'en' ? 'About me' : 'À propos',
-    title: lang === 'en' ? 'Merwan Guerrib' : 'Merwan Guerrib',
-    bio:
+    eyebrow: lang === 'en' ? 'Team' : 'Équipe',
+    title:
       lang === 'en'
-        ? 'I am a fullstack developer focused on one thing: shipping digital products that generate measurable business outcomes.\n\nOver the last 10+ years, I have delivered projects for teams like PayFit and Capgemini, from high-traffic websites to complex product features.\n\nToday, I combine development, AI automation, and product thinking to help founders and teams move faster without sacrificing quality.'
-        : 'Je suis développeur fullstack avec une obsession: livrer des produits digitaux qui génèrent des résultats business mesurables.\n\nDepuis plus de 10 ans, j\'accompagne des équipes comme PayFit et Capgemini, du site web à fort trafic aux fonctionnalités produit complexes.\n\nAujourd\'hui, je combine développement, automatisation IA et vision produit pour aider les équipes à aller vite sans compromettre la qualité.',
-    values: [
-      { icon: 'lightning', label: lang === 'en' ? 'Fast delivery' : 'Livraison rapide' },
-      { icon: 'shield', label: lang === 'en' ? 'Clean code' : 'Code propre' },
-      { icon: 'chat', label: lang === 'en' ? 'Clear comms' : 'Communication claire' },
-      { icon: 'trend-up', label: lang === 'en' ? 'Product thinking' : 'Vision produit' },
+        ? 'The team behind Just Dev It Agency'
+        : 'L’équipe derrière Just Dev It Agency',
+    members: [
+      {
+        id: 'merwan',
+        name: 'Merwan Guerrib',
+        role:
+          lang === 'en'
+            ? 'Founder · Full-Stack & AI Automation'
+            : 'Fondateur · Full-Stack & Automatisation IA',
+        bio:
+          lang === 'en'
+            ? 'Merwan designs and builds conversion-first websites, full-stack apps, and AI automation systems for founders and product teams.\n\nWith 10+ years of delivery experience across companies like PayFit and Capgemini, he leads technical architecture, implementation quality, and production launch.'
+            : 'Merwan conçoit et développe des websites orientés conversion, des applications full-stack et des systèmes d’automatisation IA pour les fondateurs et les équipes produit.\n\nAvec plus de 10 ans d’expérience sur des projets menés notamment avec PayFit et Capgemini, il pilote l’architecture technique, la qualité d’implémentation et la mise en production.',
+      },
+      {
+        id: 'ismael',
+        name: 'Ismaël Guerrib',
+        role:
+          lang === 'en'
+            ? 'Co-Founder · Growth & Operations'
+            : 'Co-fondateur · Growth & Opérations',
+        bio:
+          lang === 'en'
+            ? 'Ismaël leads growth and operations. He structures acquisition strategy, clarifies offers, and keeps execution aligned with measurable business outcomes.\n\nTogether with Merwan, he ensures each website, app, or automation project ships with clear priorities, tight timelines, and proactive client communication.'
+            : 'Ismaël pilote la croissance et les opérations. Il structure la stratégie d’acquisition, clarifie les offres et aligne l’exécution sur des objectifs business mesurables.\n\nAvec Merwan, il s’assure que chaque projet website, app ou automatisation avance avec des priorités nettes, des délais maîtrisés et une communication client proactive.',
+      },
     ],
   },
   contact: {
