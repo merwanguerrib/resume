@@ -177,6 +177,13 @@ const languageSchema = [
 
 const languageRefs = languageSchema.map((language) => ({ '@id': language['@id'] }));
 const primaryServiceId = `${siteUrl}#service-catalog`;
+const personSameAs = [
+  'https://www.linkedin.com/in/merwanguerrib',
+  'https://github.com/merwanguerrib',
+];
+const organizationSameAs = [
+  'https://www.linkedin.com/company/justdevitagency/',
+];
 
 const personSchema = {
   '@type': 'Person',
@@ -194,10 +201,7 @@ const personSchema = {
     addressRegion: 'Provence-Alpes-Côte d\'Azur',
     addressCountry: 'FR',
   },
-  sameAs: [
-    'https://www.linkedin.com/in/merwanguerrib',
-    'https://github.com/merwanguerrib',
-  ],
+  sameAs: personSameAs,
   worksFor: {
     '@id': organizationId,
   },
@@ -218,7 +222,7 @@ const organizationSchema = {
     '@type': 'ImageObject',
     url: logoImage,
   },
-  sameAs: personSchema.sameAs,
+  sameAs: organizationSameAs,
   knowsLanguage: languageRefs,
   contactPoint: [
     {
@@ -316,7 +320,6 @@ const currentServiceSchema =
         isRelatedTo: {
           '@id': primaryServiceId,
         },
-        inLanguage,
       }
     : null;
 
@@ -414,7 +417,6 @@ const structuredServicesSchema = serviceCatalogEntries.map((entry) => ({
   isRelatedTo: {
     '@id': primaryServiceId,
   },
-  inLanguage,
 }));
 
 const schemaGraph = {
