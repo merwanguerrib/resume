@@ -70,6 +70,16 @@ export const t = (lang: Lang) => ({
     cta_secondary: lang === 'en' ? 'See services' : 'Voir les services',
     trustedBy: lang === 'en' ? 'Trusted by' : 'Ils nous font confiance',
   },
+  seoIntro: {
+    heading:
+      lang === 'en'
+        ? 'Technical team in Marseille for acquisition and execution'
+        : 'Équipe technique à Marseille, orientée acquisition et exécution',
+    body:
+      lang === 'en'
+        ? 'Based in Marseille, we work with teams across France and internationally to build conversion-focused websites, full-stack web apps, and AI automation systems connected to real operations. With 10+ years of experience and 50+ delivered missions, we help teams move from fragmented stacks to consistent execution: clearer acquisition, faster delivery, and better decision support. We combine product thinking, UX, technical architecture, SEO/GEO, and n8n automation to create experiences that generate qualified leads while reducing internal friction. If your website is under-converting, your team still handles too many manual tasks, or your roadmap is losing momentum, we can run a focused sprint with clear priorities, realistic timelines, and measurable impact from strategy to production.'
+        : 'Basés à Marseille, nous accompagnons des équipes partout en France et à l’international pour concevoir des websites orientés conversion, des applications web full-stack et des systèmes d’automatisation IA connectés aux opérations réelles. Avec plus de 10 ans d’expérience et 50+ missions livrées, nous aidons les équipes à passer de stacks dispersées à une exécution cohérente: acquisition plus lisible, delivery plus rapide, décisions mieux outillées. Nous combinons vision produit, UX, architecture technique, SEO/GEO et automatisation n8n pour créer des parcours qui génèrent des leads qualifiés tout en réduisant les frictions internes. Si votre website convertit mal, si vos équipes répètent encore trop de tâches manuelles, ou si votre roadmap ralentit, nous pouvons structurer un sprint ciblé avec priorités claires, délais réalistes et impact mesurable de la stratégie à la production.',
+  },
   stats: [
     { value: '10+', label: lang === 'en' ? 'Years of experience' : "Années d'expérience" },
     { value: '50+', label: lang === 'en' ? 'Missions delivered' : 'Missions livrées' },
