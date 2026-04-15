@@ -24,13 +24,13 @@ const leadMagnetHref = contactHref ?? `${sectionPrefix}#lead-magnet`;
 
 <header class="fixed top-0 left-0 right-0 z-40 flex justify-center pt-5 px-4">
   <nav
-    class="flex w-full max-w-2xl items-center rounded-full border border-black/8 bg-surface/90 px-2 py-2 shadow-pill backdrop-blur-md"
+    class="flex w-full max-w-5xl items-center rounded-full border border-black/8 bg-surface/90 px-2 py-2 shadow-pill backdrop-blur-md"
     aria-label="Main navigation"
   >
     <!-- Logo -->
     <a
       href={lang === 'en' ? '/' : '/fr/'}
-      class="shrink-0 rounded-full px-3 py-2 transition-colors duration-200 hover:bg-elevated md:mr-8 lg:mr-10"
+      class="shrink-0 rounded-full px-3 py-2 transition-colors duration-200 hover:bg-elevated md:mr-6 lg:mr-8"
       aria-label="Just Dev It Agency home"
     >
       <div class="flex items-center gap-2.5">
@@ -42,26 +42,26 @@ const leadMagnetHref = contactHref ?? `${sectionPrefix}#lead-magnet`;
           loading="eager"
           decoding="async"
         />
-        <span class="hidden md:inline font-display text-sm font-bold text-muted">
+        <span class="hidden lg:inline font-display text-sm font-bold text-muted">
           Just Dev It Agency
         </span>
       </div>
     </a>
 
-    <div class="hidden min-w-0 flex-1 items-center justify-center gap-1 md:flex">
+    <div class="hidden min-w-0 flex-1 items-center justify-center gap-1 overflow-hidden md:flex">
       <!-- Nav links -->
-      <a href={servicesHref} class="px-4 py-2 text-sm font-medium text-muted hover:text-ink rounded-full hover:bg-elevated transition-all duration-200 whitespace-nowrap">
+      <a href={servicesHref} class="px-3 py-2 text-sm font-medium text-muted hover:text-ink rounded-full hover:bg-elevated transition-all duration-200 whitespace-nowrap lg:px-4">
         {strings.nav.services}
       </a>
-      <a href={workHref} class="px-4 py-2 text-sm font-medium text-muted hover:text-ink rounded-full hover:bg-elevated transition-all duration-200 whitespace-nowrap">
+      <a href={workHref} class="px-3 py-2 text-sm font-medium text-muted hover:text-ink rounded-full hover:bg-elevated transition-all duration-200 whitespace-nowrap lg:px-4">
         {strings.nav.work}
       </a>
-      <a href={aboutHref} class="px-4 py-2 text-sm font-medium text-muted hover:text-ink rounded-full hover:bg-elevated transition-all duration-200 whitespace-nowrap">
+      <a href={aboutHref} class="px-3 py-2 text-sm font-medium text-muted hover:text-ink rounded-full hover:bg-elevated transition-all duration-200 whitespace-nowrap lg:px-4">
         {strings.nav.about}
       </a>
     </div>
 
-    <div class="ml-auto flex items-center gap-1.5">
+    <div class="ml-auto shrink-0 md:ml-4 flex items-center gap-1.5">
       <!-- Lang toggle -->
       <a
         href={computedAltHref}
