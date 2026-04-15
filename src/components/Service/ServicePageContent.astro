@@ -18,7 +18,7 @@ const relatedSlugs = getRelatedServiceSlugs(slug);
 const homePath = lang === 'fr' ? '/fr/' : '/';
 const servicesPath = `${homePath}#services`;
 const serviceLeadPath = '#service-lead-magnet';
-const workPath = `${homePath}#work`;
+const workPath = `${homePath}#services`;
 const formName = 'service-lead-audit';
 const formId = `service-lead-form-${slug}-${lang}`;
 const successId = `service-lead-success-${slug}-${lang}`;
@@ -56,7 +56,7 @@ const formText =
         cta: page.leadMagnetCtaLabel.fr,
         trust: 'Sans spam. Désinscription possible à tout moment.',
         success:
-          'Merci, c’est bien reçu. Je vous réponds rapidement avec la suite.',
+          'Merci, c’est bien reçu. Notre équipe vous répond rapidement avec la suite.',
       }
     : {
         title: 'Get the prioritized audit',
@@ -70,7 +70,7 @@ const formText =
         cta: page.leadMagnetCtaLabel.en,
         trust: 'No spam. Unsubscribe anytime.',
         success:
-          'Thanks, received. I will reply quickly with the next best move.',
+          'Thanks, received. Our team will reply quickly with the next best move.',
       };
 ---
 
@@ -192,7 +192,7 @@ const formText =
             ))}
           </div>
           <a href={workPath} class="inline-flex mt-6 text-sm font-medium text-muted hover:text-dark transition-colors duration-200">
-            {lang === 'fr' ? 'Voir les projets livrés' : 'See delivered projects'}
+            {lang === 'fr' ? 'Explorer les services' : 'Explore services'}
           </a>
         </div>
       </article>

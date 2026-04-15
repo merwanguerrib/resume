@@ -74,8 +74,8 @@ export const servicePages: Record<ServiceSlug, ServicePageContent> = {
       fr: 'Développement de Website Orienté Conversion',
     },
     intro: {
-      en: `Most websites do not underperform because of design. They underperform because the offer is vague, page flow is unclear, and the next step is weak. I rebuild websites around one commercial goal: more qualified pipeline conversations. That means tighter positioning, cleaner page hierarchy, stronger CTA logic, and technical SEO integrated from day one. I usually step in when traffic looks healthy but conversion is inconsistent, or when a redesign is needed without losing search momentum. Based in Marseille, I work with founders, product teams, and agencies in France and internationally. You get a website that is easier to rank, easier to manage, and easier for the right prospects to say yes to.`,
-      fr: `Je conçois des websites pensés pour convertir avant d'être pensés pour décorer. Chaque page sert un objectif business clair: plus de rendez-vous qualifiés, plus de demandes de démo, ou un inbound plus rentable. Mon approche combine positionnement, copywriting de conversion, hiérarchie UX, SEO technique et implémentation performante pour que votre site soit visible et convaincant. Basé à Marseille, j'accompagne des équipes en France et à l'international, surtout quand le trafic progresse mais que la conversion stagne, ou lorsqu'une refonte est nécessaire sans casser l'acquisition en cours. Avec plus de 10 ans d'expérience et 50+ missions livrées, j'aide les fondateurs, équipes produit et agences à transformer des pages dispersées en système d'acquisition cohérent. Vous obtenez des priorités actionnables, des décisions mesurables et un site facile à faire évoluer dans le temps.`,
+      en: `Most websites do not underperform because of design. They underperform because the offer is vague, page flow is unclear, and the next step is weak. We rebuild websites around one commercial goal: more qualified pipeline conversations. That means tighter positioning, cleaner page hierarchy, stronger CTA logic, and technical SEO integrated from day one. We usually step in when traffic looks healthy but conversion is inconsistent, or when a redesign is needed without losing search momentum. Based in Marseille, we work with founders, product teams, and agencies in France and internationally. You get a website that is easier to rank, easier to manage, and easier for the right prospects to say yes to.`,
+      fr: `Nous concevons des websites pensés pour convertir avant d'être pensés pour décorer. Chaque page sert un objectif business clair: plus de rendez-vous qualifiés, plus de demandes de démo, ou un inbound plus rentable. Notre approche combine positionnement, copywriting de conversion, hiérarchie UX, SEO technique et implémentation performante pour que votre site soit visible et convaincant. Basés à Marseille, nous accompagnons des équipes en France et à l'international, surtout quand le trafic progresse mais que la conversion stagne, ou lorsqu'une refonte est nécessaire sans casser l'acquisition en cours. Avec plus de 10 ans d'expérience et 50+ missions livrées, nous aidons les fondateurs, équipes produit et agences à transformer des pages dispersées en système d'acquisition cohérent. Vous obtenez des priorités actionnables, des décisions mesurables et un site facile à faire évoluer dans le temps.`,
     },
     offerTitle: {
       en: 'What is included',
@@ -196,7 +196,7 @@ export const servicePages: Record<ServiceSlug, ServicePageContent> = {
         {
           question: 'Can you work with our in-house marketing team?',
           answer:
-            'Yes. I regularly collaborate with in-house marketing teams and agencies in collaborative or white-label mode, with clear handover documentation.',
+            'Yes. We regularly collaborate with in-house marketing teams and agencies in collaborative or white-label mode, with clear handover documentation.',
         },
       ],
       fr: [
@@ -208,12 +208,12 @@ export const servicePages: Record<ServiceSlug, ServicePageContent> = {
         {
           question: 'Le SEO est-il intégré pendant le développement ?',
           answer:
-            'Oui. J\'intègre le SEO technique dès le départ: metadata, hiérarchie sémantique, maillage interne, préparation schema et performance.',
+            'Oui. Nous intégrons le SEO technique dès le départ: metadata, hiérarchie sémantique, maillage interne, préparation schema et performance.',
         },
         {
           question: 'Pouvez-vous collaborer avec notre équipe marketing interne ?',
           answer:
-            'Oui. J\'interviens régulièrement en collaboration avec des équipes internes et agences, y compris en marque blanche.',
+            'Oui. Nous intervenons régulièrement en collaboration avec des équipes internes et agences, y compris en marque blanche.',
         },
       ],
     },
@@ -222,8 +222,8 @@ export const servicePages: Record<ServiceSlug, ServicePageContent> = {
       fr: 'Besoin d\'un website qui convertit sans freiner l\'équipe ?',
     },
     finalCtaBody: {
-      en: 'Share your current URL and context, and I will map the fastest route to clearer messaging, cleaner structure, and better conversion.',
-      fr: 'Partagez votre contexte et je vous propose le chemin le plus rapide vers un site prêt à convertir.',
+      en: 'Share your current URL and context, and we will map the fastest route to clearer messaging, cleaner structure, and better conversion.',
+      fr: 'Partagez votre contexte et nous vous proposons le chemin le plus rapide vers un site prêt à convertir.',
     },
     finalCtaPrimary: {
       en: 'Book a website strategy call',
@@ -250,8 +250,8 @@ export const servicePages: Record<ServiceSlug, ServicePageContent> = {
       fr: 'Développement d\'Applications Web Full-Stack',
     },
     intro: {
-      en: `Shipping features gets hard once an app has real usage. Quick fixes accumulate, release confidence drops, and each sprint takes longer than planned. I help teams regain delivery speed without creating new technical debt. I can join an existing codebase, map the bottlenecks, and ship across frontend, backend, API, and data layers. Most engagements start when velocity slows after MVP, when product and engineering handoffs break down, or when roadmap delivery needs senior full-stack ownership. You get pragmatic architecture decisions, reliable implementation, and code your team can maintain after handover.`,
-      fr: `J'aide les équipes à livrer des applications web qui restent maintenables quand les fonctionnalités, les utilisateurs et la pression business augmentent. L'objectif n'est pas seulement de livrer vite, mais de livrer sans accumuler une dette invisible qui bloque les prochaines releases. J'interviens souvent lors du passage MVP vers usage réel, quand la vélocité roadmap baisse, ou quand l'équipe a besoin d'un renfort senior front, back et data. Mon périmètre couvre la discovery de features, les choix d'architecture, la conception API et modèle de données, l'authentification, les intégrations, les tests et la préparation production. J'ai livré dans des contextes startup et enterprise, notamment PayFit et Capgemini, avec le même principe: des fondations propres puis de l'itération rapide. Vous gagnez un partenaire pragmatique capable d'aligner objectifs produit et exécution technique durable.`,
+      en: `Shipping features gets hard once an app has real usage. Quick fixes accumulate, release confidence drops, and each sprint takes longer than planned. We help teams regain delivery speed without creating new technical debt. We can join an existing codebase, map the bottlenecks, and ship across frontend, backend, API, and data layers. Most engagements start when velocity slows after MVP, when product and engineering handoffs break down, or when roadmap delivery needs senior full-stack ownership. You get pragmatic architecture decisions, reliable implementation, and code your team can maintain after handover.`,
+      fr: `Nous aidons les équipes à livrer des applications web qui restent maintenables quand les fonctionnalités, les utilisateurs et la pression business augmentent. L'objectif n'est pas seulement de livrer vite, mais de livrer sans accumuler une dette invisible qui bloque les prochaines releases. Nous intervenons souvent lors du passage MVP vers usage réel, quand la vélocité roadmap baisse, ou quand l'équipe a besoin d'un renfort senior front, back et data. Notre périmètre couvre la discovery de features, les choix d'architecture, la conception API et modèle de données, l'authentification, les intégrations, les tests et la préparation production. Nous avons livré dans des contextes startup et enterprise, notamment PayFit et Capgemini, avec le même principe: des fondations propres puis de l'itération rapide. Vous gagnez un partenaire pragmatique capable d'aligner objectifs produit et exécution technique durable.`,
     },
     offerTitle: {
       en: 'What is included',
@@ -362,12 +362,12 @@ export const servicePages: Record<ServiceSlug, ServicePageContent> = {
         {
           question: 'Can you join an existing codebase?',
           answer:
-            'Yes. I regularly onboard into existing products, map the current architecture, and ship new features while reducing fragile areas.',
+            'Yes. We regularly onboard into existing products, map the current architecture, and ship new features while reducing fragile areas.',
         },
         {
           question: 'Do you work on both frontend and backend?',
           answer:
-            'Yes. I work end to end: UI, backend services, data modeling, integrations, and release hardening.',
+            'Yes. We work end to end: UI, backend services, data modeling, integrations, and release hardening.',
         },
         {
           question: 'Do you provide documentation for handover?',
@@ -379,17 +379,17 @@ export const servicePages: Record<ServiceSlug, ServicePageContent> = {
         {
           question: 'Pouvez-vous rejoindre une codebase existante ?',
           answer:
-            'Oui. Je peux onboard rapidement, cartographier l\'architecture actuelle et livrer des features en réduisant le risque.',
+            'Oui. Nous pouvons onboard rapidement, cartographier l\'architecture actuelle et livrer des features en réduisant le risque.',
         },
         {
           question: 'Intervenez-vous sur le front et le back ?',
           answer:
-            'Oui. Je couvre frontend, backend, data et intégrations pour faire avancer l\'équipe avec un interlocuteur technique responsable.',
+            'Oui. Nous couvrons frontend, backend, data et intégrations pour faire avancer l\'équipe avec un interlocuteur technique responsable.',
         },
         {
           question: 'Fournissez-vous de la documentation de handover ?',
           answer:
-            'Oui. Je livre des notes techniques, le contexte d\'architecture et les décisions clés pour assurer la continuité interne.',
+            'Oui. Nous livrons des notes techniques, le contexte d\'architecture et les décisions clés pour assurer la continuité interne.',
         },
       ],
     },
@@ -398,8 +398,8 @@ export const servicePages: Record<ServiceSlug, ServicePageContent> = {
       fr: 'Besoin d\'accélérer sans dégrader la qualité ?',
     },
     finalCtaBody: {
-      en: 'Share your roadmap and current blockers, and I will propose a delivery plan that improves velocity while keeping the codebase stable.',
-      fr: 'Je peux aider votre équipe à retrouver de la vélocité avec une architecture plus claire et une exécution ciblée.',
+      en: 'Share your roadmap and current blockers, and we will propose a delivery plan that improves velocity while keeping the codebase stable.',
+      fr: 'Nous pouvons aider votre équipe à retrouver de la vélocité avec une architecture plus claire et une exécution ciblée.',
     },
     finalCtaPrimary: {
       en: 'Book a full-stack scoping call',
@@ -426,8 +426,8 @@ export const servicePages: Record<ServiceSlug, ServicePageContent> = {
       fr: 'Développement d\'Automatisations IA',
     },
     intro: {
-      en: `AI automation is useful only when it removes real friction from daily operations. I build workflows that take repetitive work off your team, including lead qualification, support triage, content operations, internal copilots, and reporting pipelines connected to your existing tools. The focus is operational impact, not demo effects. We define success early, such as time saved, response time, and error reduction, then implement with guardrails so quality stays predictable. I work from Marseille with teams in France and internationally, often after failed pilots or scattered AI experiments. You get maintainable automations your team can run every day, not fragile one-off prototypes.`,
-      fr: `L'automatisation IA crée de la valeur uniquement quand elle cible des points de friction opérationnels concrets. Je conçois des systèmes pragmatiques qui réduisent les tâches répétitives, accélèrent les délais de réponse et améliorent la qualité de décision pour les équipes produit, sales et marketing. Les projets couvrent souvent la qualification de leads, les copilotes internes, le tri support, les opérations de contenu et les pipelines de reporting connectés à vos outils existants. L'objectif reste mesurable: temps gagné, moins d'erreurs, délais raccourcis et meilleure visibilité sur la performance des process. Je combine vision produit et profondeur d'implémentation pour livrer une couche d'automatisation maintenable, intégrée à votre website, votre app, votre CRM et votre stack data. Basé à Marseille et actif à l'international, j'aide les équipes à passer d'expérimentations IA isolées à des automatisations solides au service de l'exécution quotidienne et de la croissance.`,
+      en: `AI automation is useful only when it removes real friction from daily operations. We build workflows that take repetitive work off your team, including lead qualification, support triage, content operations, internal copilots, and reporting pipelines connected to your existing tools. The focus is operational impact, not demo effects. We define success early, such as time saved, response time, and error reduction, then implement with guardrails so quality stays predictable. From Marseille, we work with teams in France and internationally, often after failed pilots or scattered AI experiments. You get maintainable automations your team can run every day, not fragile one-off prototypes.`,
+      fr: `L'automatisation IA crée de la valeur uniquement quand elle cible des points de friction opérationnels concrets. Nous concevons des systèmes pragmatiques qui réduisent les tâches répétitives, accélèrent les délais de réponse et améliorent la qualité de décision pour les équipes produit, sales et marketing. Les projets couvrent souvent la qualification de leads, les copilotes internes, le tri support, les opérations de contenu et les pipelines de reporting connectés à vos outils existants. L'objectif reste mesurable: temps gagné, moins d'erreurs, délais raccourcis et meilleure visibilité sur la performance des process. Nous combinons vision produit et profondeur d'implémentation pour livrer une couche d'automatisation maintenable, intégrée à votre website, votre app, votre CRM et votre stack data. Basés à Marseille et actifs à l'international, nous aidons les équipes à passer d'expérimentations IA isolées à des automatisations solides au service de l'exécution quotidienne et de la croissance.`,
     },
     offerTitle: {
       en: 'What is included',
@@ -538,12 +538,12 @@ export const servicePages: Record<ServiceSlug, ServicePageContent> = {
         {
           question: 'Do you build custom AI agents or only no-code flows?',
           answer:
-            'Both. I can ship quickly with no-code or low-code where it fits, and add custom integrations when your process needs deeper control.',
+            'Both. We can ship quickly with no-code or low-code where it fits, and add custom integrations when your process needs deeper control.',
         },
         {
           question: 'How do you avoid hallucinations and quality issues?',
           answer:
-            'By design. I add prompt constraints, validation layers, fallback routes, and human review for high-risk steps.',
+            'By design. We add prompt constraints, validation layers, fallback routes, and human review for high-risk steps.',
         },
         {
           question: 'Can we start with one workflow before scaling?',
@@ -555,12 +555,12 @@ export const servicePages: Record<ServiceSlug, ServicePageContent> = {
         {
           question: 'Construisez-vous des agents IA custom ou seulement du no-code ?',
           answer:
-            'Les deux. Je peux implémenter des automatisations no-code/low-code et développer des intégrations custom quand nécessaire.',
+            'Les deux. Nous pouvons implémenter des automatisations no-code/low-code et développer des intégrations custom quand nécessaire.',
         },
         {
           question: 'Comment limitez-vous les hallucinations et erreurs de qualité ?',
           answer:
-            'J\'intègre des garde-fous, validations, règles de fallback et du contrôle humain quand la fiabilité est critique.',
+            'Nous intégrons des garde-fous, validations, règles de fallback et du contrôle humain quand la fiabilité est critique.',
         },
         {
           question: 'Peut-on démarrer avec un seul workflow avant de scaler ?',
@@ -574,8 +574,8 @@ export const servicePages: Record<ServiceSlug, ServicePageContent> = {
       fr: 'Vous voulez moins de tâches répétitives et plus de vitesse ?',
     },
     finalCtaBody: {
-      en: 'Tell me where your team is losing time today, and I will map the first automation sprint with expected impact and implementation effort.',
-      fr: 'Je peux concevoir une roadmap d\'automatisation IA pratique, adaptée à votre équipe, vos outils et vos contraintes.',
+      en: 'Tell us where your team is losing time today, and we will map the first automation sprint with expected impact and implementation effort.',
+      fr: 'Nous pouvons concevoir une roadmap d\'automatisation IA pratique, adaptée à votre équipe, vos outils et vos contraintes.',
     },
     finalCtaPrimary: {
       en: 'Book an AI automation call',
@@ -602,8 +602,8 @@ export const servicePages: Record<ServiceSlug, ServicePageContent> = {
       fr: 'Intégration de Workflows n8n',
     },
     intro: {
-      en: `n8n can remove a lot of manual operations work, but only if workflows are built like production systems. I design n8n architectures that connect forms, CRM, email tools, internal APIs, AI services, and reporting without creating hidden failure points. Most clients call me when lead routing breaks, alerts are noisy, or ownership is unclear across tools. I set naming standards, add retries and fallback paths, and make failures visible before they hurt pipeline performance. Based in Marseille and working internationally, I help teams turn ad-hoc automations into a stable operations layer they can trust every day.`,
-      fr: `n8n est l'un des moyens les plus rapides pour automatiser les opérations, à condition de concevoir des workflows robustes et maintenables. Je construis des systèmes n8n qui connectent formulaires, CRM, outils email, APIs internes, fournisseurs IA et reporting dans une même couche d'exécution. C'est particulièrement utile quand l'équipe perd du temps en copier-coller, en routage manuel de leads, en notifications répétitives et en handovers fragiles entre outils. Mon rôle est de structurer l'architecture d'automatisation, de sécuriser la logique des flux et de mettre en place l'observabilité pour détecter les incidents avant impact pipeline. Vous obtenez des workflows prêts production, des conventions de nommage, une gestion des erreurs et une documentation exploitable. Basé à Marseille et actif à l'international, je vise un résultat simple: moins de chaos opérationnel, plus de vitesse d'exécution et une base workflow qui scale avec votre activité.`,
+      en: `n8n can remove a lot of manual operations work, but only if workflows are built like production systems. We design n8n architectures that connect forms, CRM, email tools, internal APIs, AI services, and reporting without creating hidden failure points. Most clients call us when lead routing breaks, alerts are noisy, or ownership is unclear across tools. We set naming standards, add retries and fallback paths, and make failures visible before they hurt pipeline performance. Based in Marseille and working internationally, we help teams turn ad-hoc automations into a stable operations layer they can trust every day.`,
+      fr: `n8n est l'un des moyens les plus rapides pour automatiser les opérations, à condition de concevoir des workflows robustes et maintenables. Nous construisons des systèmes n8n qui connectent formulaires, CRM, outils email, APIs internes, fournisseurs IA et reporting dans une même couche d'exécution. C'est particulièrement utile quand l'équipe perd du temps en copier-coller, en routage manuel de leads, en notifications répétitives et en handovers fragiles entre outils. Notre rôle est de structurer l'architecture d'automatisation, de sécuriser la logique des flux et de mettre en place l'observabilité pour détecter les incidents avant impact pipeline. Vous obtenez des workflows prêts production, des conventions de nommage, une gestion des erreurs et une documentation exploitable. Basés à Marseille et actifs à l'international, nous visons un résultat simple: moins de chaos opérationnel, plus de vitesse d'exécution et une base workflow qui scale avec votre activité.`,
     },
     offerTitle: {
       en: 'What is included',
@@ -682,8 +682,8 @@ export const servicePages: Record<ServiceSlug, ServicePageContent> = {
       fr: 'Audit gratuit de workflows n8n',
     },
     leadMagnetSubtitle: {
-      en: 'I review your current workflows and identify where reliability, speed, and maintainability can improve quickly.',
-      fr: 'Je passe en revue vos workflows actuels et j\'identifie où améliorer vite la fiabilité, la vitesse et la maintenance.',
+      en: 'We review your current workflows and identify where reliability, speed, and maintainability can improve quickly.',
+      fr: 'Nous passons en revue vos workflows actuels et identifions où améliorer vite la fiabilité, la vitesse et la maintenance.',
     },
     leadMagnetDeliverablesTitle: {
       en: 'You get in 5 business days',
@@ -714,34 +714,34 @@ export const servicePages: Record<ServiceSlug, ServicePageContent> = {
         {
           question: 'Can you improve existing n8n workflows?',
           answer:
-            'Yes. I audit current workflows, isolate fragile nodes, and refactor for clarity, resilience, and easier team ownership.',
+            'Yes. We audit current workflows, isolate fragile nodes, and refactor for clarity, resilience, and easier team ownership.',
         },
         {
           question: 'Do you handle alerts and failure recovery?',
           answer:
-            'Yes. I set up retries, fallback branches, and alerting so failures are detected quickly and recovery is straightforward.',
+            'Yes. We set up retries, fallback branches, and alerting so failures are detected quickly and recovery is straightforward.',
         },
         {
           question: 'Can n8n connect with our CRM and internal APIs?',
           answer:
-            'Yes. I regularly connect n8n with CRMs, internal APIs, forms, email tools, and data sources, with validation and mapping rules.',
+            'Yes. We regularly connect n8n with CRMs, internal APIs, forms, email tools, and data sources, with validation and mapping rules.',
         },
       ],
       fr: [
         {
           question: 'Pouvez-vous améliorer des workflows n8n existants ?',
           answer:
-            'Oui. J\'audite les flux existants, corrige les logiques fragiles et refactorise pour plus de résilience et de lisibilité.',
+            'Oui. Nous auditons les flux existants, corrigeons les logiques fragiles et refactorisons pour plus de résilience et de lisibilité.',
         },
         {
           question: 'Gérez-vous les alertes et la reprise sur erreur ?',
           answer:
-            'Oui. Je mets en place retries, branches de fallback et alertes pour rendre les échecs visibles et récupérables.',
+            'Oui. Nous mettons en place retries, branches de fallback et alertes pour rendre les échecs visibles et récupérables.',
         },
         {
           question: 'Pouvez-vous connecter n8n à notre CRM et nos APIs internes ?',
           answer:
-            'Oui. J\'intègre régulièrement n8n avec CRM, APIs custom, formulaires, outils email et sources data avec validation.',
+            'Oui. Nous intégrons régulièrement n8n avec CRM, APIs custom, formulaires, outils email et sources data avec validation.',
         },
       ],
     },
@@ -750,8 +750,8 @@ export const servicePages: Record<ServiceSlug, ServicePageContent> = {
       fr: 'Besoin d\'une automatisation fiable avec n8n ?',
     },
     finalCtaBody: {
-      en: 'Share your current setup and failure points, and I will propose a practical hardening plan with clear priorities.',
-      fr: 'Je peux vous aider à passer de flux fragiles à une couche d\'automatisation robuste et exploitable au quotidien.',
+      en: 'Share your current setup and failure points, and we will propose a practical hardening plan with clear priorities.',
+      fr: 'Nous pouvons vous aider à passer de flux fragiles à une couche d\'automatisation robuste et exploitable au quotidien.',
     },
     finalCtaPrimary: {
       en: 'Book an n8n architecture call',

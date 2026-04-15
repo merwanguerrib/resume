@@ -13,7 +13,7 @@ export const t = (lang: Lang) => ({
   },
   nav: {
     services: lang === 'en' ? 'Services' : 'Services',
-    work: lang === 'en' ? 'Work' : 'Projets',
+    work: lang === 'en' ? 'Solutions' : 'Solutions',
     about: lang === 'en' ? 'About' : 'À propos',
     contact: lang === 'en' ? 'Get free audit' : 'Audit gratuit',
   },
@@ -37,12 +37,12 @@ export const t = (lang: Lang) => ({
       lang === 'en'
         ? [
             { label: 'Services', section: 'services' },
-            { label: 'Case studies', section: 'work' },
+            { label: 'Team', section: 'about' },
             { label: 'Contact', section: 'contact' },
           ]
         : [
             { label: 'Services', section: 'services' },
-            { label: 'Cas clients', section: 'work' },
+            { label: 'Équipe', section: 'about' },
             { label: 'Contact', section: 'contact' },
           ],
     helpCardTitle:
@@ -51,24 +51,34 @@ export const t = (lang: Lang) => ({
         : 'Transformons cette erreur en opportunité.',
     helpCardBody:
       lang === 'en'
-        ? 'Share your context and I will send a focused action plan to improve acquisition, conversion, and automation.'
-        : 'Partagez votre contexte, je vous envoie un plan d\'action concret pour améliorer acquisition, conversion et automatisation.',
-    helpCardCta: lang === 'en' ? 'Request my audit' : 'Demander mon audit',
+        ? 'Share your context and we will send a focused action plan to improve acquisition, conversion, and automation.'
+        : 'Partagez votre contexte, nous vous envoyons un plan d\'action concret pour améliorer acquisition, conversion et automatisation.',
+    helpCardCta: lang === 'en' ? 'Request a free audit' : 'Demander un audit gratuit',
   },
   hero: {
     available: lang === 'en' ? 'Available for new projects' : 'Disponible pour de nouveaux projets',
     seoH1:
       lang === 'en'
-        ? 'Freelance Full-Stack Developer in Marseille'
-        : 'Développeur Full-Stack à Marseille',
+        ? 'Websites, Apps & AI Automation Agency in Marseille'
+        : 'Agence web, app et automatisation IA à Marseille',
     tagline: 'Just dev it.',
     subtitle:
       lang === 'en'
         ? 'Websites, apps, and AI automations built for growth.\nFrom strategy to production, with clear ROI.'
         : 'Websites, apps et automatisations IA conçus pour la croissance.\nDe la stratégie à la production, avec un ROI clair.',
     cta_primary: lang === 'en' ? 'Get free audit' : 'Recevoir un audit gratuit',
-    cta_secondary: lang === 'en' ? 'See my work' : 'Voir mes projets',
-    trustedBy: lang === 'en' ? 'Trusted by' : 'Ils me font confiance',
+    cta_secondary: lang === 'en' ? 'See services' : 'Voir les services',
+    trustedBy: lang === 'en' ? 'Trusted by' : 'Ils nous font confiance',
+  },
+  seoIntro: {
+    heading:
+      lang === 'en'
+        ? 'Technical team in Marseille for acquisition and execution'
+        : 'Équipe technique à Marseille, orientée acquisition et exécution',
+    body:
+      lang === 'en'
+        ? 'Based in Marseille, we work with teams across France and internationally to build conversion-focused websites, full-stack web apps, and AI automation systems connected to real operations. With 10+ years of experience and 50+ delivered missions, we help teams move from fragmented stacks to consistent execution: clearer acquisition, faster delivery, and better decision support. We combine product thinking, UX, technical architecture, SEO/GEO, and n8n automation to create experiences that generate qualified leads while reducing internal friction. If your website is under-converting, your team still handles too many manual tasks, or your roadmap is losing momentum, we can run a focused sprint with clear priorities, realistic timelines, and measurable impact from strategy to production.'
+        : 'Basés à Marseille, nous accompagnons des équipes partout en France et à l’international pour concevoir des websites orientés conversion, des applications web full-stack et des systèmes d’automatisation IA connectés aux opérations réelles. Avec plus de 10 ans d’expérience et 50+ missions livrées, nous aidons les équipes à passer de stacks dispersées à une exécution cohérente: acquisition plus lisible, delivery plus rapide, décisions mieux outillées. Nous combinons vision produit, UX, architecture technique, SEO/GEO et automatisation n8n pour créer des parcours qui génèrent des leads qualifiés tout en réduisant les frictions internes. Si votre website convertit mal, si vos équipes répètent encore trop de tâches manuelles, ou si votre roadmap ralentit, nous pouvons structurer un sprint ciblé avec priorités claires, délais réalistes et impact mesurable de la stratégie à la production.',
   },
   stats: [
     { value: '10+', label: lang === 'en' ? 'Years of experience' : "Années d'expérience" },
@@ -76,7 +86,7 @@ export const t = (lang: Lang) => ({
     { value: '24h', label: lang === 'en' ? 'Average response time' : 'Délai moyen de réponse' },
   ],
   services: {
-    eyebrow: lang === 'en' ? 'How I help' : 'Ce que je construis',
+    eyebrow: lang === 'en' ? 'How we help' : 'Ce que nous construisons',
     title:
       lang === 'en'
         ? 'Four service tracks.\nOne growth system.'
@@ -118,8 +128,8 @@ export const t = (lang: Lang) => ({
         title: lang === 'en' ? 'Build & automate' : 'Build & automate',
         description:
           lang === 'en'
-            ? 'I deliver production-ready code plus AI automations and n8n/no-code workflows when relevant.'
-            : 'Je livre un code prêt production avec automatisations IA et workflows n8n/no-code si pertinent.',
+            ? 'We deliver production-ready code plus AI automations and n8n/no-code workflows when relevant.'
+            : 'Nous livrons un code prêt production avec automatisations IA et workflows n8n/no-code quand c\'est pertinent.',
       },
       {
         number: '04',
@@ -141,7 +151,7 @@ export const t = (lang: Lang) => ({
       lang === 'en'
         ? 'Get a concise action plan to increase leads, reduce manual work, and improve your technical foundations.'
         : 'Recevez un plan d\'action concret pour augmenter vos leads, réduire le travail manuel et renforcer vos fondations techniques.',
-    highlightsTitle: lang === 'en' ? 'What we analyze' : 'Ce que j\'analyse',
+    highlightsTitle: lang === 'en' ? 'What we analyze' : 'Ce que nous analysons',
     highlights:
       lang === 'en'
         ? [
@@ -192,8 +202,8 @@ export const t = (lang: Lang) => ({
           : 'Ex: augmenter les leads qualifiés sans tout reconstruire',
       cta:
         lang === 'en'
-          ? 'Send me the free audit'
-          : 'Envoyer mon audit gratuit',
+          ? 'Get your free audit'
+          : 'Recevoir votre audit gratuit',
       privacy:
         lang === 'en'
           ? 'No spam. You can unsubscribe anytime.'
@@ -203,8 +213,8 @@ export const t = (lang: Lang) => ({
           ? 'Request received. Check your inbox shortly.'
           : 'Demande reçue. Vérifiez votre boîte mail.',
     },
-    ctaPrimary: lang === 'en' ? 'Get my free audit' : 'Je veux mon audit gratuit',
-    ctaSecondary: lang === 'en' ? 'See case studies' : 'Voir les cas clients',
+    ctaPrimary: lang === 'en' ? 'Get your free audit' : 'Recevoir votre audit gratuit',
+    ctaSecondary: lang === 'en' ? 'See services' : 'Voir les services',
   },
   faq: {
     eyebrow: lang === 'en' ? 'FAQ' : 'FAQ',
@@ -218,17 +228,17 @@ export const t = (lang: Lang) => ({
             {
               question: 'What services do you offer?',
               answer:
-                'I build conversion-focused websites, full-stack web applications, AI automation systems, and workflow integrations with n8n or no-code tools.',
+                'We build conversion-focused websites, full-stack web applications, AI automation systems, and workflow integrations with n8n or no-code tools.',
             },
             {
               question: 'Can you integrate n8n with my current stack?',
               answer:
-                'Yes. I design and implement n8n workflows connected to your CRM, forms, databases, APIs, and AI tools to remove repetitive manual work.',
+                'Yes. We design and implement n8n workflows connected to your CRM, forms, databases, APIs, and AI tools to remove repetitive manual work.',
             },
             {
               question: 'Do you also handle SEO and GEO optimization?',
               answer:
-                'Yes. I optimize technical SEO, on-page structure, and AI-search readiness (GEO) so your website can rank in Google and be easier to cite by AI assistants.',
+                'Yes. We optimize technical SEO, on-page structure, and AI-search readiness (GEO) so your website can rank in Google and be easier to cite by AI assistants.',
             },
             {
               question: 'How long does a typical project take?',
@@ -243,24 +253,24 @@ export const t = (lang: Lang) => ({
             {
               question: 'Do you work in white-label mode for agencies?',
               answer:
-                'Yes. I regularly collaborate in white-label with agencies and product teams, with clear communication, strict deadlines, and clean handover documentation.',
+                'Yes. We regularly collaborate in white-label mode with agencies and product teams, with clear communication, strict deadlines, and clean handover documentation.',
             },
           ]
         : [
             {
               question: 'Quels services proposez-vous ?',
               answer:
-                'Je conçois des websites orientés conversion, des applications web full-stack, des systèmes d\'automatisation IA, et des intégrations de workflows avec n8n ou des outils no-code.',
+                'Nous concevons des websites orientés conversion, des applications web full-stack, des systèmes d\'automatisation IA, et des intégrations de workflows avec n8n ou des outils no-code.',
             },
             {
               question: 'Pouvez-vous intégrer n8n à mon stack actuel ?',
               answer:
-                'Oui. Je conçois et implémente des workflows n8n connectés à votre CRM, formulaires, bases de données, APIs et outils IA pour réduire les tâches manuelles.',
+                'Oui. Nous concevons et implémentons des workflows n8n connectés à votre CRM, formulaires, bases de données, APIs et outils IA pour réduire les tâches manuelles.',
             },
             {
               question: 'Gérez-vous aussi l\'optimisation SEO et GEO ?',
               answer:
-                'Oui. J\'optimise le SEO technique, la structure on-page et la préparation GEO pour mieux performer sur Google et dans les réponses d\'assistants IA.',
+                'Oui. Nous optimisons le SEO technique, la structure on-page et la préparation GEO pour mieux performer sur Google et dans les réponses d\'assistants IA.',
             },
             {
               question: 'Quel est le délai moyen pour un projet ?',
@@ -275,22 +285,41 @@ export const t = (lang: Lang) => ({
             {
               question: 'Travaillez-vous en marque blanche pour les agences ?',
               answer:
-                'Oui. Je collabore en marque blanche avec des agences et des équipes produit, avec communication claire, respect des délais et documentation de handover.',
+                'Oui. Nous collaborons en marque blanche avec des agences et des équipes produit, avec communication claire, respect des délais et documentation de handover.',
             },
           ],
   },
   about: {
-    eyebrow: lang === 'en' ? 'About me' : 'À propos',
-    title: lang === 'en' ? 'Merwan Guerrib' : 'Merwan Guerrib',
-    bio:
+    eyebrow: lang === 'en' ? 'Team' : 'Équipe',
+    title:
       lang === 'en'
-        ? 'I am a fullstack developer focused on one thing: shipping digital products that generate measurable business outcomes.\n\nOver the last 10+ years, I have delivered projects for teams like PayFit and Capgemini, from high-traffic websites to complex product features.\n\nToday, I combine development, AI automation, and product thinking to help founders and teams move faster without sacrificing quality.'
-        : 'Je suis développeur fullstack avec une obsession: livrer des produits digitaux qui génèrent des résultats business mesurables.\n\nDepuis plus de 10 ans, j\'accompagne des équipes comme PayFit et Capgemini, du site web à fort trafic aux fonctionnalités produit complexes.\n\nAujourd\'hui, je combine développement, automatisation IA et vision produit pour aider les équipes à aller vite sans compromettre la qualité.',
-    values: [
-      { icon: 'lightning', label: lang === 'en' ? 'Fast delivery' : 'Livraison rapide' },
-      { icon: 'shield', label: lang === 'en' ? 'Clean code' : 'Code propre' },
-      { icon: 'chat', label: lang === 'en' ? 'Clear comms' : 'Communication claire' },
-      { icon: 'trend-up', label: lang === 'en' ? 'Product thinking' : 'Vision produit' },
+        ? 'The team behind Just Dev It Agency'
+        : 'L’équipe derrière Just Dev It Agency',
+    members: [
+      {
+        id: 'merwan',
+        name: 'Merwan Guerrib',
+        role:
+          lang === 'en'
+            ? 'Founder · Full-Stack & AI Automation'
+            : 'Fondateur · Full-Stack & Automatisation IA',
+        bio:
+          lang === 'en'
+            ? 'Merwan designs and builds conversion-first websites, full-stack apps, and AI automation systems for founders and product teams.\n\nWith 10+ years of delivery experience across companies like PayFit and Capgemini, he leads technical architecture, implementation quality, and production launch.'
+            : 'Merwan conçoit et développe des websites orientés conversion, des applications full-stack et des systèmes d’automatisation IA pour les fondateurs et les équipes produit.\n\nAvec plus de 10 ans d’expérience sur des projets menés notamment avec PayFit et Capgemini, il pilote l’architecture technique, la qualité d’implémentation et la mise en production.',
+      },
+      {
+        id: 'ismael',
+        name: 'Ismaël Guerrib',
+        role:
+          lang === 'en'
+            ? 'Co-Founder · Growth & Operations'
+            : 'Co-fondateur · Growth & Opérations',
+        bio:
+          lang === 'en'
+            ? 'Ismaël leads growth and operations. He structures acquisition strategy, clarifies offers, and keeps execution aligned with measurable business outcomes.\n\nTogether with Merwan, he ensures each website, app, or automation project ships with clear priorities, tight timelines, and proactive client communication.'
+            : 'Ismaël pilote la croissance et les opérations. Il structure la stratégie d’acquisition, clarifie les offres et aligne l’exécution sur des objectifs business mesurables.\n\nAvec Merwan, il s’assure que chaque projet website, app ou automatisation avance avec des priorités nettes, des délais maîtrisés et une communication client proactive.',
+      },
     ],
   },
   contact: {
@@ -301,7 +330,7 @@ export const t = (lang: Lang) => ({
         : 'Construisons votre prochain\nsystème de croissance.',
     subtitle:
       lang === 'en'
-        ? 'Tell me what you need: website, app, AI automation, or n8n/no-code workflow. I reply within 24 hours.'
+        ? 'Tell us what you need: website, app, AI automation, or n8n/no-code workflow. We reply within 24 hours.'
         : 'Expliquez votre besoin: website, app, automatisation IA, ou workflow n8n/no-code. Réponse sous 24h.',
     fields: {
       email: lang === 'en' ? 'Work email' : 'Email professionnel',
@@ -315,7 +344,7 @@ export const t = (lang: Lang) => ({
         lang === 'en'
           ? 'Ex: launch a conversion-focused website in 6 weeks'
           : 'Ex: lancer un site orienté conversion en 6 semaines',
-      submit: lang === 'en' ? 'Send my request' : 'Envoyer ma demande',
+      submit: lang === 'en' ? 'Send your request' : 'Envoyer votre demande',
     },
     privacy:
       lang === 'en'
@@ -323,8 +352,8 @@ export const t = (lang: Lang) => ({
         : 'Pas de spam. Désinscription possible à tout moment.',
     success:
       lang === 'en'
-        ? 'Message sent. I\'ll be in touch shortly.'
-        : 'Message envoyé. Je reviens vers vous rapidement.',
+        ? 'Message sent. Our team will get back to you shortly.'
+        : 'Message envoyé. Notre équipe revient vers vous rapidement.',
   },
   footer: {
     tagline: 'Just dev it.',
