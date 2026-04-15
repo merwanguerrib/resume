@@ -32,11 +32,11 @@ const memberPhotos = {
         about.members.map((member, index) => (
           <article class="card-shell reveal h-full" data-delay={String(70 + index * 70)}>
             <div class="card-core flex h-full flex-col overflow-hidden p-0">
-              <div class="aspect-[4/5] bg-canvas">
+              <div class="aspect-[4/5] bg-canvas md:aspect-auto md:h-[min(58vh,520px)]">
                 <Image
                   src={memberPhotos[member.id as keyof typeof memberPhotos] ?? merwanPhoto}
                   alt={member.name}
-                  class="h-full w-full object-cover object-top"
+                  class="h-full w-full object-cover object-top md:object-contain"
                   loading="lazy"
                   decoding="async"
                   widths={[380, 520, 760]}
