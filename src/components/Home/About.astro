@@ -16,6 +16,11 @@ const memberPhotos = {
   merwan: merwanPhoto,
   ismael: ismaelPhoto,
 } as const;
+
+const memberObjectPositions: Record<string, string> = {
+  merwan: '50% 20%',
+  ismael: '50% 16%',
+};
 ---
 
 <section id="about" class="py-section px-4 bg-elevated">
@@ -32,20 +37,21 @@ const memberPhotos = {
         about.members.map((member, index) => (
           <article class="card-shell reveal h-full" data-delay={String(70 + index * 70)}>
             <div class="card-core flex h-full flex-col overflow-hidden p-0">
-              <div class="aspect-[4/5] bg-canvas">
+              <div class="aspect-[4/5] bg-canvas md:aspect-[9/10] lg:aspect-[10/11]">
                 <Image
                   src={memberPhotos[member.id as keyof typeof memberPhotos] ?? merwanPhoto}
                   alt={member.name}
-                  class="h-full w-full object-cover object-top"
+                  class="h-full w-full object-cover"
+                  style={`object-position: ${memberObjectPositions[member.id] ?? '50% 18%'};`}
                   loading="lazy"
                   decoding="async"
-                  widths={[380, 520, 760]}
-                  sizes="(min-width: 768px) 50vw, 100vw"
+                  widths={[520, 760, 900, 1100]}
+                  sizes="(min-width: 1280px) 460px, (min-width: 768px) calc(50vw - 2rem), 100vw"
                   format="webp"
                 />
               </div>
 
-              <div class="p-6 md:p-7">
+              <div class="p-5 md:p-6">
                 <h3 class="font-display text-2xl font-bold text-dark">{member.name}</h3>
                 <p class="mt-1 text-xs uppercase tracking-[0.14em] text-muted">{member.role}</p>
 
